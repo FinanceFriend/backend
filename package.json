@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend of a project we work on as a team as a part of subject of Faculty of Computing and Electrical Engineering Zagreb.",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
