@@ -28,12 +28,7 @@ const registerUser = async (req, res) => {
       .json({ message: "User created successfully", user: userForResponse });
   } catch (err) {
     console.error(err);
-
-    if (err.name === "ValidationError") {
-      return res.status(400).json({ message: "Invalid input data" });
-    }
-
-    return res.status(500).json({ message: "Error creating user" });
+    return res.status(500).json({ message: "Error creating user", error: err });
   }
 };
 
