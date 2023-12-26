@@ -1,3 +1,4 @@
+const { validateEmail } = require("../utilities/regex");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
@@ -18,6 +19,13 @@ const registerUser = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "Email already exists" });
+    }
+
+    const emailFormCorrect = validateEmail(email);
+    if (!emailFormCorrect) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email form incorrect" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -91,5 +99,5 @@ const loginUser = async (req, res) => {
 
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
 };
