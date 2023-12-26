@@ -8,7 +8,7 @@ connectDB();
 
 const app = express();
 setupMiddleware(app);
-app.use('/api/users', userRoutes);
+app.use('/api', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -103,7 +103,44 @@ const loginUser = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username }).select("-password");
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.json({ success: true, user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error fetching user data",
+      error: err,
+    });
+  }
+};
+
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+
+    res.json({ success: true, users });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ success: false, message: "Error fetching users", error: err });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  getUser,
+  getAllUsers
 };
