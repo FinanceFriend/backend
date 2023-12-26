@@ -40,3 +40,29 @@
   - Returns `500 Internal Server Error` for any server-side errors.
 - **Security Notes**:
   - Password verification is performed using bcrypt.
+
+## 3. Fetch User Profile
+
+- **Endpoint**: `/api/user/:username`
+- **Method**: `GET`
+- **Description**: Fetches the profile details of a specific user by their username.
+- **URL Parameters**:
+  - `username`: String (required) - The username of the user whose profile is being requested.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `user`: Object - Contains the requested user's information (excluding password).
+- **Error Handling**:
+  - Returns `404 Not Found` if the user does not exist.
+  - Returns `500 Internal Server Error` for any server-side errors.
+
+## 4. Fetch All Users 
+
+- **Endpoint**: `/api/users`
+- **Method**: `GET`
+- **Description**: Retrieves a list of all users. This endpoint is intended for admin use.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `users`: Array - A list of user objects, each containing user information (excluding passwords).
+- **Error Handling**:
+  - Returns `401 Unauthorized` if the user is not authorized (non-admin).
+  - Returns `500 Internal Server Error` for any server-side errors.
