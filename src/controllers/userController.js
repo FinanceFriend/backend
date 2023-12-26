@@ -64,6 +64,12 @@ const loginUser = async (req, res) => {
   try {
     const { login, password } = req.body;
 
+    if (!login || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Both fields are required" });
+    }
+
     const user = await User.findOne({
       $or: [{ username: login }, { email: login }],
     });
