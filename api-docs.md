@@ -66,3 +66,27 @@
 - **Error Handling**:
   - Returns `401 Unauthorized` if the user is not authorized (non-admin).
   - Returns `500 Internal Server Error` for any server-side errors.
+
+## 5. Update User Information
+
+- **Endpoint**: `/api/user/:username`
+- **Method**: `PUT`
+- **Description**: Allows users to update their account information.
+- **URL Parameters**:
+  - `username`: String (required) - The current username of the user whose profile is being updated.
+- **Request Body** (Any or all of the following):
+  - `newUsername`: String (optional) - The new username for the user.
+  - `email`: String (optional) - The new email address for the user.
+  - `dateOfBirth`: Date (optional) - The new date of birth for the user.
+  - `countryOfOrigin`: String (optional) - The new country of origin for the user.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message describing the outcome.
+  - `user`: Object - Contains the updated user's information.
+- **Error Handling**:
+  - Returns `400 Bad Request` if the new username or email already exists, or if the email format is incorrect.
+  - Returns `404 Not Found` if the original user is not found.
+  - Returns `500 Internal Server Error` for any server-side errors.
+- **Security Notes**:
+  - Ensure this endpoint is accessible only to the authenticated user or users with admin privileges.
+  - Validate the email format before processing updates.
