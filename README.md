@@ -19,8 +19,8 @@ Follow these steps to get your development environment set up:
 - Add your MongoDB URI and other necessary environment variables. Example:
   ```
   MONGODB_URI=your_mongodb_uri
-  PORT=3000
+  PORT=3001
   ```
 5. Start the Server: `npm start`
 6. Verify Installation:
-- Open `http://localhost:3000` in your web browser. You should see a confirmation message indicating that the server is running.
+- Open `http://localhost:3001` in your web browser. You should see a confirmation message indicating that the server is running.
