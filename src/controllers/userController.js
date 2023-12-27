@@ -202,10 +202,32 @@ const updateUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const user = await User.findOneAndDelete({ username });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.json({ success: true, message: "User deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ success: false, message: "Error deleting user", error: err });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getUser,
   getAllUsers,
   updateUser,
+  deleteUser,
 };

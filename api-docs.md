@@ -90,3 +90,17 @@
 - **Security Notes**:
   - Ensure this endpoint is accessible only to the authenticated user or users with admin privileges.
   - Validate the email format before processing updates.
+
+## 6. Delete User
+
+- **Endpoint**: `/api/user/:username`
+- **Method**: `DELETE`
+- **Description**: Deletes a specific user's account.
+- **URL Parameters**:
+  - `username`: String (required) - The username of the user to be deleted.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message describing the outcome.
+- **Error Handling**:
+  - Returns `404 Not Found` if the user does not exist.
+  - Returns `500 Internal Server Error` for any server-side errors.
