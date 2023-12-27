@@ -19,6 +19,7 @@ Follow these steps to get your development environment set up:
 - Add your MongoDB URI and other necessary environment variables. Example:
   ```
   MONGODB_URI=your_mongodb_uri
+  OPENAI_API_KEY=your_api_key
   PORT=3000
   ```
 5. Start the Server: `npm start`
