@@ -6,6 +6,7 @@ Before you begin, ensure you have met the following requirements:
 - Node.js
 - npm (Node Package Manager)
 - MongoDB (local setup or MongoDB Atlas URI)
+- Pyton 3 (Pip)
 
 ## Installing
 
