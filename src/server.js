@@ -15,7 +15,7 @@ app.use(cors());
 
 setupMiddleware(app);
 app.use('/api', userRoutes);
-app.use('/langchain', langchainRoutes);
+app.use('/api/langchain', langchainRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
