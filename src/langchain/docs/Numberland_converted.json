@@ -1,0 +1,517 @@
+[
+    {
+        "name": "Basic Arithmetic in Finance",
+        "sublessons": [
+            {
+                "name": "Introduction to Financial Arithmetic",
+                "goal": "Introduction to the role of mathematics in everyday financial situations and the importance of learning financial arithmetic."
+            },
+            {
+                "name": "Adding Money",
+                "goal": "Understanding how to add different amounts of money, including coins and bills, and the concept of total value."
+            },
+            {
+                "name": "Subtracting Money",
+                "goal": "Learning to subtract expenses from a given amount, such as deducting purchases from a budget or allowance."
+            },
+            {
+                "name": "Introduction to Multiplication in Budgeting",
+                "goal": "Exploring the use of multiplication in creating budgets, such as calculating total costs for multiple items or repeated expenses."
+            },
+            {
+                "name": "Division in Financial Planning",
+                "goal": "Utilizing division in financial contexts, like dividing total expenses into categories or splitting bills among several people."
+            },
+            {
+                "name": "Real-Life Application of Addition and Subtraction",
+                "goal": "Practical application of addition and subtraction in everyday financial decisions, like managing spending within a budget."
+            },
+            {
+                "name": "Multiplying for Long-Term Goals",
+                "goal": "Applying multiplication to calculate long-term savings goals, understanding how repeated savings add up over time."
+            },
+            {
+                "name": "Using Division in Discounts",
+                "goal": "Teaching how to use division to calculate discounts and determining the final price of discounted items."
+            },
+            {
+                "name": "Interactive Budgeting Exercise",
+                "goal": "Integrating addition, subtraction, multiplication, and division in a comprehensive budgeting exercise, demonstrating how these operations are used together in financial planning."
+            }
+        ]
+    },
+    {
+        "name": "Percentages and Discounts",
+        "sublessons": [
+            {
+                "name": "Review and Practical Applications",
+                "goal": "Reviewing key concepts from the week, emphasizing the real-life application of basic arithmetic in personal finance."
+            },
+            {
+                "name": "Understanding Percentages",
+                "goal": "Introduction to the concept of percentages and their fundamental role in finance, such as understanding price increases or interest rates."
+            },
+            {
+                "name": "Calculating Percentages",
+                "goal": "Basic methods of calculating percentages, teaching the formula and its practical application."
+            },
+            {
+                "name": "Percentages in Price Increases",
+                "goal": "Applying percentage calculations to understand price increases, such as inflation or surcharges."
+            },
+            {
+                "name": "Percentages in Price Reductions",
+                "goal": "Learning how to calculate percentage-based price reductions, including sales and discounts."
+            },
+            {
+                "name": "Understanding Sales Tax",
+                "goal": "Explaining what sales tax is and how it is calculated as a percentage of the purchase price."
+            },
+            {
+                "name": "Calculating Total Costs with Sales Tax",
+                "goal": "Combining the concepts of addition and percentages to calculate the total cost of items including sales tax."
+            },
+            {
+                "name": "Interpreting Discounts and Offers",
+                "goal": "Teaching how to interpret and calculate various discount offers, such as '20% off' or 'buy one get one 50% off'."
+            },
+            {
+                "name": "Using Percentages in Budgeting",
+                "goal": "Applying percentages to budgeting, such as allocating a percentage of income to different expenses or savings."
+            },
+            {
+                "name": "Percentages in Banking and Savings",
+                "goal": "Exploring the use of percentages in banking, like understanding interest rates on savings accounts."
+            }
+        ]
+    },
+    {
+        "name": "Ratio and Proportion in Budgeting",
+        "sublessons": [
+            {
+                "name": "Review of Percentages in Financial Contexts",
+                "goal": "Reviewing and reinforcing the week's topics, focusing on the practical application of percentages in various financial scenarios."
+            },
+            {
+                "name": "Introduction to Ratios",
+                "goal": "Explaining the concept of ratios and their relevance in financial contexts, such as comparing different quantities or prices."
+            },
+            {
+                "name": "Understanding Proportions",
+                "goal": "Introducing the concept of proportion, explaining how it relates to ratios and its use in comparing quantities."
+            },
+            {
+                "name": "Ratios in Income and Expenses",
+                "goal": "Applying ratios to understand the relationship between income and expenses, and how to balance them effectively."
+            },
+            {
+                "name": "Using Ratios for Budget Allocation",
+                "goal": "Teaching how to use ratios to allocate a budget across different categories (e.g., savings, entertainment, necessities)."
+            },
+            {
+                "name": "Proportional Distribution in Savings",
+                "goal": "Understanding how to distribute savings proportionally, such as saving a consistent fraction of weekly or monthly income."
+            },
+            {
+                "name": "Ratios in Price Comparisons",
+                "goal": "Using ratios to compare prices of items, such as understanding value for money and making smarter shopping decisions."
+            },
+            {
+                "name": "Proportions in Discounts and Sales",
+                "goal": "Calculating proportional discounts on products, understanding how to determine the final price after a percentage discount."
+            },
+            {
+                "name": "Ratios in Investment Distribution",
+                "goal": "Basic introduction to using ratios for dividing investments among different options (stocks, bonds, savings)."
+            },
+            {
+                "name": "Real-Life Applications of Ratios and Proportions",
+                "goal": "Engaging with real-life scenarios where ratios and proportions are used, such as in cooking recipes or in dividing tasks."
+            }
+        ]
+    },
+    {
+        "name": "Simple Interest Calculations",
+        "sublessons": [
+            {
+                "name": "Review of Ratios and Proportions in Finance",
+                "goal": "Consolidating the week's learning, emphasizing the practical application of ratios and proportions in everyday finance."
+            },
+            {
+                "name": "What is Simple Interest?",
+                "goal": "Introduction to the concept of simple interest, explaining its basic definition and purpose in finance."
+            },
+            {
+                "name": "Understanding Simple Interest Formula",
+                "goal": "Teaching the formula for simple interest (Interest = Principal \u00d7 Rate \u00d7 Time) and explaining each component."
+            },
+            {
+                "name": "Calculating Simple Interest",
+                "goal": "Step-by-step instruction on how to calculate simple interest for different scenarios, such as savings or loans."
+            },
+            {
+                "name": "Applying Simple Interest in Savings",
+                "goal": "Using simple interest calculations to determine earnings from savings accounts over different time periods."
+            },
+            {
+                "name": "Simple Interest in Loans",
+                "goal": "Exploring how simple interest applies to loans, including calculating the total interest payable on borrowed amounts."
+            },
+            {
+                "name": "Comparing Interest Rates",
+                "goal": "Learning to compare different interest rates and their impact on the total interest earned or paid."
+            },
+            {
+                "name": "Simple Interest in Everyday Life",
+                "goal": "Practical examples of simple interest in daily life, like understanding interest on small loans from friends or family."
+            },
+            {
+                "name": "The Impact of Time on Interest",
+                "goal": "Demonstrating how the length of time affects the total interest calculated using simple interest."
+            },
+            {
+                "name": "Using Technology to Calculate Interest",
+                "goal": "Introducing basic financial calculators or apps that can help calculate simple interest."
+            }
+        ]
+    },
+    {
+        "name": "Compound Interest Concepts",
+        "sublessons": [
+            {
+                "name": "Review of Simple Interest Concepts",
+                "goal": "A recap of the week's lessons, reinforcing the key concepts and calculations of simple interest."
+            },
+            {
+                "name": "Introduction to Compound Interest",
+                "goal": "Explaining the concept of compound interest and how it differs from simple interest."
+            },
+            {
+                "name": "Understanding the Compound Interest Formula",
+                "goal": "Introducing the formula for compound interest and explaining its components (Principal, Rate, Time, and Number of Compounding Periods)."
+            },
+            {
+                "name": "Calculating Compound Interest",
+                "goal": "Step-by-step guide on calculating compound interest for different scenarios and compounding frequencies (e.g., annually, semi-annually)."
+            },
+            {
+                "name": "Compound Interest in Savings",
+                "goal": "Demonstrating the impact of compound interest on savings over time, highlighting the benefit of regular contributions."
+            },
+            {
+                "name": "The Power of Compounding Over Time",
+                "goal": "Showing how compound interest accumulates over longer periods and the concept of \"interest on interest.\""
+            },
+            {
+                "name": "Compound Interest in Real-Life Investments",
+                "goal": "Applying compound interest calculations to understand returns on investments like fixed deposits or bonds."
+            },
+            {
+                "name": "Comparing Simple and Compound Interest",
+                "goal": "Direct comparison between simple and compound interest, illustrating the differences and benefits of each."
+            },
+            {
+                "name": "Understanding Compounding Frequencies",
+                "goal": "Exploring how the frequency of compounding (e.g., quarterly, monthly) affects the total interest earned."
+            },
+            {
+                "name": "Compound Interest and Debt",
+                "goal": "Applying compound interest concepts to understand how debt can grow over time if not managed properly."
+            },
+            {
+                "name": "Using Financial Tools for Compound Interest",
+                "goal": "Introduction to online calculators or tools for computing compound interest, encouraging practical application."
+            }
+        ]
+    },
+    {
+        "name": "Understanding and Using Graphs",
+        "sublessons": [
+            {
+                "name": "Review of Compound Interest Concepts",
+                "goal": "Consolidating the week's learning, emphasizing key takeaways and the importance of understanding compound interest in personal finance."
+            },
+            {
+                "name": "Introduction to Financial Graphs",
+                "goal": "Explaining the role of graphs in visualizing financial data and making informed decisions."
+            },
+            {
+                "name": "Describing Line Graphs",
+                "goal": "Textual explanation of what line graphs are and how they represent financial data over time."
+            },
+            {
+                "name": "Interpreting Line Graphs",
+                "goal": "Teaching how to interpret line graphs in financial contexts through descriptive examples."
+            },
+            {
+                "name": "Understanding Bar Graphs",
+                "goal": "Explaining the use of bar graphs in finance, such as comparing monthly expenses or income."
+            },
+            {
+                "name": "Reading Bar Graphs",
+                "goal": "Guiding on how to read and interpret bar graphs using text-based scenarios."
+            },
+            {
+                "name": "Introduction to Pie Charts",
+                "goal": "Describing pie charts and their application in representing financial distributions like budget categories."
+            },
+            {
+                "name": "Interpreting Pie Charts",
+                "goal": "Teaching how to understand pie charts in financial contexts, using descriptive examples."
+            },
+            {
+                "name": "Trends and Patterns in Graphs",
+                "goal": "Explaining how to identify and interpret trends and patterns in financial graphs through written descriptions."
+            },
+            {
+                "name": "Practical Uses of Graphs in Finance",
+                "goal": "Discussing practical applications of understanding graphs in personal finance and decision-making."
+            },
+            {
+                "name": "Conceptual Graph Creation",
+                "goal": "Guiding students through conceptual exercises on creating graphs from financial data in a text-based format."
+            }
+        ]
+    },
+    {
+        "name": "Unit Price and Best Buy Calculations",
+        "sublessons": [
+            {
+                "name": "Review and Application of Graph Knowledge",
+                "goal": "Reviewing the concepts learned about financial graphs and discussing their real-world applications through text-based examples."
+            },
+            {
+                "name": "Understanding Unit Price",
+                "goal": "Explaining the concept of unit price and its importance in making informed shopping decisions."
+            },
+            {
+                "name": "Calculating Unit Price",
+                "goal": "Teaching the method to calculate unit price from total cost and quantity, using text-based examples."
+            },
+            {
+                "name": "Comparing Unit Prices",
+                "goal": "Guiding students on how to compare unit prices of different products to determine the best value."
+            },
+            {
+                "name": "Unit Price in Bulk Buying",
+                "goal": "Discussing the economics of bulk buying and how unit price calculation is essential in such scenarios."
+            },
+            {
+                "name": "Best Buy Decisions",
+                "goal": "Introducing the concept of 'Best Buy' in shopping, using unit price as a key factor in decision-making."
+            },
+            {
+                "name": "Unit Price in Everyday Products",
+                "goal": "Applying unit price calculations to everyday products, like groceries or school supplies."
+            },
+            {
+                "name": "Unit Price and Budgeting",
+                "goal": "Explaining how understanding unit prices can aid in effective budgeting and financial planning."
+            },
+            {
+                "name": "Special Offers and Unit Price",
+                "goal": "Discussing how to assess special offers and discounts using unit price calculations."
+            },
+            {
+                "name": "Practical Exercises on Unit Price",
+                "goal": "Engaging in text-based exercises and scenarios to practice calculating and comparing unit prices."
+            }
+        ]
+    },
+    {
+        "name": "Financial Problem Solving",
+        "sublessons": [
+            {
+                "name": "Review of Unit Price Concepts",
+                "goal": "Consolidating the week's learning, emphasizing the practical application of unit price knowledge in daily financial decisions."
+            },
+            {
+                "name": "Introduction to Financial Problem Solving",
+                "goal": "Explaining the importance of problem-solving skills in managing personal finances and making wise financial decisions."
+            },
+            {
+                "name": "Analyzing Spending Habits",
+                "goal": "Teaching how to analyze and reflect on personal spending habits using problem-solving techniques."
+            },
+            {
+                "name": "Solving Budgeting Challenges",
+                "goal": "Presenting common budgeting challenges and guiding students through problem-solving steps to address them."
+            },
+            {
+                "name": "Decision Making in Saving Money",
+                "goal": "Using problem-solving skills to make effective decisions about saving money, such as choosing savings methods."
+            },
+            {
+                "name": "Planning for Large Purchases",
+                "goal": "Applying problem-solving steps to plan for large purchases, including saving strategies and spending analysis."
+            },
+            {
+                "name": "Dealing with Unexpected Expenses",
+                "goal": "Teaching how to handle unexpected financial situations using systematic problem-solving approaches."
+            },
+            {
+                "name": "Evaluating Financial Products",
+                "goal": "Guiding students on how to evaluate different financial products (like bank accounts or insurance) using critical thinking and problem-solving skills."
+            },
+            {
+                "name": "Goal Setting and Financial Planning",
+                "goal": "Discussing the role of goal setting in financial planning and how to use problem-solving skills to achieve financial goals."
+            },
+            {
+                "name": "Negotiation Skills in Finance",
+                "goal": "Introducing basic negotiation skills for financial contexts, such as bargaining for better prices or terms."
+            },
+            {
+                "name": "Applying Financial Problem Solving to Real-Life Scenarios",
+                "goal": "Engaging students in text-based real-life financial scenarios where they apply their problem-solving skills."
+            }
+        ]
+    },
+    {
+        "name": "Exploring Financial Ratios and Measurements",
+        "sublessons": [
+            {
+                "name": "Review and Consolidation",
+                "goal": "Reviewing key problem-solving strategies and their applications in various financial situations, reinforcing the learned skills."
+            },
+            {
+                "name": "Introduction to Financial Ratios",
+                "goal": "Explaining what financial ratios are and their significance in understanding personal finance."
+            },
+            {
+                "name": "Debt-to-Income Ratio",
+                "goal": "Teaching how to calculate and interpret the debt-to-income ratio, a crucial measure of financial health."
+            },
+            {
+                "name": "Savings Ratio",
+                "goal": "Exploring the savings ratio, which measures the proportion of income saved, and its importance in financial planning."
+            },
+            {
+                "name": "Expense Ratio",
+                "goal": "Understanding the expense ratio, which compares expenses to income, and its role in budgeting."
+            },
+            {
+                "name": "Loan-to-Value Ratio",
+                "goal": "Introduction to the loan-to-value ratio used in borrowing, especially relevant for understanding mortgages."
+            },
+            {
+                "name": "Calculating Interest Coverage Ratios",
+                "goal": "Teaching how to calculate the interest coverage ratio to understand the ability to pay interest expenses."
+            },
+            {
+                "name": "Understanding Liquidity Ratios",
+                "goal": "Explaining liquidity ratios, which assess the ability to cover short-term debts, and their relevance in personal finance."
+            },
+            {
+                "name": "Applying Ratios to Real-life Scenarios",
+                "goal": "Engaging students in applying these ratios to hypothetical but realistic financial scenarios."
+            },
+            {
+                "name": "Financial Health Check Using Ratios",
+                "goal": "Guiding students on how to conduct a basic financial health check using these ratios."
+            }
+        ]
+    },
+    {
+        "name": "Geometry in Finance",
+        "sublessons": [
+            {
+                "name": "Review and Consolidation",
+                "goal": "Reviewing all the financial ratios covered, emphasizing their practical application and importance in personal financial management."
+            },
+            {
+                "name": "Introduction to Geometry in Finance",
+                "goal": "Explaining how basic geometric concepts are applied in financial contexts, like in architecture, design, and planning."
+            },
+            {
+                "name": "Understanding Area and Perimeter",
+                "goal": "Teaching the concepts of area and perimeter and their relevance in real estate, home improvement, and space planning."
+            },
+            {
+                "name": "Calculating Costs Based on Measurements",
+                "goal": "Using area and perimeter calculations to estimate costs for materials in construction or renovation projects."
+            },
+            {
+                "name": "Volume and Finance",
+                "goal": "Exploring how volume calculations are used in financial contexts, such as in shipping, storage, and packaging."
+            },
+            {
+                "name": "Geometric Shapes in Design and Cost",
+                "goal": "Discussing how different geometric shapes influence design and cost, particularly in architecture and product design."
+            },
+            {
+                "name": "Angles and Financial Models",
+                "goal": "Introducing the concept of angles and their application in financial models and projections, such as in market trend analysis."
+            },
+            {
+                "name": "Scale Drawings and Budget Planning",
+                "goal": "Teaching how to interpret scale drawings in planning and budgeting, especially in architecture and landscaping."
+            },
+            {
+                "name": "Geometry in Everyday Financial Decisions",
+                "goal": "Applying geometric concepts to everyday financial decisions, like planning a garden layout or home furnishing."
+            },
+            {
+                "name": "Geometric Patterns in Market Analysis",
+                "goal": "Introducing basic concepts of how geometric patterns are observed in financial markets and investment analysis."
+            }
+        ]
+    },
+    {
+        "name": "Course Recap and Consolidation",
+        "sublessons": [
+            {
+                "name": "Review and Practical Applications",
+                "goal": "Reviewing geometric concepts and their practical applications in various financial situations."
+            },
+            {
+                "name": "Recap of Basic Arithmetic in Finance",
+                "goal": "Reviewing key concepts from Week 1, emphasizing the application of basic arithmetic operations in financial contexts."
+            },
+            {
+                "name": "Revisiting Percentages and Discounts",
+                "goal": "Summarizing lessons from Week 2, focusing on the calculation and significance of percentages in finance."
+            },
+            {
+                "name": "Ratios and Proportions in Budgeting",
+                "goal": "Recapping the concepts of ratios and proportions from Week 3 and their role in effective budget management."
+            },
+            {
+                "name": "Reflection on Simple Interest",
+                "goal": "Reviewing the principles of simple interest covered in Week 4 and their application in savings and loans."
+            },
+            {
+                "name": "Compound Interest Concepts",
+                "goal": "Revisiting the critical concepts of compound interest from Week 5 and its long-term impact on finance."
+            },
+            {
+                "name": "Understanding and Using Graphs",
+                "goal": "Summarizing Week 6's lessons on different types of financial graphs and their analytical use."
+            },
+            {
+                "name": "Unit Price and Best Buy Calculations",
+                "goal": "Recapping Week 7's focus on calculating and comparing unit prices for smart shopping decisions."
+            },
+            {
+                "name": "Exploring Financial Ratios and Measurements",
+                "goal": "Reflecting on the financial ratios and measurements discussed in Week 10 and their importance in personal finance."
+            },
+            {
+                "name": "Geometry in Finance",
+                "goal": "Reviewing Week 11's integration of geometry with finance, highlighting how spatial concepts relate to financial planning."
+            },
+            {
+                "name": "Comprehensive Course Review",
+                "goal": "A broad overview of all topics covered throughout the course, emphasizing how each concept interlinks and contributes to a solid foundation in financial literacy."
+            },
+            {
+                "name": "Final Reflections and Future Learning",
+                "goal": "Encouraging students to reflect on their learning journey, discuss how they can apply these skills in real life, and explore further learning opportunities in finance and mathematics."
+            },
+            {
+                "name": "Celebrating Achievements and Course Completion",
+                "goal": "Congratulating students on completing the course, discussing the importance of continual learning and growth in financial literacy."
+            }
+        ]
+    }
+]
