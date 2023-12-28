@@ -33,7 +33,8 @@ const executePython = async (script, args) => {
 
 const getLessonMessage = async (req, res) => {
     try {
-        const { lesson_index, mini_lesson_index } = req.body;
+        const lesson_index = req.query.lesson_index;
+  const mini_lesson_index = req.query.mini_lesson_index;
         const result = await executePython(scriptPath, [lesson_index, mini_lesson_index]);
   
         res.json({ result: result });
