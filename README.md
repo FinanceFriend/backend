@@ -21,8 +21,8 @@ Follow these steps to get your development environment set up:
   ```
   MONGODB_URI=your_mongodb_uri
   OPENAI_API_KEY=your_api_key
-  PORT=3000
+  PORT=3001
   ```
 5. Start the Server: `npm start`
 6. Verify Installation:
-- Open `http://localhost:3000` in your web browser. You should see a confirmation message indicating that the server is running.
+- Open `http://localhost:3001` in your web browser. You should see a confirmation message indicating that the server is running.
