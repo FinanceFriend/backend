@@ -11,10 +11,11 @@ const getChatForUserAndLocation = async (req, res) => {
       // Decompress each message in the nested array structure
       const decompressedMessagesList = chatDoc.messagesList.map(group => 
         group.map(message => {
-          const content = message.isCompressed ? decompressMessage(message.compressedContent) : message.content;
+          const buffer = Buffer.from(message.compressedContent, 'base64');
+          const decompressed = zlib.gunzipSync(buffer).toString();
           return {
             sender: message.sender,
-            content: content
+            content: decompressed
           };
         })
       );
@@ -86,9 +87,7 @@ const saveMessage = async (req, res) => {
 
 function decompressMessage(compressedText) {
   try {
-    const buffer = Buffer.from(compressedText, 'base64');
-    const decompressed = zlib.gunzipSync(buffer);
-    return decompressed.toString();
+    
   } catch (error) {
     console.error('Decompression error:', error);
     return ''; // Return an empty string or handle the error as required
