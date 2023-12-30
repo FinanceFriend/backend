@@ -1,6 +1,8 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'script.py');
+const Chat = require("../models/chat");
+const zlib = require('zlib');
 
 
 const executePython = async (script, args) => {
@@ -33,12 +35,7 @@ const executePython = async (script, args) => {
 
 const getLessonMessage = async (req, res) => {
     try {
-        const username = req.query.username;
-        const location = req.query.location;
-        const friend_name = req.query.friend_name;
-        const friend_type = req.query.friend_type;
-        const mini_lesson_index = req.query.mini_lesson_index;
-        const lesson_index = req.query.lesson_index;
+        const { username, location_id, location, friend_name, friend_type, lesson_index, mini_lesson_index } = req.query;
 
         const result = await executePython(scriptPath, [
             username,
@@ -48,16 +45,45 @@ const getLessonMessage = async (req, res) => {
             lesson_index, 
             mini_lesson_index
         ]);
+
+        //compress and save message for user and location
+        const compressedResult = zlib.gzipSync(result).toString('base64');
+       
+        const newMessage = {
+            sender: 'AI',
+            compressedContent: compressedResult,
+            isCompressed: true
+        };
+
+        // Find or create a document for the user and module
+        let chatDoc = await Chat.findOne({ username, location_id });
+        
+        if (!chatDoc ) {
+            chatDoc = new Chat({ username, location_id, messagesList: [[newMessage]] });
+        }else{
+
+            if (chatDoc.messagesList.length === 0 || chatDoc.messagesList[chatDoc.messagesList.length - 1].length === 0) {
+                chatDoc.messagesList.push([newMessage]);
+            } else {
+                chatDoc.messagesList[chatDoc.messagesList.length - 1].push(newMessage);
+            }
+
+        }
+
+        // Save the updated document
+        await chatDoc.save();
   
+        //send message to user
         res.status(200).json({
             success: true,
             message: result
-          });
+        });
+
     } catch (error) {
         res.status(500).json({
             success: false,
             error: error
-          });
+        });
     }
   };
 
