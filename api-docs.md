@@ -105,13 +105,14 @@
   - Returns `404 Not Found` if the user does not exist.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 7. Get lesson message
+## 7. Save AI Message And Returns It
 
 - **Endpoint**: `/api/langchain/lessons`
-- **Method**: `GET`
-- **Description**: Retrieves a message that explains mini-lesson goal.
+- **Method**: `POST`
+- **Description**: Retrieves and save a message that explains mini-lesson goal.
 - **URL Parameters**:
   - `username`: String (required)
+  - `location_id`: Integer (required)
   - `location`: String (required)
   - `friend_name`: String (required)
   - `friend_type`: String (required)

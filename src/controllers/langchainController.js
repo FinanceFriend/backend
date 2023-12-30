@@ -33,12 +33,7 @@ const executePython = async (script, args) => {
 
 const getLessonMessage = async (req, res) => {
     try {
-        const username = req.query.username;
-        const location = req.query.location;
-        const friend_name = req.query.friend_name;
-        const friend_type = req.query.friend_type;
-        const mini_lesson_index = req.query.mini_lesson_index;
-        const lesson_index = req.query.lesson_index;
+        const { username, location_id, location, friend_name, friend_type, lesson_index, mini_lesson_index } = req.query;
 
         const result = await executePython(scriptPath, [
             username,
