@@ -24,7 +24,7 @@ const getGeneralLeaderboard = async (req, res) => {
             $floor: {
               $divide: [
                 { $subtract: [new Date(), "$dateOfBirth"] },
-                365 * 24 * 60 * 60 * 1000, // Number of milliseconds in a year
+                365 * 24 * 60 * 60 * 1000,
               ],
             },
           },
@@ -33,6 +33,9 @@ const getGeneralLeaderboard = async (req, res) => {
       },
       {
         $sort: { totalPoints: -1 },
+      },
+      {
+        $limit: 100,
       },
     ]);
 

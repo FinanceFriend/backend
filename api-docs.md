@@ -167,11 +167,11 @@
   - Returns `404 Not Found` if no stats are found for the given username.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 10. Basic Leaderboard
+## 10. General Leaderboard
 
 - **Endpoint**: `/api/leaderboard/general`
 - **Method**: `GET`
-- **Description**: Retrieves a leaderboard of users sorted by total points. Each entry includes the user's username, country, age, total points, and their rank.
+- **Description**: Retrieves a leaderboard of first 100 users sorted by total points. Each entry includes the user's username, country, age, total points, and their rank.
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
   - `leaderboard`: Array of Objects - A list of user rankings.
