@@ -1,7 +1,7 @@
 const { validateEmail } = require("../utilities/regex");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const statsController = require('../controllers/statsController');
+const statsController = require('./statsController');
 
 const registerUser = async (req, res) => {
   try {
