@@ -104,3 +104,21 @@
 - **Error Handling**:
   - Returns `404 Not Found` if the user does not exist.
   - Returns `500 Internal Server Error` for any server-side errors.
+
+## 7. Get lesson message
+
+- **Endpoint**: `/api/langchain/lessons`
+- **Method**: `GET`
+- **Description**: Retrieves a message that explains mini-lesson goal.
+- **URL Parameters**:
+  - `username`: String (required)
+  - `location`: String (required)
+  - `friend_name`: String (required)
+  - `friend_type`: String (required)
+  - `lesson_index`: Integer (required)
+  - `mini_lesson_index`: Integer (required)
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message we want.
+- **Error Handling**:
+  - Returns `500 Internal Server Error` for any server-side errors.

@@ -49,9 +49,15 @@ const getLessonMessage = async (req, res) => {
             mini_lesson_index
         ]);
   
-        res.json({ result: result });
+        res.status(200).json({
+            success: true,
+            message: result
+          });
     } catch (error) {
-        res.status(500).json({ error: error });
+        res.status(500).json({
+            success: false,
+            error: error
+          });
     }
   };
 
