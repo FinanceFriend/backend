@@ -105,13 +105,14 @@
   - Returns `404 Not Found` if the user does not exist.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 7. Get lesson message
+## 7. Save message lesson and returns it
 
 - **Endpoint**: `/api/langchain/lessons`
-- **Method**: `GET`
-- **Description**: Retrieves a message that explains mini-lesson goal.
+- **Method**: `POST`
+- **Description**: Retrieves and save a message that explains mini-lesson goal.
 - **URL Parameters**:
   - `username`: String (required)
+  - `location_id`: Integer (required)
   - `location`: String (required)
   - `friend_name`: String (required)
   - `friend_type`: String (required)
@@ -122,3 +123,32 @@
   - `message`: String - A message we want.
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
+
+## 8. Save user message
+
+- **Endpoint**: `/api/chat`
+- **Method**: `POST`
+- **Description**: Save message that user have sent.
+- **Request Body**:
+  - `username`: String (required)
+  - `location_id`: Integer (required)
+  - `message`: String (required)
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message we want.
+- **Error Handling**:
+  - Returns `500 Internal Server Error` for any server-side errors.
+
+## 8. Save user message
+
+- **Endpoint**: `/api/chat`
+- **Method**: `GET`
+- **Description**: Retrieves chat of user for location.
+- **URL Parameters**:
+  - `username`: String (required)
+  - `location_id`: Integer (required)
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message we want.
+- **Error Handling**:
+  - Returns `500 Internal Server Error` for any server-side errors.  
