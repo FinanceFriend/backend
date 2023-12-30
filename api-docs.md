@@ -123,3 +123,46 @@
   - `message`: String - A message we want.
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
+
+## 8. Fetch User Stats
+
+- **Endpoint**: `/api/stats/:username`
+- **Method**: `GET`
+- **Description**: Retrieves the statistics associated with a specific user.
+- **URL Parameters**:
+  - `username`: String (required) - The username of the user whose stats are being requested.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `data`: Object - Contains the user's statistics.
+    - `username`: String - The username of the user.
+    - `completionPercentages`: Array of Numbers - An array of completion percentages.
+    - `points`: Array of Numbers - An array of points.
+    - `correctAnswers`: Number - The count of correct answers.
+    - `incorrectAnswers`: Number - The count of incorrect answers.
+    - `totalCompletion`: Number - The average of all completion percentages.
+    - `totalPoints`: Number - The sum of all points.
+    - `correctAnswersPercentage`: Number - The percentage of correct answers.
+- **Error Handling**:
+  - Returns `404 Not Found` if the stats for the given username are not found.
+  - Returns `500 Internal Server Error` for any server-side errors.
+
+## 9. Update User Stats
+
+- **Endpoint**: `/api/stats/:username`
+- **Method**: `PUT`
+- **Description**: Updates the statistics associated with a specific user.
+- **URL Parameters**:
+  - `username`: String (required) - The username of the user whose stats are to be updated.
+- **Request Body** (Any or all of the following):
+  - `completionPercentages`: Array of Numbers (optional) - An array of new completion percentages.
+  - `points`: Array of Numbers (optional) - An array of new points.
+  - `correctAnswers`: Number (optional) - The updated count of correct answers.
+  - `incorrectAnswers`: Number (optional) - The updated count of incorrect answers.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message describing the outcome.
+  - `data`: Object - Contains the updated stats for the user.
+- **Error Handling**:
+  - Returns `400 Bad Request` if the provided data is invalid or if required fields are missing.
+  - Returns `404 Not Found` if no stats are found for the given username.
+  - Returns `500 Internal Server Error` for any server-side errors.
