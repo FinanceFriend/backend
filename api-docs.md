@@ -123,3 +123,25 @@
   - `message`: String - A message we want.
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
+
+## 8. Fetch User Stats
+
+- **Endpoint**: `/api/stats/:username`
+- **Method**: `GET`
+- **Description**: Retrieves the statistics associated with a specific user.
+- **URL Parameters**:
+  - `username`: String (required) - The username of the user whose stats are being requested.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `data`: Object - Contains the user's statistics.
+    - `username`: String - The username of the user.
+    - `completionPercentages`: Array of Numbers - An array of completion percentages.
+    - `points`: Array of Numbers - An array of points.
+    - `correctAnswers`: Number - The count of correct answers.
+    - `incorrectAnswers`: Number - The count of incorrect answers.
+    - `totalCompletion`: Number - The average of all completion percentages.
+    - `totalPoints`: Number - The sum of all points.
+    - `correctAnswersPercentage`: Number - The percentage of correct answers.
+- **Error Handling**:
+  - Returns `404 Not Found` if the stats for the given username are not found.
+  - Returns `500 Internal Server Error` for any server-side errors.
