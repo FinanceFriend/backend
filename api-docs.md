@@ -105,7 +105,7 @@
   - Returns `404 Not Found` if the user does not exist.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 7. Save message lesson and returns it
+## 7. Save AI Message And Returns It
 
 - **Endpoint**: `/api/langchain/lessons`
 - **Method**: `POST`
@@ -124,7 +124,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 8. Save user message
+## 8. Save User Message
 
 - **Endpoint**: `/api/chat`
 - **Method**: `POST`
@@ -139,7 +139,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 8. Save user message
+## 8. Fetch User Chat
 
 - **Endpoint**: `/api/chat`
 - **Method**: `GET`
