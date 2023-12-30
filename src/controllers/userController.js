@@ -1,6 +1,7 @@
 const { validateEmail } = require("../utilities/regex");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const statsController = require('../controllers/statsController');
 
 const registerUser = async (req, res) => {
   try {
@@ -48,6 +49,8 @@ const registerUser = async (req, res) => {
       countryOfOrigin: newUser.countryOfOrigin,
       preferredLanguage: newUser.preferredLanguage
     };
+
+    await statsController.initializeStats(newUser.username);
 
     res.status(201).json({
       success: true,
@@ -216,6 +219,7 @@ const deleteUser = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
+    await statsController.deleteStats(username);
     res.json({ success: true, message: "User deleted successfully" });
   } catch (err) {
     console.error(err);
