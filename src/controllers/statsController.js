@@ -39,27 +39,7 @@ const getStats = async (req, res) => {
         .json({ success: false, message: "Stats not found" });
     }
 
-    const totalCompletion = stats.completionPercentages.length > 0
-      ? stats.completionPercentages.reduce((a, b) => a + b, 0) / stats.completionPercentages.length
-      : 0;
-
-    const totalPoints = stats.points.reduce((a, b) => a + b, 0);
-
-    const totalAnswers = stats.correctAnswers + stats.incorrectAnswers;
-    const correctAnswersPercentage = totalAnswers > 0
-      ? (stats.correctAnswers / totalAnswers) * 100
-      : 0;
-
-    const statsResponse = {
-        username: stats.username,
-        completionPercentages: stats.completionPercentages,
-        points: stats.points,
-        correctAnswers: stats.correctAnswers,
-        incorrectAnswers: stats.incorrectAnswers,
-        totalCompletion: totalCompletion,
-        totalPoints: totalPoints,
-        correctAnswersPercentage: correctAnswersPercentage
-    };
+    const statsResponse = createStatsResponse(stats);
 
     res.status(200).json({ success: true, statsResponse });
   } catch (err) {
@@ -72,8 +52,69 @@ const getStats = async (req, res) => {
   }
 };
 
+const updateStats = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const updateData = req.body;
+
+    const updatedStats = await Stats.findOneAndUpdate(
+      { username: username },
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedStats) {
+      return res.status(404).json({
+        success: false,
+        message: "Stats not found for the given username",
+      });
+    }
+
+    const statsResponse = createStatsResponse(updatedStats);
+
+    res.status(200).json({
+      success: true,
+      message: "Stats updated successfully",
+      data: statsResponse,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error updating stats",
+      error: err.message,
+    });
+  }
+};
+
+function createStatsResponse(stats) {
+  const totalCompletion =
+    stats.completionPercentages.length > 0
+      ? stats.completionPercentages.reduce((a, b) => a + b, 0) /
+        stats.completionPercentages.length
+      : 0;
+
+  const totalPoints = stats.points.reduce((a, b) => a + b, 0);
+
+  const totalAnswers = stats.correctAnswers + stats.incorrectAnswers;
+  const correctAnswersPercentage =
+    totalAnswers > 0 ? (stats.correctAnswers / totalAnswers) * 100 : 0;
+
+  return {
+    username: stats.username,
+    completionPercentages: stats.completionPercentages,
+    points: stats.points,
+    correctAnswers: stats.correctAnswers,
+    incorrectAnswers: stats.incorrectAnswers,
+    totalCompletion: totalCompletion,
+    totalPoints: totalPoints,
+    correctAnswersPercentage: correctAnswersPercentage,
+  };
+}
+
 module.exports = {
   initializeStats,
   deleteStats,
-  getStats
+  getStats,
+  updateStats,
 };
