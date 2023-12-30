@@ -166,3 +166,19 @@
   - Returns `400 Bad Request` if the provided data is invalid or if required fields are missing.
   - Returns `404 Not Found` if no stats are found for the given username.
   - Returns `500 Internal Server Error` for any server-side errors.
+
+## 10. Basic Leaderboard
+
+- **Endpoint**: `/api/leaderboard/general`
+- **Method**: `GET`
+- **Description**: Retrieves a leaderboard of users sorted by total points. Each entry includes the user's username, country, age, total points, and their rank.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `leaderboard`: Array of Objects - A list of user rankings.
+    - `username`: String - The username of the user.
+    - `countryOfOrigin`: String - The country of origin of the user.
+    - `age`: Number - The age of the user, calculated from their date of birth.
+    - `totalPoints`: Number - The total points accumulated by the user.
+    - `rank`: Number - The rank of the user in the leaderboard. Users with the same number of points share the same rank.
+- **Error Handling**:
+  - Returns `500 Internal Server Error` for any server-side errors.
