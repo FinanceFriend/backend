@@ -253,7 +253,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 13. Single User Age-Specific Leaderboard
+## 15. Single User Age-Specific Leaderboard
 
 - **Endpoint**: `/api/leaderboard/age/:age/:username`
 - **Method**: `GET`
