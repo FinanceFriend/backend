@@ -3,6 +3,7 @@ const path = require('path');
 const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'script.py');
 const Chat = require("../models/chat");
 const zlib = require('zlib');
+const chatController = require('./chatController');
 
 
 const executePython = async (script, args) => {
@@ -46,32 +47,7 @@ const getLessonMessage = async (req, res) => {
             mini_lesson_index
         ]);
 
-        //compress and save message for user and location
-        const compressedResult = zlib.gzipSync(result).toString('base64');
-       
-        const newMessage = {
-            sender: 'AI',
-            compressedContent: compressedResult,
-            isCompressed: true
-        };
-
-        // Find or create a document for the user and module
-        let chatDoc = await Chat.findOne({ username, location_id });
-        
-        if (!chatDoc ) {
-            chatDoc = new Chat({ username, location_id, messagesList: [[newMessage]] });
-        }else{
-
-            if (chatDoc.messagesList.length === 0 || chatDoc.messagesList[chatDoc.messagesList.length - 1].length === 0) {
-                chatDoc.messagesList.push([newMessage]);
-            } else {
-                chatDoc.messagesList[chatDoc.messagesList.length - 1].push(newMessage);
-            }
-
-        }
-
-        // Save the updated document
-        await chatDoc.save();
+        await chatController.saveMessage(username, 'AI', location_id, result);
   
         //send message to user
         res.status(200).json({
@@ -82,7 +58,7 @@ const getLessonMessage = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            error: error
+            error: error.message
         });
     }
   };
@@ -99,7 +75,31 @@ const getLessonMessage = async (req, res) => {
     }
   };
 
+  const getAnswerToUserMessage = async (req, res) => {
+    try {
+        const {username, location_id, message} = req.body;
+
+
+        //TODO get result message from llm
+
+        await chatController.saveMessage(username, 'User', location_id, message);
+
+
+        res.status(200).json({
+            success: true,
+            message: message
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
     getLessonMessage,
-    getLessonMessageLoremIpsum
+    getLessonMessageLoremIpsum,
+    getAnswerToUserMessage
 };

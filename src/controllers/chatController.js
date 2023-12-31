@@ -38,24 +38,20 @@ const getChatForUserAndLocation = async (req, res) => {
   }
 };
 
-const saveMessage = async (req, res) => {
+const saveMessage = async (username, sender, location_id, message) => {
 
   try{
-
-    const {username, location_id, message} = req.body;
-
-    const compressedResult = zlib.gzipSync(message).toString('base64');
         
     const newMessage = {
-        sender: 'User',
-        compressedContent: compressedResult,
+        sender: sender,
+        compressedContent: zlib.gzipSync(message).toString('base64'),
         isCompressed: true
     };
 
     // Find or create a document for the user and module
     let chatDoc = await Chat.findOne({ username, location_id });
     
-    if (!chatDoc ) {
+    if (!chatDoc) {
         chatDoc = new Chat({ username, location_id, messagesList: [[newMessage]] });
     }else{
 
@@ -70,29 +66,14 @@ const saveMessage = async (req, res) => {
     // Save the updated document
     await chatDoc.save();
 
-    res.status(200).json({
-      success: true,
-      message: "Message added sucessfuly",
-    });
+    console.log(`Message for user ${username} added successfully.`);
+
 
   } catch(error){
-    res.status(500).json({
-      success: false,
-      message: error
-    });
+    console.log(`Error adding message for user ${username}.`);
   }
 
 };
-  
-
-function decompressMessage(compressedText) {
-  try {
-    
-  } catch (error) {
-    console.error('Decompression error:', error);
-    return ''; // Return an empty string or handle the error as required
-  }
-}
 
 module.exports = {
     getChatForUserAndLocation,
