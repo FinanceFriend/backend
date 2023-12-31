@@ -74,7 +74,19 @@ const saveMessage = async (username, sender, location_id, message) => {
 
 };
 
+const deleteChat = async (username) => {
+
+  try {
+    await Chat.deleteMany({ username: username });
+    console.log(`Chat for user ${username} deleted successfully.`);
+  } catch (error) {
+    console.error("Error deleting chat: ", error);
+  }
+
+};
+
 module.exports = {
-    getChatForUserAndLocation,
-    saveMessage
+  getChatForUserAndLocation,
+  saveMessage,
+  deleteChat
 };
