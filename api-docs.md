@@ -105,7 +105,7 @@
   - Returns `404 Not Found` if the user does not exist.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 7. Save AI Message And Returns It
+## 7. Save And Return AI Message
 
 - **Endpoint**: `/api/langchain/lessons`
 - **Method**: `POST`

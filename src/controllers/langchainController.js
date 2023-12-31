@@ -5,31 +5,31 @@ const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'script.py
 
 const executePython = async (script, args) => {
     const arguments = args.map(arg => arg.toString());
-  
+
     const py = spawn("python", [script, ...arguments]);
-  
+
     const result = await new Promise((resolve, reject) => {
         let output;
-  
+
         // Get output from python script
         py.stdout.on('data', (data) => {
             output = data.toString();
         });
-  
-        // Handle erros
+
+        // Handle errors
         py.stderr.on("data", (data) => {
             console.error(`[python] Error occured: ${data}`);
             reject(`Error occured in ${script}`);
         });
-  
+
         py.on("exit", (code) => {
             console.log(`Child process exited with code ${code}`);
             resolve(output);
         });
     });
-  
+
     return result;
-  }
+}
 
 const getLessonMessage = async (req, res) => {
     try {
@@ -43,30 +43,96 @@ const getLessonMessage = async (req, res) => {
             lesson_index, 
             mini_lesson_index
         ]);
-  
+
         res.status(200).json({
             success: true,
             message: result
-          });
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
             error: error
-          });
+        });
     }
-  };
+};
 
-  const getLessonMessageLoremIpsum = async (req, res) => {
+const getLessonMessageLoremIpsum = async (req, res) => {
     try {
         const lesson_index = req.query.lesson_index;
         const mini_lesson_index = req.query.mini_lesson_index;
         const result = lesson_index+""+mini_lesson_index+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed scelerisque leo. Vestibulum tincidunt blandit enim, in mollis ipsum vestibulum eu. Vestibulum a rutrum massa. Mauris in suscipit enim. Pellentesque vel pellentesque enim, vitae accumsan felis. Proin eu justo non metus vulputate venenatis non et ipsum. Donec ut imperdiet erat, et ultricies tortor. Curabitur accumsan congue diam, sed dignissim erat auctor quis. Suspendisse mollis lectus sit amet purus hendrerit faucibus. Integer ac metus nisl. Phasellus ante dolor, mattis eu magna ac, scelerisque lacinia erat. Vestibulum et vehicula purus, quis sollicitudin magna."
-  
+
         res.json({ result: result });
     } catch (error) {
         res.status(500).json({ error: error });
     }
-  };
+};
+
+const getWelcomeMessage = async (req, res) => {
+    try {
+        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.query;
+
+        const result = await executePython("../scripts/welcomeMessageGenerator.py", [
+            username,
+            locationName,
+            friendName,
+            friendType,
+            moduleName,
+            moduleDecriptionKids,
+            moduleDescriptionParents, 
+            progress, 
+            currentLesson, 
+            currentMinilesson,
+            currentBlock, 
+            userAge,
+            userLanguage
+        ]);
+
+        res.status(200).json({
+            success: true,
+            message: result
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error
+        });
+    }
+};
+
+const getLessonMessageAlt = async (req, res) => {
+    try {
+        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.query;
+
+
+        script = int(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : "../scripts/lessonMessageGenerator.py"
+        const result = await executePython(script, [
+            username,
+            locationName,
+            friendName,
+            friendType,
+            moduleName,
+            moduleDecriptionKids,
+            moduleDescriptionParents, 
+            progress, 
+            currentLesson, 
+            currentMinilesson,
+            currentBlock, 
+            userAge,
+            userLanguage
+        ]);
+
+        res.status(200).json({
+            success: true,
+            message: result
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error
+        });
+    }
+}
 
 module.exports = {
     getLessonMessage,

@@ -1,0 +1,50 @@
+[
+    {
+        "id": 0,
+        "name": "Numberland",
+        "friendName": "Cal",
+        "friendType": "The Calculator",
+        "module": "Financial Mathematics",
+        "description": "In Numberland, kids learn the basics of financial arithmetic, including adding and subtracting money, and understanding the role of mathematics in budgeting and financial planning."
+    },
+    {
+        "id": 1,
+        "name": "Savings Treehouse",
+        "friendName": "Olivia",
+        "friendType": "The Owl",
+        "module": "Savings",
+        "description": "At Savings Treehouse, children explore the importance of saving, learn about different savings strategies, and understand how regular saving contributes to financial goals."
+    },
+    {
+        "id": 2,
+        "name": "Taxtown",
+        "friendName": "Timmy",
+        "friendType": "The Turtle",
+        "module": "Taxes",
+        "description": "In Taxtown, kids are introduced to the concept of taxes, learning how taxes work, why they are paid, and the role taxes play in society."
+    },
+    {
+        "id": 3,
+        "name": "Investment Woods",
+        "friendName": "Fiona",
+        "friendType": "The Fox",
+        "module": "Investments",
+        "description": "Investment Woods teaches children about the basics of investments, including different types of investments and the concept of risk and return."
+    },
+    {
+        "id": 4,
+        "name": "Loan Lake",
+        "friendName": "Bart",
+        "friendType": "The Beaver",
+        "module": "Loans",
+        "description": "At Loan Lake, kids learn about loans, interest rates, and the importance of borrowing responsibly and understanding loan agreements."
+    },
+    {
+        "id": 5,
+        "name": "Imagination Jungle",
+        "friendName": "Cleo",
+        "friendType": "The Cameleon",
+        "module": "Freeform",
+        "description": "Imagination Jungle is a creative space where kids can talk with Cleo about whatever they want. However, Cleo is a little sensitive so they will also learn how to behave well, even when talking to a chatbot."
+    }
+]
