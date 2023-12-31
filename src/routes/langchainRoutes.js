@@ -8,5 +8,4 @@ router.get('/lessonsLoremIpsum', langchainController.getLessonMessageLoremIpsum)
 router.post('/welcome', langchainController.getWelcomeMessage);
 router.post('/lessonMessage', langchainController.getLessonMessageAlt);
 
-
 module.exports = router;
