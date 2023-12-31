@@ -19,11 +19,11 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 2. Save User Message
+## 2. Save User Message And Return AI answer
 
-- **Endpoint**: `/api/chat`
+- **Endpoint**: `/api/langchain/userMessage`
 - **Method**: `POST`
-- **Description**: Save message that user have sent.
+- **Description**: Save message that user have sent and.
 - **Request Body**:
   - `username`: String (required)
   - `location_id`: Integer (required)

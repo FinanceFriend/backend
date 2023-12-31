@@ -85,6 +85,8 @@ const deleteChat = async (username) => {
 
 };
 
+//TODO delete chat for specific location
+
 module.exports = {
   getChatForUserAndLocation,
   saveMessage,
