@@ -105,26 +105,7 @@
   - Returns `404 Not Found` if the user does not exist.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 7. Save AI Message And Returns It
-
-- **Endpoint**: `/api/langchain/lessons`
-- **Method**: `POST`
-- **Description**: Retrieves and save a message that explains mini-lesson goal.
-- **URL Parameters**:
-  - `username`: String (required)
-  - `location_id`: Integer (required)
-  - `location`: String (required)
-  - `friend_name`: String (required)
-  - `friend_type`: String (required)
-  - `lesson_index`: Integer (required)
-  - `mini_lesson_index`: Integer (required)
-- **Response**:
-  - `success`: Boolean - Indicates if the operation was successful.
-  - `message`: String - A message we want.
-- **Error Handling**:
-  - Returns `500 Internal Server Error` for any server-side errors.
-
-## 8. Fetch User Stats
+## 7. Fetch User Stats
 
 - **Endpoint**: `/api/stats/:username`
 - **Method**: `GET`
@@ -146,7 +127,7 @@
   - Returns `404 Not Found` if the stats for the given username are not found.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 9. Update User Stats
+## 8. Update User Stats
 
 - **Endpoint**: `/api/stats/:username`
 - **Method**: `PUT`
@@ -167,7 +148,7 @@
   - Returns `404 Not Found` if no stats are found for the given username.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 10. General Leaderboard
+## 9. General Leaderboard
 
 - **Endpoint**: `/api/leaderboard/general`
 - **Method**: `GET`
@@ -183,7 +164,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 11. Single User General Leaderboard
+## 10. Single User General Leaderboard
 
 - **Endpoint**: `/api/leaderboard/general/:username`
 - **Method**: `GET`
@@ -202,7 +183,7 @@
   - Returns `404 Not Found` if the specified user is not found.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 12. Country-Specific Leaderboard
+## 11. Country-Specific Leaderboard
 
 - **Endpoint**: `/api/leaderboard/country/:country`
 - **Method**: `GET`
@@ -218,7 +199,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 13. Single User Country-Specific Leaderboard
+## 12. Single User Country-Specific Leaderboard
 
 - **Endpoint**: `/api/leaderboard/country/:country/:username`
 - **Method**: `GET`
@@ -237,7 +218,7 @@
   - Returns `404 Not Found` if the specified user is not found.
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 14. Age-Specific Leaderboard
+## 13. Age-Specific Leaderboard
 
 - **Endpoint**: `/api/leaderboard/age/:age`
 - **Method**: `GET`
@@ -253,7 +234,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 15. Single User Age-Specific Leaderboard
+## 14. Single User Age-Specific Leaderboard
 
 - **Endpoint**: `/api/leaderboard/age/:age/:username`
 - **Method**: `GET`
