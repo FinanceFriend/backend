@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
   countryOfOrigin: {
     type: String,
     required: true
+  },
+  preferredLanguage: {
+    type: String,
+    required: true
   }
 });
 
