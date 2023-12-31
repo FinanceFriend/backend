@@ -43,9 +43,8 @@ const saveMessage = async (username, sender, location_id, message) => {
   try{
         
     const newMessage = {
-        sender: sender,
-        compressedContent: zlib.gzipSync(message).toString('base64'),
-        isCompressed: true
+      sender: sender,
+      compressedContent: zlib.gzipSync(message).toString('base64')    
     };
 
     // Find or create a document for the user and module
@@ -56,9 +55,9 @@ const saveMessage = async (username, sender, location_id, message) => {
     }else{
 
         if (chatDoc.messagesList.length === 0 || chatDoc.messagesList[chatDoc.messagesList.length - 1].length === 0) {
-            chatDoc.messagesList.push([newMessage]);
+          chatDoc.messagesList.push([newMessage]);
         } else {
-            chatDoc.messagesList[chatDoc.messagesList.length - 1].push(newMessage);
+          chatDoc.messagesList[chatDoc.messagesList.length - 1].push(newMessage);
         }
 
     }

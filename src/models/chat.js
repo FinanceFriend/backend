@@ -9,10 +9,6 @@ const messageSchema = new mongoose.Schema({
   compressedContent: {
     type: String,
     required: true
-  },
-  isCompressed: {
-    type: Boolean,
-    default: true
   }
 });
 
