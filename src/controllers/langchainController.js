@@ -136,5 +136,7 @@ const getLessonMessageAlt = async (req, res) => {
 
 module.exports = {
     getLessonMessage,
-    getLessonMessageLoremIpsum
+    getLessonMessageLoremIpsum, 
+    getWelcomeMessage,
+    getLessonMessageAlt
 };
