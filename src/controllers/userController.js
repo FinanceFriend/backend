@@ -1,10 +1,11 @@
 const { validateEmail } = require("../utilities/regex");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const statsController = require('./statsController');
 
 const registerUser = async (req, res) => {
   try {
-    const { username, email, password, dateOfBirth, countryOfOrigin } =
+    const { username, email, password, dateOfBirth, countryOfOrigin, preferredLanguage } =
       req.body;
 
     const usernameExists = await User.findOne({ username });
@@ -36,6 +37,7 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
       dateOfBirth: new Date(dateOfBirth),
       countryOfOrigin,
+      preferredLanguage
     });
 
     await newUser.save();
@@ -45,7 +47,10 @@ const registerUser = async (req, res) => {
       email: newUser.email,
       dateOfBirth: newUser.dateOfBirth,
       countryOfOrigin: newUser.countryOfOrigin,
+      preferredLanguage: newUser.preferredLanguage
     };
+
+    await statsController.initializeStats(newUser.username);
 
     res.status(201).json({
       success: true,
@@ -214,6 +219,7 @@ const deleteUser = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
+    await statsController.deleteStats(username);
     res.json({ success: true, message: "User deleted successfully" });
   } catch (err) {
     console.error(err);
