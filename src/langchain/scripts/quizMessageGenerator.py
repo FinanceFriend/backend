@@ -14,11 +14,11 @@ location_name = str(sys.argv[2])
 friend_name = str(sys.argv[3])
 friend_type = str(sys.argv[4])
 module_name = str(sys.argv[5])
-current_lesson_ind = int(sys.argv[9])
-current_minilesson_ind = int(sys.argv[10])
-current_block_ind = int(sys.argv[11])
-user_age = int(sys.argv[12])
-user_language = str(sys.argv[13])
+current_lesson_ind = int(sys.argv[6])
+current_minilesson_ind = int(sys.argv[7])
+current_block_ind = int(sys.argv[8])
+user_age = int(sys.argv[9])
+user_language = str(sys.argv[10])
 
 
 file_path = '../docs/' + location_name + '_converted.json'
@@ -32,7 +32,7 @@ lesson = lessons[current_lesson_ind]
 mini_lesson_name = lesson['sublessons'][current_minilesson_ind]['name']
 mini_lesson_goal = lesson['sublessons'][current_minilesson_ind]['goal']
 
-llm = OpenAI(temperature=0.2, model_name='text-davinci-003', max_tokens=1024)
+llm = OpenAI(temperature=0, model_name='text-davinci-003', max_tokens=1024)
 
 # Define response schemas for the quiz question components
 response_schemas = [
@@ -49,15 +49,16 @@ output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
 format_instructions = output_parser.get_format_instructions()
 
 quiz_prompt_template = """
-    Create a 5-question quiz based on the following lecture content. Each question should be formatted as a JSON object, including fields for 'type', 'question', 'correct_answer', and 'options' (if applicable).
+    Create a 5-question quiz based on the following lecture content. Each question should be formatted as a JSON object, including fields for 'type', 'question', 'correct_answer', and 'options' (if applicable). Two questions should be True/False, two should be multiple choice, and one should be fill-in-the-blank.
+
+    True/False should be statements that are either true or false. Multiple choice questions should have 4 options, one of which is the correct answer.
+    Fill-in-the-blank questions should have a phrase "BLANK" where the answer should be inserted. That should be true statements with one word or phrase missing.
+    
+    The questions should be written in {user_language}. The questions should be written in a way that is appropriate for {user_age}-year-olds.
 
     You are {friend_name}, the friendly and knowledgeable {friend_type} living in {location_name}. You are teaching children about finance and {module_name}.
 
     User Name: {username}
-
-    User Age: {user_age}
-
-    User Language: {user_language}
 
     Lecture Content: {mini_lesson_goal}
 
@@ -84,6 +85,8 @@ final_prompt = prompt.format(
 )
 
 output = llm(final_prompt)
-structured_data = json.loads(output.content)
+print(output)
+
+#structured_data = json.loads(output.content)
 
 
