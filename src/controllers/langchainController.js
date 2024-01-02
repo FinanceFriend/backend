@@ -32,34 +32,6 @@ const executePython = async (script, args) => {
     return result;
 }
 
-const getLessonMessage = async (req, res) => {
-    try {
-        const { username, location_id, location, friend_name, friend_type, lesson_index, mini_lesson_index } = req.query;
-
-        const result = await executePython(scriptPath, [
-            username,
-            location,
-            friend_name,
-            friend_type,
-            lesson_index, 
-            mini_lesson_index
-        ]);
-
-        await chatController.saveMessage(username, 'AI', location_id, result);
-  
-        //send message to user
-        res.status(200).json({
-            success: true,
-            message: result
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error
-        });
-    }
-};
-
 const getLessonMessageLoremIpsum = async (req, res) => {
     try {
         const lesson_index = req.query.lesson_index;
@@ -108,7 +80,7 @@ const getLessonMessageAlt = async (req, res) => {
     try {
         const {username, userAge, userLanguage, locationName, locationId, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
 
-        if(currentLesson > 0 && currentMinilesson === 0 && currentBlock !== 3) await chatController.deleteChatByLocationId(username, locationId);
+        if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(username, locationId);
 
         script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
         const result = await executePython(script, [
