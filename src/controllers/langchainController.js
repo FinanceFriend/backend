@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 const path = require('path');
-const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'script.py');
+const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMessageGenerator.py');
 
 
 const executePython = async (script, args) => {
@@ -105,7 +105,8 @@ const getLessonMessageAlt = async (req, res) => {
         const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
 
 
-        script = int(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : "../scripts/lessonMessageGenerator.py"
+        //script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : "../langchain/scripts/lessonMessageGenerator.py"
+        script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : scriptPath
         const result = await executePython(script, [
             username,
             locationName,
@@ -124,6 +125,7 @@ const getLessonMessageAlt = async (req, res) => {
             message: result
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             success: false,
             error: error
