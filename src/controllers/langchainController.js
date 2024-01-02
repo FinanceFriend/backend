@@ -4,6 +4,7 @@ const lessonPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMes
 const quizPath = path.join(__dirname, '..', 'langchain', 'scripts', 'quizMessageGenerator.py');
 const welcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'welcomeMessageGenerator.py');
 const chatController = require('./chatController');
+const { now } = require('mongoose');
 
 
 const executePython = async (script, args) => {
@@ -48,22 +49,36 @@ const getLessonMessageLoremIpsum = async (req, res) => {
 
 const getWelcomeMessage = async (req, res) => {
     try {
-        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.query;
+
+        const currentBlock = req.body.currentBlock;
+        const currentLesson = req.body.currentLesson;
+        const currentMinilesson = req.body.currentMinilesson;
+        const progress = req.body.progress;
+        const user = req.body.user;
+        const land = req.body.land;
+
+        const birthDate = new Date(user.dateOfBirth);
+        const today = new Date();
+        let userAge = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            userAge--;
+        }
 
         const result = await executePython(welcomePath, [ //"../scripts/welcomeMessageGenerator.py"
-            username,
-            locationName,
-            friendName,
-            friendType,
-            moduleName,
-            moduleDecriptionKids,
-            moduleDescriptionParents, 
+            user.username,
+            land.name,
+            land.friendName,
+            land.friendType,
+            land.moduleName,
+            land.moduleDecriptionKids,
+            land.moduleDescriptionParents, 
             progress, 
             currentLesson, 
             currentMinilesson,
             currentBlock, 
             userAge,
-            userLanguage
+            user.preferredLanguage
         ]);
 
         res.status(200).json({
@@ -80,35 +95,49 @@ const getWelcomeMessage = async (req, res) => {
 
 const getLessonMessageAlt = async (req, res) => {
     try {
-      
-        const {username, userAge, userLanguage, locationName, locationId, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
 
-        if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(username, locationId);
+        const currentBlock = req.body.currentBlock;
+        const currentLesson = req.body.currentLesson;
+        const currentMinilesson = req.body.currentMinilesson;
+        const user = req.body.user;
+        const land = req.body.land;
+
+        const birthDate = new Date(user.dateOfBirth);
+        const today = new Date();
+        let userAge = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            userAge--;
+        }
+      
+
+        if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(user.username, land.id);
 
 
        // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
        script = parseInt(currentBlock) == 3 ? quizPath :  lessonPath
        const result = await executePython(script, [
-            username,
-            locationName,
-            friendName,
-            friendType,
-            moduleName,
+            user.username,
+            land.name,
+            land.friendName,
+            land.friendType,
+            land.moduleName,
             currentLesson, 
             currentMinilesson,
             currentBlock, 
             userAge,
-            userLanguage
+            user.preferredLanguage
         ]);
 
 
-        await chatController.saveMessage(username, 'AI', locationId, result);
+        await chatController.saveMessage(user.username, 'AI', land.id, result);
 
         res.status(200).json({
             success: true,
             message: result
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             error: error
