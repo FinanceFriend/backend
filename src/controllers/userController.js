@@ -2,6 +2,7 @@ const { validateEmail } = require("../utilities/regex");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const statsController = require('./statsController');
+const chatController = require('./chatController');
 
 const registerUser = async (req, res) => {
   try {
@@ -220,6 +221,8 @@ const deleteUser = async (req, res) => {
     }
 
     await statsController.deleteStats(username);
+    await chatController.deleteChat(username);
+
     res.json({ success: true, message: "User deleted successfully" });
   } catch (err) {
     console.error(err);

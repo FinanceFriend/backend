@@ -1,6 +1,9 @@
 const { spawn } = require('child_process');
 const path = require('path');
-const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMessageGenerator.py');
+const lessonPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMessageGenerator.py');
+const quizPath = path.join(__dirname, '..', 'langchain', 'scripts', 'quizMessageGenerator.py');
+const welcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'welcomeMessageGenerator.py');
+const chatController = require('./chatController');
 
 
 const executePython = async (script, args) => {
@@ -31,31 +34,6 @@ const executePython = async (script, args) => {
     return result;
 }
 
-const getLessonMessage = async (req, res) => {
-    try {
-        const { username, location_id, location, friend_name, friend_type, lesson_index, mini_lesson_index } = req.query;
-
-        const result = await executePython(scriptPath, [
-            username,
-            location,
-            friend_name,
-            friend_type,
-            lesson_index, 
-            mini_lesson_index
-        ]);
-
-        res.status(200).json({
-            success: true,
-            message: result
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error
-        });
-    }
-};
-
 const getLessonMessageLoremIpsum = async (req, res) => {
     try {
         const lesson_index = req.query.lesson_index;
@@ -72,7 +50,7 @@ const getWelcomeMessage = async (req, res) => {
     try {
         const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.query;
 
-        const result = await executePython("../scripts/welcomeMessageGenerator.py", [
+        const result = await executePython(welcomePath, [ //"../scripts/welcomeMessageGenerator.py"
             username,
             locationName,
             friendName,
@@ -102,12 +80,15 @@ const getWelcomeMessage = async (req, res) => {
 
 const getLessonMessageAlt = async (req, res) => {
     try {
-        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
+      
+        const {username, userAge, userLanguage, locationName, locationId, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
+
+        if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(username, locationId);
 
 
-        //script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : "../langchain/scripts/lessonMessageGenerator.py"
-        script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : scriptPath
-        const result = await executePython(script, [
+       // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
+       script = parseInt(currentBlock) == 3 ? quizPath :  lessonPath
+       const result = await executePython(script, [
             username,
             locationName,
             friendName,
@@ -120,12 +101,14 @@ const getLessonMessageAlt = async (req, res) => {
             userLanguage
         ]);
 
+
+        await chatController.saveMessage(username, 'AI', locationId, result);
+
         res.status(200).json({
             success: true,
             message: result
         });
     } catch (error) {
-        console.log(error);
         res.status(500).json({
             success: false,
             error: error
@@ -133,9 +116,32 @@ const getLessonMessageAlt = async (req, res) => {
     }
 }
 
+  const getAnswerToUserMessage = async (req, res) => {
+    try {
+
+        const {username, locationId, message} = req.body;
+
+        await chatController.saveMessage(username, 'User', locationId, message);
+
+        //TODO get result message from llm
+
+
+        res.status(200).json({
+            success: true,
+            message: message
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
-    getLessonMessage,
     getLessonMessageLoremIpsum, 
     getWelcomeMessage,
-    getLessonMessageAlt
+    getLessonMessageAlt,
+    getAnswerToUserMessage
 };
