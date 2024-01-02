@@ -17,7 +17,8 @@ friend_type = str(sys.argv[4])
 lesson_index = int(sys.argv[5])
 mini_lesson_index = int(sys.argv[6])
 
-file_path = '../docs/' + location + '_converted.json'
+#file_path = '../docs/' + location + '_converted.json'
+file_path = 'src/langchain/docs/' + location + '_converted.json'
 
 
 with open(file_path, 'r') as file:

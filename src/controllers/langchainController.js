@@ -80,9 +80,11 @@ const getWelcomeMessage = async (req, res) => {
 
 const getLessonMessageAlt = async (req, res) => {
     try {
+      
         const {username, userAge, userLanguage, locationName, locationId, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
 
         if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(username, locationId);
+
 
        // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
        script = parseInt(currentBlock) == 3 ? quizPath :  lessonPath
@@ -107,7 +109,6 @@ const getLessonMessageAlt = async (req, res) => {
             message: result
         });
     } catch (error) {
-        console.log(error)
         res.status(500).json({
             success: false,
             error: error
