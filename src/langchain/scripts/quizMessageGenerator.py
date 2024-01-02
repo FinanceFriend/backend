@@ -21,7 +21,8 @@ user_age = int(sys.argv[9])
 user_language = str(sys.argv[10])
 
 
-file_path = '../docs/' + location_name + '_converted.json'
+#file_path = '../docs/' + location_name + '_converted.json'
+file_path = 'src/langchain/docs/' + location_name + '_converted.json'
 
 with open(file_path, 'r') as file:
     lessons = json.load(file)
@@ -86,7 +87,5 @@ final_prompt = prompt.format(
 
 output = llm(final_prompt)
 print(output)
-
-#structured_data = json.loads(output.content)
 
 
