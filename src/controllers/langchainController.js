@@ -119,9 +119,9 @@ const getLessonMessageAlt = async (req, res) => {
   const getAnswerToUserMessage = async (req, res) => {
     try {
 
-        const {username, locationId, message} = req.body;
+        const {username, location_id, message} = req.body;
 
-        await chatController.saveMessage(username, 'User', locationId, message);
+        await chatController.saveMessage(username, 'User', location_id, message);
 
         //TODO get result message from llm
 
