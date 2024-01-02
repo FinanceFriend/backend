@@ -102,7 +102,7 @@ const getWelcomeMessage = async (req, res) => {
 
 const getLessonMessageAlt = async (req, res) => {
     try {
-        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.query;
+        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
 
 
         script = int(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : "../scripts/lessonMessageGenerator.py"
@@ -112,9 +112,6 @@ const getLessonMessageAlt = async (req, res) => {
             friendName,
             friendType,
             moduleName,
-            moduleDecriptionKids,
-            moduleDescriptionParents, 
-            progress, 
             currentLesson, 
             currentMinilesson,
             currentBlock, 
