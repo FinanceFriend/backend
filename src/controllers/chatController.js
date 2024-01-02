@@ -85,10 +85,20 @@ const deleteChat = async (username) => {
 
 };
 
-//TODO delete chat for specific location
+const deleteChatByLocationId = async (username, location_id) => {
+
+  try {
+    await Chat.deleteOne({ username: username, location_id: location_id });
+    console.log(`Chat for user ${username} at location ${location_id} deleted successfully.`);
+  } catch (error) {
+    console.error("Error deleting chat: ", error);
+  }
+
+};
 
 module.exports = {
   getChatForUserAndLocation,
   saveMessage,
-  deleteChat
+  deleteChat,
+  deleteChatByLocationId
 };

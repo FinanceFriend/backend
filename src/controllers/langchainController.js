@@ -1,8 +1,6 @@
 const { spawn } = require('child_process');
 const path = require('path');
-const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'script.py');
-const Chat = require("../models/chat");
-const zlib = require('zlib');
+const scriptPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMessageGenerator.py');
 const chatController = require('./chatController');
 
 
@@ -108,19 +106,17 @@ const getWelcomeMessage = async (req, res) => {
 
 const getLessonMessageAlt = async (req, res) => {
     try {
-        const {username, userAge, userLanguage, locationName, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.query;
+        const {username, userAge, userLanguage, locationName, locationId, friendName, friendType, moduleName, moduleDecriptionKids, moduleDescriptionParents, progress, currentLesson, currentMinilesson, currentBlock} = req.body;
 
+        if(currentLesson > 0 && currentMinilesson === 0 && currentBlock !== 3) await chatController.deleteChatByLocationId(username, locationId);
 
-        script = int(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" : "../scripts/lessonMessageGenerator.py"
+        script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
         const result = await executePython(script, [
             username,
             locationName,
             friendName,
             friendType,
             moduleName,
-            moduleDecriptionKids,
-            moduleDescriptionParents, 
-            progress, 
             currentLesson, 
             currentMinilesson,
             currentBlock, 
@@ -128,11 +124,15 @@ const getLessonMessageAlt = async (req, res) => {
             userLanguage
         ]);
 
+
+        await chatController.saveMessage(username, 'AI', locationId, result);
+
         res.status(200).json({
             success: true,
             message: result
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             error: error
@@ -142,12 +142,12 @@ const getLessonMessageAlt = async (req, res) => {
 
   const getAnswerToUserMessage = async (req, res) => {
     try {
-        const {username, location_id, message} = req.body;
+        const {username, locationId, message} = req.body;
 
 
         //TODO get result message from llm
 
-        await chatController.saveMessage(username, 'User', location_id, message);
+        await chatController.saveMessage(username, 'User', locationId, message);
 
 
         res.status(200).json({
