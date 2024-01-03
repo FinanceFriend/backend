@@ -4,7 +4,7 @@ const lessonPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMes
 const quizPath = path.join(__dirname, '..', 'langchain', 'scripts', 'quizMessageGenerator.py');
 const welcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'welcomeMessageGenerator.py');
 const chatController = require('./chatController');
-const { now } = require('mongoose');
+const { readFileSync } = require('fs');
 
 
 const executePython = async (script, args) => {
@@ -168,9 +168,46 @@ const getLessonMessageAlt = async (req, res) => {
     }
 }
 
+
+const getLessonsndMiniLessonsName = async (req, res) => {
+
+    try {
+
+        const {locationName} = req.query;
+
+        const dataPath = path.join(__dirname, '..', 'langchain', 'docs', locationName + '_converted.json');
+        
+        const data = readFileSync(dataPath)
+        const jsonObject = JSON.parse(data);
+
+        const transformedData = jsonObject.map(lesson => {
+            return {
+                lessonName: lesson.name,
+                miniLessonsNames: lesson.sublessons.map(sublesson => sublesson.name)
+            }
+        });
+
+    
+
+        res.status(200).json({
+            success: true,
+            message: transformedData
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }    
+
+
+}
+
 module.exports = {
     getLessonMessageLoremIpsum, 
     getWelcomeMessage,
     getLessonMessageAlt,
-    getAnswerToUserMessage
+    getAnswerToUserMessage,
+    getLessonsndMiniLessonsName
 };
