@@ -51,15 +51,9 @@ const saveMessage = async (username, sender, location_id, message) => {
     let chatDoc = await Chat.findOne({ username, location_id });
     
     if (!chatDoc) {
-        chatDoc = new Chat({ username, location_id, messagesList: [[newMessage]] });
+        chatDoc = new Chat({ username, location_id, messagesList: [newMessage] });
     }else{
-
-        if (chatDoc.messagesList.length === 0 || chatDoc.messagesList[chatDoc.messagesList.length - 1].length === 0) {
-          chatDoc.messagesList.push([newMessage]);
-        } else {
-          chatDoc.messagesList[chatDoc.messagesList.length - 1].push(newMessage);
-        }
-
+      chatDoc.messagesList.push(newMessage);
     }
 
     // Save the updated document

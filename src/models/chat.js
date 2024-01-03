@@ -21,7 +21,7 @@ const chatSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  messagesList: [[messageSchema]] 
+  messagesList: [messageSchema]
 });
 
 module.exports = mongoose.model('Chat', chatSchema);
