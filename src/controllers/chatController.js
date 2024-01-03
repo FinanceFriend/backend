@@ -9,15 +9,14 @@ const getChatForUserAndLocation = async (req, res) => {
 
     if (chatDoc) {
       // Decompress each message in the nested array structure
-      const decompressedMessagesList = chatDoc.messagesList.map(group => 
-        group.map(message => {
+      const decompressedMessagesList = chatDoc.messagesList.map(message => {
           const buffer = Buffer.from(message.compressedContent, 'base64');
           const decompressed = zlib.gunzipSync(buffer).toString();
           return {
             sender: message.sender,
             content: decompressed
-          };
-        })
+        }
+      }
       );
 
       res.status(200).json({
