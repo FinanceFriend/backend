@@ -3,6 +3,7 @@ const path = require('path');
 const lessonPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMessageGenerator.py');
 const quizPath = path.join(__dirname, '..', 'langchain', 'scripts', 'quizMessageGenerator.py');
 const welcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'welcomeMessageGenerator.py');
+const answerUserPath = path.join(__dirname, '..', 'langchain', 'scripts', 'userAnswerGenerator.py');
 const chatController = require('./chatController');
 const { readFileSync } = require('fs');
 
@@ -148,16 +149,41 @@ const getLessonMessageAlt = async (req, res) => {
   const getAnswerToUserMessage = async (req, res) => {
     try {
 
-        const {username, location_id, message} = req.body;
+        const currentLesson = req.body.currentLesson;
+        const currentMinilesson = req.body.currentMinilesson;
+        const user = req.body.user;
+        const land = req.body.land;
 
-        await chatController.saveMessage(username, 'User', location_id, message);
+        const birthDate = new Date(user.dateOfBirth);
+        const today = new Date();
+        let userAge = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            userAge--;
+        }
 
-        //TODO get result message from llm
+        const message = req.body.message;
 
+        await chatController.saveMessage(user.username, 'User', land.id, message);
+
+        const result = await executePython(answerUserPath, [
+            user.username,
+            land.name,
+            land.friendName,
+            land.friendType,
+            land.moduleName,
+            currentLesson, 
+            currentMinilesson,
+            userAge,
+            user.preferredLanguage,
+            message
+        ]);
+
+        await chatController.saveMessage(user.username, 'AI', land.id, result);
 
         res.status(200).json({
             success: true,
-            message: message
+            message: result
         });
     } catch (error) {
         console.error(error);
