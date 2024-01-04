@@ -4,6 +4,8 @@ const lessonPath = path.join(__dirname, '..', 'langchain', 'scripts', 'lessonMes
 const quizPath = path.join(__dirname, '..', 'langchain', 'scripts', 'quizMessageGenerator.py');
 const welcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'welcomeMessageGenerator.py');
 const answerUserPath = path.join(__dirname, '..', 'langchain', 'scripts', 'userAnswerGenerator.py');
+const freeformPath = path.join(__dirname, '..', 'langchain', 'scripts', 'freeformMessageGenerator.py');
+const freeformWelcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'freeformWelcomeMessageGenerator.py');
 const chatController = require('./chatController');
 const { readFileSync } = require('fs');
 
@@ -72,7 +74,9 @@ const getWelcomeMessage = async (req, res) => {
 
         const userAge = await calculateAge(new Date(user.dateOfBirth));
 
-        const result = await executePython(welcomePath, [ //"../scripts/welcomeMessageGenerator.py"
+        const script = land == "Imagination Jungle" ? freeformWelcomePath : welcomePath
+
+        const result = await executePython(script, [ //"../scripts/welcomeMessageGenerator.py"
             user.username,
             land.name,
             land.friendName,
@@ -115,8 +119,9 @@ const getLessonMessageAlt = async (req, res) => {
 
 
        // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
-       script = parseInt(currentBlock) == 3 ? quizPath :  lessonPath
-       const result = await executePython(script, [
+        script = parseInt(currentBlock) == 3 ? quizPath :  lessonPath
+        script = land == "Imagination Jungle" ? freeformPath : script
+        const result = await executePython(script, [
             user.username,
             land.name,
             land.friendName,
@@ -145,7 +150,7 @@ const getLessonMessageAlt = async (req, res) => {
     }
 }
 
-  const getAnswerToUserMessage = async (req, res) => {
+const getAnswerToUserMessage = async (req, res) => {
     try {
 
         const currentLesson = req.body.currentLesson;
@@ -193,7 +198,7 @@ const getLessonsndMiniLessonsName = async (req, res) => {
 
         const {locationName} = req.query;
 
-        const dataPath = path.join(__dirname, '..', 'langchain', 'docs', locationName + '_converted.json');
+        const dataPath = path.join(__dirname, '..', 'langchain', 'docs', locationName + '.json');
         
         const data = readFileSync(dataPath)
         const jsonObject = JSON.parse(data);

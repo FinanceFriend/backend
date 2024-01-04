@@ -1,0 +1,264 @@
+[
+    {
+        "name": "Introduction to Investment",
+        "mini_lessons": [
+            {
+                "name": "Introduction to Investing",
+                "content": "Define what investing means. Understand that investing involves making money grow over time."
+            },
+            {
+                "name": "Examples of Investments",
+                "content": "Introduce simple examples of investments (stocks, bonds, real estate). Explain how these investments work in simple terms."
+            },
+            {
+                "name": "Risk and Reward",
+                "content": "Explain the concept of risk and reward in investing. Understand that different investments come with varying levels of risk."
+            },
+            {
+                "name": "Famous Investors",
+                "content": "Introduce well-known investors and their success stories. Mention the importance of learning from successful individuals."
+            },
+            {
+                "name": "Investment Goals",
+                "content": "Help children set simple investment goals (e.g., saving for a toy). Discuss the concept of long-term and short-term goals."
+            }
+        ]
+    },
+    {
+        "name": "Introduction to Stock Market",
+        "mini_lessons": [
+            {
+                "name": "What are Stocks?",
+                "content": "Define stocks as ownership in a company. Explain the concept of shareholders."
+            },
+            {
+                "name": "Stock Market Basics",
+                "content": "Introduce the idea of a stock market as a place where stocks are bought and sold. Explore the role of stock exchanges."
+            },
+            {
+                "name": "Bull and Bear Markets",
+                "content": "Explain the terms 'bull market' and 'bear market.' Discuss the characteristics of each market condition."
+            },
+            {
+                "name": "How Stocks Make Money",
+                "content": "Learn how stocks can generate returns through dividends and capital gains. Discuss the role of company profits."
+            },
+            {
+                "name": "Diversification",
+                "content": "Introduce the concept of diversification in investment portfolios. Explain how spreading investments can reduce risk."
+            },
+            {
+                "name": "Introduction to Index Funds",
+                "content": "Define index funds as a type of investment that tracks a market index. Discuss the benefits of index funds."
+            },
+            {
+                "name": "Understanding Stock Symbols",
+                "content": "Learn how stocks are identified by unique symbols. Explore examples of stock symbols."
+            },
+            {
+                "name": "Reading Stock Quotes",
+                "content": "Understand how to read basic stock quotes. Identify important information in a stock quote."
+            }
+        ]
+    },
+    {
+        "name": "Bonds and Fixed Income",
+        "mini_lessons": [
+            {
+                "name": "What are Bonds?",
+                "content": "Imagine bonds as special loans that you give to companies or the government. Learn about fixed income – a cool way to earn money from bonds!"
+            },
+            {
+                "name": "How Bonds Work",
+                "content": "Dive into the world of bonds and discover how they pay you back with interest. Compare bonds to stocks in a simple way."
+            },
+            {
+                "name": "Different Types of Bonds",
+                "content": "Meet different bonds like government bonds, corporate bonds, and municipal bonds. Find out what makes each one special and how they help the world."
+            },
+            {
+                "name": "Bond Ratings",
+                "content": "Learn about bond ratings – it's like giving grades to bonds! Discover why these grades are important and who's in charge of giving them."
+            },
+            {
+                "name": "Risks in Bonds",
+                "content": "Explore the possible adventures and challenges of investing in bonds. Discover why having a team of different bonds is like having a team of superheroes."
+            },
+            {
+                "name": "Benefits of Bonds",
+                "content": "Find out why including bonds in your investment team is a smart move. Learn how bonds help keep things safe and sound."
+            },
+            {
+                "name": "Savings Bonds",
+                "content": "Meet savings bonds – the friendly cousins of other bonds. Learn what makes them special and why they're like the superheroes of savings."
+            }
+        ]
+    },
+    {
+        "name": "Mutual Funds and ETFs",
+        "mini_lessons": [
+            {
+                "name": "What are Mutual Funds?",
+                "content": "Picture mutual funds as special teams that bring money together from lots of friends. Learn how these teams make sure everyone's money is safe and sound by working together."
+            },
+            {
+                "name": "How Mutual Funds Work",
+                "content": "Dive into the magic world of mutual funds and see how they're like big games with managers. Find out how these managers help the team grow and win!"
+            },
+            {
+                "name": "Types of Mutual Funds",
+                "content": "Meet different types of mutual funds – some are like adventure teams for stocks, some for bonds, and some follow a cool plan called an index. Explore what makes each team special."
+            },
+            {
+                "name": "Exchange-Traded Funds (ETFs)",
+                "content": "Imagine ETFs as special funds that trade on the stock market like trading cards. Compare them to mutual funds and see which one suits your investment game."
+            },
+            {
+                "name": "Benefits and Risks of Mutual Funds",
+                "content": "Let's talk about the good and not-so-good sides of being on a mutual fund team. Learn how fees can be like speed bumps on the investment journey."
+            },
+            {
+                "name": "Real-world Examples",
+                "content": "Hear stories about real mutual fund and ETF teams. See how they played in the investment game and what adventures they had over the years."
+            },
+            {
+                "name": "How to Buy Mutual Funds and ETFs",
+                "content": "Unlock the secret door to buying into these awesome teams! Understand how to join the game and meet special helpers called financial advisors."
+            },
+            {
+                "name": "Dollar-Cost Averaging",
+                "content": "Discover a cool strategy called dollar-cost averaging. Learn how it helps you invest a little bit at a time and why it's like a superpower for your money."
+            },
+            {
+                "name": "Understanding Expense Ratios",
+                "content": "Dive into the world of expense ratios – it's like knowing how much it costs to play on the team. Learn why low-cost investing is like having a winning strategy."
+            }
+        ]
+    },    
+    {
+        "name": "Real Estate Investment",
+        "mini_lessons": [
+            {
+                "name": "Introduction to Real Estate Investment",
+                "content": "Imagine real estate investment as a treasure hunt for special places! Learn about the different kinds of treasures like real houses and something called REITs. Discover why investing in real estate is like finding hidden treasures."
+            },
+            {
+                "name": "Different Types of Real Estate Investments",
+                "content": "Explore different types of treasures in the real estate world – there are cozy houses, big buildings, and even places where cool machines live. Find out about the adventures and surprises each treasure can bring."
+            },
+            {
+                "name": "Real Estate Market Trends",
+                "content": "Let's become detectives and discover what makes the real estate world change. Learn about supply and demand."
+            },
+            {
+                "name": "Investing in Real Estate Investment Trusts (REITs)",
+                "content": "Meet REITs, the magical keys that let you join the real estate adventure without needing a big backpack of money. Find out why REITs are like special passes to the treasure island."
+            },
+            {
+                "name": "Risks in Real Estate Investment",
+                "content": "Explore the challenges and surprises that can come with hunting for treasures in real estate. Learn how to be a smart adventurer and make the right choices."
+            },
+            {
+                "name": "Real-world Examples",
+                "content": "Hear stories about brave adventurers who found amazing treasures in real estate. Discover how they made their dreams come true with real houses and special places."
+            },
+            {
+                "name": "Financing Real Estate Investments",
+                "content": "Learn about magical tools called mortgages that help you get the treasures you want. Understand how these tools can turn your dreams into reality."
+            },
+            {
+                "name": "How to Invest in Real Estate",
+                "content": "Unlock the secrets of joining the treasure hunt! Explore different ways you can become a real estate adventurer and find your own special treasures."
+            },
+            {
+                "name": "Real Estate Investment Strategies",
+                "content": "Become a strategy master and learn different ways to hunt for treasures – like renting houses or flipping them! Discover which strategy suits your adventurer style."
+            }
+        ]
+    },
+    {
+        "name": "Introduction to Risk Management",
+        "mini_lessons": [
+            {
+                "name": "What is Risk?",
+                "content": "Learn what 'risk' means when we talk about saving or investing money. Understand the difference between taking a risk and being unsure about something."
+            },
+            {
+                "name": "Different Kinds of Risks",
+                "content": "Discover the various risks like market risk, inflation risk, and interest rate risk that can affect our money."
+            },
+            {
+                "name": "How Much Risk Can You Take?",
+                "content": "Understand 'risk tolerance' – it's how comfortable you are with taking risks in money matters, and it's different for everyone."
+            },
+            {
+                "name": "Your Age and Risk",
+                "content": "Discuss how your age can affect how much risk you should take with your money. Learn about saving strategies for different ages."
+            },
+            {
+                "name": "Mixing It Up",
+                "content": "Learn about 'asset allocation,' which means spreading your money across different types of investments to manage risks."
+            },
+            {
+                "name": "The Power of Diversification",
+                "content": "Find out why it's important to spread your investments across different areas to reduce risk."
+            },
+            {
+                "name": "Using Insurance",
+                "content": "Talk about how insurance (like life, health, or property insurance) helps in managing financial risks."
+            },
+            {
+                "name": "Emergency Funds",
+                "content": "Learn what an 'emergency fund' is and why it's important for handling unexpected money needs."
+            },
+            {
+                "name": "Protecting Your Investments",
+                "content": "Explore simple ways to protect your investments from risks, including some basic ideas about hedging."
+            }
+        ]
+    },
+    {
+        "name": "Long-Term vs. Short-Term Investing",
+        "mini_lessons": [
+            {
+                "name": "Time Horizons",
+                "content": "Learn about time horizons. Time horizons are like planning for the future. Talk about the difference between short-term and long-term goals."
+            },
+            {
+                "name": "Quick Ways to Make Money",
+                "content": "Discover short-term ways to grow your money, like playing the stock market for a short time. Mention risks that come with it."
+            },
+            {
+                "name": "Growing Money Slow and Steady",
+                "content": "Find out about long-term ways to grow your money, like holding onto investments for a long time."
+            },
+            {
+                "name": "Stories from Money's Past",
+                "content": "Hear stories about how people made money in the past, both quickly and slowly."
+            },
+            {
+                "name": "Magic of Growing Money",
+                "content": "Talk about how letting your money grow over time can make it even bigger."
+            },
+            {
+                "name": "Plan for Big Dreams",
+                "content": "Learn how to set goals for the future. Talk about how saving and growing money can make your dreams come true."
+            },
+            {
+                "name": "Up and Down Adventures of Money",
+                "content": "Learn about the exciting ups and downs of money in the big world. We'll explore how different things can happen to money at different times."
+            },
+            {
+                "name": "Importance of Waiting",
+                "content": "Learn about how important it is to wait for good things to happen with your money."
+            },
+            {
+                "name": "Short or Long Adventures?",
+                "content": "Compare the risks of quick money adventures with the slower, long-term ones. We'll also share some tricks to make sure your money stays safe."
+            }
+        ]
+    }
+    
+    
+    
+]

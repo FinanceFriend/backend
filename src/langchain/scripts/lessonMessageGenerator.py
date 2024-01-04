@@ -39,7 +39,7 @@ user_language = str(sys.argv[10])
 
 
 #file_path = '../docs/' + location_name + '_converted.json'
-file_path = 'src/langchain/docs/' + location_name + '_converted.json'
+file_path = 'src/langchain/docs/' + location_name + '.json'
 
 
 with open(file_path, 'r') as file:
