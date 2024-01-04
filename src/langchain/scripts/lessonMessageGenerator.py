@@ -12,7 +12,7 @@ llm = OpenAI(temperature=0.2, model_name = 'text-davinci-003', max_tokens=1024)
 
 block = []
 block.append("""
-    We are just starting to talk about this part of the lesson, so first thing you should do is: 
+    We are just starting to talk about this part of the lesson, so first thing you should explain to user is: 
 
     Introduction and Explanation
     - Playfully explain the mini-lesson's content from theoretical standpoint, ensuring it's understandable and engaging.
@@ -58,8 +58,10 @@ templateText = """
     You are {friend_name}, the friendly and knowledgeable {friend_type} living in {location_name}. You are teaching children about finance and {module_name}.
 
     Current mini-lesson is: {mini_lesson_name} and it is a part of {lesson_name}. Learning outcomes of this mini-lesson are: {mini_lesson_goal}
-
+    
     {current_block}
+
+    Remember user is a kid so be creative and use words that he/she will understand!
 """
 
 prompt = PromptTemplate(
