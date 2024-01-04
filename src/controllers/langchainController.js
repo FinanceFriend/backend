@@ -36,6 +36,18 @@ const executePython = async (script, args) => {
     return result;
 }
 
+const calculateAge = async (birthDate) => {
+    
+    const today = new Date();
+    let userAge = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        userAge--;
+    }
+    
+    return userAge;
+}
+
 const getLessonMessageLoremIpsum = async (req, res) => {
     try {
         const lesson_index = req.query.lesson_index;
@@ -58,13 +70,7 @@ const getWelcomeMessage = async (req, res) => {
         const user = req.body.user;
         const land = req.body.land;
 
-        const birthDate = new Date(user.dateOfBirth);
-        const today = new Date();
-        let userAge = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-            userAge--;
-        }
+        const userAge = await calculateAge(new Date(user.dateOfBirth));
 
         const result = await executePython(welcomePath, [ //"../scripts/welcomeMessageGenerator.py"
             user.username,
@@ -103,14 +109,7 @@ const getLessonMessageAlt = async (req, res) => {
         const user = req.body.user;
         const land = req.body.land;
 
-        const birthDate = new Date(user.dateOfBirth);
-        const today = new Date();
-        let userAge = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-            userAge--;
-        }
-      
+        const userAge = await calculateAge(new Date(user.dateOfBirth));
 
         if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(user.username, land.id);
 
@@ -153,16 +152,9 @@ const getLessonMessageAlt = async (req, res) => {
         const currentMinilesson = req.body.currentMinilesson;
         const user = req.body.user;
         const land = req.body.land;
-
-        const birthDate = new Date(user.dateOfBirth);
-        const today = new Date();
-        let userAge = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-            userAge--;
-        }
-
         const message = req.body.message;
+
+        const userAge = await calculateAge(new Date(user.dateOfBirth));
 
         await chatController.saveMessage(user.username, 'User', land.id, message);
 
