@@ -144,7 +144,7 @@ const getLessonMessageAlt = async (req, res) => {
         ]);
 
 
-        await chatController.saveMessage(user.username, 'AI', land.id, result);
+        if(currentBlock < 2) await chatController.saveMessage(user.username, 'AI', land.id, result);
 
         res.status(200).json({
             success: true,
