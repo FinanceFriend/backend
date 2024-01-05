@@ -20,6 +20,7 @@ current_minilesson_ind = int(sys.argv[7])
 user_age = int(sys.argv[8])
 user_language = str(sys.argv[9])
 userMessage = str(sys.argv[10])
+historyContext = str(sys.argv[11])
 
 #file_path = '../docs/' + location_name + '_converted.json'
 file_path = 'src/langchain/docs/' + location_name + '.json'
@@ -36,12 +37,10 @@ mini_lesson_goal = lesson['mini_lessons'][current_lesson_ind]['content']
 
 
 prompt = PromptTemplate(
-    input_variables=["username", "location", "friend_name", "friend_type" , "module_name", "lesson_name", "mini_lesson_name", "mini_lesson_goal", "userMessage"],
+    input_variables=["username", "user_age", "user_language", "location", "friend_name", "friend_type" , "module_name", "lesson_name", "mini_lesson_name", "mini_lesson_goal", "userMessage", "historyContext"],
     template="""
         You are interacting with {username}, who is {user_age} years old. RESPOND IN: {user_language}.
         User's Question: "{userMessage}"
-
-        Please answer the given question.
         
         Context Information:
             - You are {friend_name}, the {friend_type}, living in {location}.
@@ -56,11 +55,18 @@ prompt = PromptTemplate(
         If the user's question is off-topic:
             - Try to answer the question briefly if it's appropriate.
             - Gently remind {username} to focus back on the topic of '{module_name}'.
+
+        History of previous chat is : {historyContext}
+
+        Note: Directly provide an answer to given question of the mini-lesson content without introductory greetings or welcoming phrases. The response should be straightforward and focused on the subject matter.
+
     """
 )
 
 final_prompt = prompt.format(
     username=username,
+    user_age=user_age,
+    user_language=user_language,
     location=location_name, 
     friend_name=friend_name,
     friend_type=friend_type,
@@ -68,7 +74,8 @@ final_prompt = prompt.format(
     lesson_name=lesson_name,
     mini_lesson_name=mini_lesson_name,
     mini_lesson_goal=mini_lesson_goal,
-    userMessage=userMessage
+    userMessage=userMessage,
+    historyContext=historyContext
 )
 
 output = llm(final_prompt)
