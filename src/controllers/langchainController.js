@@ -249,7 +249,7 @@ const getLessonsndMiniLessonsName = async (req, res) => {
         const transformedData = jsonObject.map(lesson => {
             return {
                 lessonName: lesson.name,
-                miniLessonsNames: lesson.sublessons.map(sublesson => sublesson.name)
+                miniLessonsNames: lesson.mini_lessons.map(mini_lesson => mini_lesson.name)
             }
         });
 
