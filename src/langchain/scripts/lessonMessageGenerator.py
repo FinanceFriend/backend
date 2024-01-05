@@ -48,8 +48,8 @@ with open(file_path, 'r') as file:
 lesson_name = lessons[current_lesson_ind]['name']
 lesson = lessons[current_lesson_ind]
 
-mini_lesson_name = lesson['sublessons'][current_minilesson_ind]['name']
-mini_lesson_goal = lesson['sublessons'][current_minilesson_ind]['goal']
+mini_lesson_name = lesson['mini_lessons'][current_minilesson_ind]['name']
+mini_lesson_goal = lesson['mini_lessons'][current_minilesson_ind]['content']
 current_block = block[current_block_ind]
 
 templateText = """
