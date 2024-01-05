@@ -171,6 +171,8 @@ const getAnswerToUserMessage = async (req, res) => {
 
         const userAge = await calculateAge(new Date(user.dateOfBirth));
 
+        const historyContext = await chatController.getHistoryMessages(user.username, land.id);
+
         await chatController.saveMessage(user.username, 'User', land.id, message);
 
         const result = await executePython(answerUserPath, [
@@ -183,7 +185,8 @@ const getAnswerToUserMessage = async (req, res) => {
             currentMinilesson,
             userAge,
             user.preferredLanguage,
-            message
+            message,
+            historyContext
         ]);
 
         await chatController.saveMessage(user.username, 'AI', land.id, result);
