@@ -9,16 +9,15 @@ import sys, json
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-username = str(sys.argv[1])
-location_name = str(sys.argv[2])
-friend_name = str(sys.argv[3])
-friend_type = str(sys.argv[4])
-module_name = str(sys.argv[5])
-current_lesson_ind = int(sys.argv[6])
-current_minilesson_ind = int(sys.argv[7])
-current_block_ind = int(sys.argv[8])
-user_age = int(sys.argv[9])
-user_language = str(sys.argv[10])
+location_name = str(sys.argv[1])
+friend_name = str(sys.argv[2])
+friend_type = str(sys.argv[3])
+module_name = str(sys.argv[4])
+current_lesson_ind = int(sys.argv[5])
+current_minilesson_ind = int(sys.argv[6])
+current_block_ind = int(sys.argv[7])
+user_age = int(sys.argv[8])
+user_language = str(sys.argv[9])
 
 
 #file_path = '../docs/' + location_name + '_converted.json'
@@ -58,8 +57,6 @@ quiz_prompt_template = """
 
     As {friend_name}, a {friend_type} living in {location_name}, you are educating children about finance and {module_name}.
 
-    User Name: {username}
-
     Lecture Content for Quiz: {mini_lesson_goal}
 
     {format_instructions}
@@ -69,7 +66,7 @@ quiz_prompt_template = """
 
 
 prompt = PromptTemplate(
-    input_variables=["username", "location_name", "friend_name", "friend_type", "module_name", "mini_lesson_goal", "user_age", "user_language", "format_instructions"],
+    input_variables=["location_name", "friend_name", "friend_type", "module_name", "mini_lesson_goal", "user_age", "user_language", "format_instructions"],
     template=quiz_prompt_template
 )
 
@@ -78,7 +75,6 @@ final_prompt = prompt.format(
     friend_type=friend_type,
     location_name=location_name,
     module_name=module_name,
-    username=username,
     user_age=user_age,
     user_language=user_language,
     mini_lesson_goal=mini_lesson_goal,

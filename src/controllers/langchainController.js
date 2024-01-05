@@ -132,7 +132,6 @@ const getLessonMessageAlt = async (req, res) => {
        // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
         script = parseInt(currentBlock) == 2 ? quizPath :  lessonPath
         const result = await executePython(script, [
-            user.username,
             land.name,
             land.friendName,
             land.friendType,
