@@ -8,7 +8,7 @@ import sys, json
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(temperature=0.7, model_name = 'text-davinci-003')
+llm = OpenAI(temperature=0.7, model_name = 'text-davinci-003', max_tokens=1024)
 
 
 username = str(sys.argv[1])

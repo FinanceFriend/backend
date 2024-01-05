@@ -6,6 +6,7 @@ router.get('/lessonsLoremIpsum', langchainController.getLessonMessageLoremIpsum)
 router.post('/userMessage', langchainController.getAnswerToUserMessage);
 router.post('/welcome', langchainController.getWelcomeMessage);
 router.post('/lessonMessage', langchainController.getLessonMessageAlt);
+router.post('/freeformUserMessage', langchainController.getFreeformMessage);
 router.get('/lessonNames', langchainController.getLessonsndMiniLessonsName);
 
 module.exports = router;
