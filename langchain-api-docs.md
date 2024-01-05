@@ -75,7 +75,7 @@
 
 - **Endpoint**: `/api/langchain/userMessage`
 - **Method**: `POST`
-- **Description**: Save message that user have sent and.
+- **Description**: Save message that user have sent and respond with AI-generated message in chat-like conversation.
 - **Request Body**:
 
   The request body is a JSON object with the following structure:
@@ -92,8 +92,41 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
+## 4. Get Freeform Chat Message
 
-## 4. Get User Chat
+- **Endpoint**: `/api/langchain/freeformChat`
+- **Method**: `POST`
+- **Description**: This endpoint facilitates a freeform chat experience in the "Imagination Jungle" module. It allows users to engage in an interactive conversation with Cleo the Chameleon on a wide range of topics, beyond just finance. Cleo, being sensitive to the tone of the conversation, will provide educational and respectful responses, and may use external sources like Google search for up-to-date information. However, if inappropriate or offensive content is detected, Cleo will share a message emphasizing positive communication instead of responding to the specific content.
+- **Request Body**:
+  
+  The request body should be a JSON object with the following structure:
+  ```json
+  {
+    "user": {
+      "username": "string",
+      "dateOfBirth": "string",
+      "preferredLanguage": "string",
+      "message": "string"
+    },
+    "land": {
+      "name": "Imagination Jungle",
+      "friendName": "Cleo",
+      "friendType": "Chameleon"
+    }
+  }
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - The response from Cleo the Chameleon, either addressing the user's query or providing guidance on positive communication.
+
+- **Error Handling**:
+  - Returns `500 Internal Server Error` for server-side issues.
+
+## Implementation Details:
+This endpoint corresponds to the `getFreeformMessage` function in the backend, which processes the user's message and invokes the `executePython` function. The Python script uses OpenAI's language model to generate Cleo's response based on the `templateText` input template. The script considers the user's age, language, and the content of the message to tailor the response. It also handles the detection of inappropriate or offensive content to maintain a respectful chat environment.
+
+
+
+## 5. Get User Chat
 
 - **Endpoint**: `/api/chat`
 - **Method**: `GET`
@@ -107,7 +140,7 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 5. Get Lessons and Mini-Lessons Names
+## 6. Get Lessons and Mini-Lessons Names
 
 - **Endpoint**: `/api/langchain/lessonNames`
 - **Method**: `GET`
