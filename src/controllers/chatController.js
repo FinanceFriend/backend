@@ -37,6 +37,30 @@ const getChatForUserAndLocation = async (req, res) => {
   }
 };
 
+const getHistoryMessages = async (username, location_id) => {
+
+  try {
+    const chatDoc = await Chat.findOne({ username, location_id: parseInt(location_id) });
+
+    if (chatDoc) {
+      // Decompress each message in the nested array structure
+      const decompressedMessagesList = chatDoc.messagesList.map(message => {
+          const buffer = Buffer.from(message.compressedContent, 'base64');
+          const decompressed = zlib.gunzipSync(buffer).toString();
+          return {
+            sender: message.sender,
+            content: decompressed
+        }
+      }
+      );
+
+      return decompressedMessagesList.slice(-3);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const saveMessage = async (username, sender, location_id, message) => {
 
   try{
@@ -93,5 +117,6 @@ module.exports = {
   getChatForUserAndLocation,
   saveMessage,
   deleteChat,
-  deleteChatByLocationId
+  deleteChatByLocationId,
+  getHistoryMessages
 };

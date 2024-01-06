@@ -1,0 +1,363 @@
+[
+    {
+        "name": "Basic Arithmetic in Finance",
+        "mini_lessons": [
+            {
+                "name": "Introduction to Financial Arithmetic",
+                "content": "Introduction to the role of mathematics in everyday financial situations and the importance of learning financial arithmetic."
+            },
+            {
+                "name": "The Foundation of Addition",
+                "content": "Introduce basic addition strategies and real-world scenarios where addition is used in financial transactions. Understanding how to add different amounts of money, including coins and bills, and the concept of total value."
+            },
+            {
+                "name": "Navigating Financial Scenarios with Subtraction",
+                "content": "Exploring subtraction in the context of financial literacy. Learn how to subtract expenses from income, calculate savings, and analyze financial changes through subtraction."
+            },
+            {
+                "name": "Multiplication Magic in Finance",
+                "content": "Unveiling the power of multiplication in financial calculations. Discover how multiplication is used to calculate total costs, expenses over time, and assess financial growth. Apply multiplication knowledge on converting money from one currency to another."
+            },
+            {
+                "name": "Dividing Finances Wisely",
+                "content": "Understand how division is applied to distribute resources, allocate budgets, and calculate per-unit costs in various financial situations."
+            },
+            {
+                "name": "The Order of Financial Operations",
+                "content": "Learn how the sequence of arithmetic operations (Parentheses, Multiplication and Division, Addition and Subtraction) ensures accurate and meaningful financial outcomes. Learn how to apply it to real-world financial scenarios."
+            },
+            {
+                "name": "Precision in Financial Arithmetic",
+                "content": "Emphasizing the need for precision in financial calculations. Discuss the significance of accurate arithmetic in budgeting, financial planning, and avoiding errors that can impact financial stability."
+            },
+            {
+                "name": "Speed and Accuracy in Financial Calculations",
+                "content": "Enhancing computational skills for efficient financial decision-making. Develop strategies for performing arithmetic calculations quickly and accurately in time-sensitive financial scenarios."
+            },
+            {
+                "name": "Practical Applications of Basic Arithmetic in Daily Finance",
+                "content": "Synthesizing knowledge through practical application. Engage in exercises and simulations where basic arithmetic is used to address everyday financial challenges and decisions."
+            }
+        ]
+    },    
+    {
+        "name": "Decimals in Finance",
+    "mini_lessons": [
+        {
+            "name": "The World of Decimals",
+            "content": "Delve into the realm of decimals, understanding them as special symbols that help express parts of a whole in the context of money. Explore how decimals, such as cents in dollars, contribute to precise money calculations."
+        },
+        {
+            "name": "Decimals in Everyday Finances",
+            "content": "Apply decimals to real-life financial situations. Learn how to use decimals when dividing money, budgeting, and sharing expenses among friends or family members, enhancing practical financial skills."
+        },
+        {
+            "name": "Decimals: The Dazzling Money Dots",
+            "content": "Explore the magic of decimals as unique dots in our money world. Understand how decimals serve as a tool to express parts of a whole, making money calculations more accurate and exciting."
+        },
+        {
+            "name": "Money Math with Decimals",
+            "content": "Apply decimals in financial calculations. Practice adding, subtracting, multiplying, and dividing decimals in money-related scenarios, enhancing precision in budgeting and transactions."
+        },
+        {
+            "name": "Decimals in Price Tags",
+            "content": "Explore how decimals appear in price tags. Practice reading and interpreting prices with decimals to become savvy shoppers in the financial world."
+        },
+        {
+            "name": "Decimals in Budgeting",
+            "content": "Explore how decimals appear in price tags. Practice reading and interpreting prices with decimals to become savvy shoppers in the financial world."
+        },
+        {
+            "name": "Precision in Financial Representation",
+            "content": "Emphasize the importance of precision when using decimals in finance. Discuss how accurate numerical representation contributes to making informed financial decisions."
+        }
+        ]
+    },
+    {
+        "name": "Ratio and Proportion in Budgeting",
+        "mini_lessons": [
+        {
+            "name": "Introduction to Ratios",
+            "content": "Explaining the concept of ratios and their relevance in financial contexts, such as comparing different quantities or prices."
+        },
+        {
+            "name": "Understanding Proportions",
+            "content": "Introducing the concept of proportion, explaining how it relates to ratios and its use in comparing quantities."
+        },
+        {
+            "name": "Ratios in Income and Expenses",
+            "content": "Applying ratios to understand the relationship between income and expenses, and how to balance them effectively."
+        },
+        {
+            "name": "Using Ratios for Budget Allocation",
+            "content": "Teaching how to use ratios to allocate a budget across different categories (e.g., savings, entertainment, necessities)."
+        },
+        {
+            "name": "Proportional Distribution in Savings",
+            "content": "Understanding how to distribute savings proportionally, such as saving a consistent fraction of weekly or monthly income."
+        },
+        {
+            "name": "Ratios in Price Comparisons",
+            "content": "Using ratios to compare prices of items, such as understanding value for money and making smarter shopping decisions."
+        },
+        {
+            "name": "Ratios in Investment Distribution",
+            "content": "Basic introduction to using ratios for dividing investments among different options (stocks, bonds, savings)."
+        },
+        {
+            "name": "Real-Life Applications of Ratios and Proportions",
+            "content": "Engaging with real-life scenarios where ratios and proportions are used, such as in cooking recipes or in dividing tasks."
+        }
+        ]
+        },
+    {
+        "name": "Percentages and Discounts",
+    "mini_lessons": [
+        {
+            "name": "Unveiling the Power of Percentages",
+            "content": "Introducing the concept of percentages as a way to express parts of a whole. Understand how percentages are related to decimals and explore their significance in the financial world."
+        },
+        {
+            "name": "Calculating Percentages",
+            "content": "Basic methods of calculating percentages, teaching the formula and its practical application."
+        },
+        {
+            "name": "Percentages in Price Increases",
+            "content": "Applying percentage calculations to understand price increases, such as inflation or surcharges."
+        },
+        {
+            "name": "Percentages in Price Reductions",
+            "content": "Learning how to calculate percentage-based price reductions, including sales and discounts."
+        },
+        {
+            "name": "Interpreting Discounts and Offers",
+            "content": "Teaching how to interpret and calculate various discount offers, such as '20% off' or 'buy one get one 50% off'."
+        },
+        {
+            "name": "Understanding Sales Tax",
+            "content": "Explaining what sales tax is and how it is calculated as a percentage of the purchase price."
+        },
+        {
+            "name": "Calculating Total Costs with Sales Tax",
+            "content": "Combining the concepts of addition and percentages to calculate the total cost of items including sales tax."
+        },
+        {
+            "name": "Using Percentages in Budgeting",
+            "content": "Applying percentages to budgeting, such as allocating a percentage of income to different expenses or savings."
+        }
+        ]
+    },
+    
+    {
+        "name": "Simple Interest Calculations",
+    "mini_lessons": [
+        {
+            "name": "What is Simple Interest?",
+            "content": "Introduction to the concept of simple interest, explaining its basic definition and purpose in finance."
+        },
+        {
+            "name": "Understanding Simple Interest Formula",
+            "content": "Teaching the formula for simple interest (Interest = Principal × Rate × Time) and explaining each component."
+        },
+        {
+            "name": "Calculating Simple Interest",
+            "content": "Step-by-step instruction on how to calculate simple interest for different scenarios, such as savings or loans."
+        },
+        {
+            "name": "Applying Simple Interest in Savings",
+            "content": "Using simple interest calculations to determine earnings from savings accounts over different time periods."
+        },
+        {
+            "name": "Simple Interest in Loans",
+            "content": "Exploring how simple interest applies to loans, including calculating the total interest payable on borrowed amounts."
+        },
+        {
+            "name": "Comparing Interest Rates",
+            "content": "Learning to compare different interest rates and their impact on the total interest earned or paid."
+        },
+        {
+            "name": "Simple Interest in Everyday Life",
+            "content": "Practical examples of simple interest in daily life, like understanding interest on small loans from friends or family."
+        },
+        {
+            "name": "The Impact of Time on Interest",
+            "content": "Demonstrating how the length of time affects the total interest calculated using simple interest."
+        },
+        {
+            "name": "Using Technology to Calculate Interest",
+            "content": "Introducing basic financial calculators or apps that can help calculate simple interest."
+        }
+        ]
+    },
+    {
+        "name": "Compound Interest",
+    "mini_lessons": [
+        {
+            "name": "Introduction to Compound Interest",
+            "content": "Explaining the concept of compound interest and how it differs from simple interest."
+        },
+        {
+            "name": "Understanding the Compound Interest Formula",
+            "content": "Introducing the formula for compound interest and explaining its components (Principal, Rate, Time, and Number of Compounding Periods)."
+        },
+        {
+            "name": "Calculating Compound Interest",
+            "content": "Step-by-step guide on calculating compound interest for different scenarios and compounding frequencies (e.g., annually, semi-annually)."
+        },
+        {
+            "name": "Compound Interest in Savings",
+            "content": "Demonstrating the impact of compound interest on savings over time, highlighting the benefit of regular contributions."
+        },
+        {
+            "name": "The Power of Compounding Over Time",
+            "content": "Showing how compound interest accumulates over longer periods and the concept of 'interest on interest.'"
+        },
+        {
+            "name": "Comparing Simple and Compound Interest",
+            "content": "Direct comparison between simple and compound interest, illustrating the differences and benefits of each."
+        },
+        {
+            "name": "Understanding Compounding Frequencies",
+            "content": "Exploring how the frequency of compounding (e.g., quarterly, monthly) affects the total interest earned."
+        },
+        {
+            "name": "Compound Interest and Debt",
+            "content": "Applying compound interest concepts to understand how debt can grow over time if not managed properly."
+        },
+        {
+            "name": "Using Financial Tools for Compound Interest",
+            "content": "Introduction to online calculators or tools for computing compound interest, encouraging practical application."
+        }
+        ]
+    },
+    {
+        "name": "Unit Price and Best Buy Calculations",
+    "mini_lessons": [
+        {
+            "name": "Understanding Unit Price",
+            "content": "Explaining the concept of unit price and its importance in making informed shopping decisions."
+        },
+        {
+            "name": "Calculating Unit Price",
+            "content": "Teaching the method to calculate unit price from total cost and quantity, using text-based examples. Guiding students on how to compare unit prices of different products to determine the best value."
+        },
+        {
+            "name": "Unit Price in Bulk Buying",
+            "content": "Discussing the economics of bulk buying and how unit price calculation is essential in such scenarios."
+        },
+        {
+            "name": "Best Buy Decisions",
+            "content": "Introducing the concept of 'Best Buy' in shopping, using unit price as a key factor in decision-making."
+        },
+        {
+            "name": "Unit Price and Budgeting",
+            "content": "Explaining how understanding unit prices can aid in effective budgeting and financial planning."
+        },
+        {
+            "name": "Special Offers and Unit Price",
+            "content": "Discussing how to assess special offers and discounts using unit price calculations."
+        }
+        ]
+    },
+    {
+        "name": "Exploring Financial Ratios and Measurements",
+        "mini_lessons": [
+        {
+            "name": "Introduction to Financial Ratios",
+            "content": "Explaining the concept of financial ratios and their significance in understanding personal finance."
+        },
+        {
+            "name": "Debt-to-Income Ratio",
+            "content": "Teaching how to calculate and interpret the debt-to-income ratio, a crucial measure of financial health."
+        },
+        {
+            "name": "Savings Ratio",
+            "content": "Exploring the savings ratio, which measures the proportion of income saved, and its importance in financial planning."
+        },
+        {
+            "name": "Expense Ratio",
+            "content": "Understanding the expense ratio, which compares expenses to income, and its role in budgeting."
+        },
+        {
+            "name": "Loan-to-Value Ratio",
+            "content": "Introduction to the loan-to-value ratio used in borrowing, especially relevant for understanding mortgages."
+        },
+        {
+            "name": "Calculating Interest Coverage Ratios",
+            "content": "Teaching how to calculate the interest coverage ratio to understand the ability to pay interest expenses."
+        },
+        {
+            "name": "Understanding Liquidity Ratios",
+            "content": "Explaining liquidity ratios, which assess the ability to cover short-term debts, and their relevance in personal finance."
+        },
+        {
+            "name": "Applying Ratios to Real-life Scenarios",
+            "content": "Engaging students in applying these ratios to hypothetical but realistic financial scenarios."
+        },
+        {
+            "name": "Financial Health Check Using Ratios",
+            "content": "Guiding students on how to conduct a basic financial health check using these ratios."
+        }
+        ]
+    },
+    {
+        "name": "Measurement",
+    "mini_lessons": [
+        {
+            "name": "Introduction to Measurement",
+            "content": "Gain insight into the importance of measurement in financial analysis. Understand the fundamental units of measurement and their role in quantifying various aspects like length, weight, and volume."
+        },
+        {
+            "name": "Exploring Length, Weight, and Volume Units",
+            "content": "Delve into specific units for measuring length, weight, and volume. Recognize the significance of precise measurements in financial decision-making and practical applications."
+        },
+        {
+            "name": "Length Measurement Mastery",
+            "content": "Become proficient in measuring distance and size using units like inches, feet, and meters. Explore how accurate length measurements contribute to effective financial planning."
+        },
+        {
+            "name": "Mastering Weight and Volume Measurement",
+            "content": "Master the art of measuring weight and volume using units such as grams, kilograms, liters, and gallons. Understand their critical role in financial contexts, from logistics to resource management."
+        },
+        {
+            "name": "Converting Measurement Units",
+            "content": "Learn the skill of converting between different measurement units. Understand the math behind switching from inches to centimeters or pounds to kilograms—a valuable tool for interpreting measurements in diverse contexts."
+        },
+        {
+            "name": "Applying Measurement in Financial Scenarios",
+            "content": "Apply measurement skills practically in financial scenarios. Explore how understanding and converting units contribute to budgeting, purchasing, and resource management. Utilize measurement as a powerful instrument for making well-informed financial decisions."
+            }
+        ]
+    },
+    {
+        "name": "Currency Conversion Basics",
+        "mini_lessons": [
+            {
+                "name": "Understanding Currency Conversion",
+                "content": "Introduction to the concept of currency conversion, explaining why and how currency values differ between countries. Learn the basic idea of exchange rates."
+            },
+            {
+                "name": "Calculating Currency Conversion",
+                "content": "Learn how to calculate currency conversion using exchange rates. Understand the math behind converting one currency to another, using real-world examples."
+            },
+            {
+                "name": "Exchange Rates and their Fluctuations",
+                "content": "Explore what affects exchange rates and how they fluctuate over time. Understand the impact of these changes on currency conversion."
+            },
+            {
+                "name": "Using Technology for Currency Conversion",
+                "content": "Introduce tools and apps for currency conversion. Learn how technology can simplify and enhance accuracy in currency calculations."
+            },
+            {
+                "name": "Currency Conversion in Budgeting",
+                "content": "Understand the role of currency conversion in budgeting for international travel or transactions. Learn to incorporate exchange rates into financial planning."
+            },
+            {
+                "name": "Understanding Currency Conversion Fees",
+                "content": "Learn about conversion fees charged by banks or currency exchange services and how to account for these in financial calculations."
+            }
+        ]
+    }
+    
+
+]

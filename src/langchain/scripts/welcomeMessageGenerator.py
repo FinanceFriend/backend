@@ -8,7 +8,7 @@ import sys, json
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(temperature=0.7, model_name = 'text-davinci-003')
+llm = OpenAI(temperature=0.7, model_name = 'text-davinci-003', max_tokens=1024)
 
 
 username = str(sys.argv[1])
@@ -27,7 +27,7 @@ user_language = str(sys.argv[13])
 
 
 #file_path = '../docs/' + location_name + '_converted.json'
-file_path = 'src/langchain/docs/' + location_name + '_converted.json'
+file_path = 'src/langchain/docs/' + location_name + '.json'
 
 
 with open(file_path, 'r') as file:
@@ -36,8 +36,8 @@ with open(file_path, 'r') as file:
 lesson_name = lessons[current_lesson_ind]['name']
 lesson = lessons[current_lesson_ind]
 
-mini_lesson_name = lesson['sublessons'][current_minilesson_ind]['name']
-mini_lesson_goal = lesson['sublessons'][current_minilesson_ind]['goal']
+mini_lesson_name = lesson['mini_lessons'][current_minilesson_ind]['name']
+mini_lesson_goal = lesson['mini_lessons'][current_minilesson_ind]['content']
 
 
 templateText = """

@@ -252,3 +252,34 @@
 - **Error Handling**:
   - Returns `404 Not Found` if the specified user is not found.
   - Returns `500 Internal Server Error` for any server-side errors.
+
+
+## Evaluate User Answer to a Question
+
+- **Endpoint**: `/evaluateQuestion`
+- **Method**: `POST`
+- **Description**: This endpoint evaluates a user's answer to a given question. It determines the relevance and correctness of the answer compared to a provided example of a correct answer. The evaluation and explanation are generated using the OpenAI language model, tailored to the specified language.
+- **Request Body**:
+  
+  The request body should be a JSON object with the following structure:
+  ```json
+  {
+    "user": {
+      "username": "string",
+      "preferredLanguage": "string"
+    },
+    "question": "string",
+    "userAnswer": "string",
+    "correctAnswerExample": "string"
+  }
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: JSON Object - Contains two fields:
+    - `evaluation`: String - Indicates the correctness of the user's answer ('correct' or 'incorrect').
+    - `explanation`: String - Provides a rationale for the evaluation of the user's answer.
+
+- **Error Handling**:
+  - Returns `500 Internal Server Error` for server-side issues.
+
+## Implementation Details:
+The `getQuestionEvaluation` function in the backend handles this endpoint. It receives the user's answer, the question, the preferred language, and an example of a correct answer. These inputs are then passed to a Python script that utilizes the OpenAI language model to evaluate the answer's correctness and relevance. The script employs structured output parsing to ensure the response is formatted as a JSON object with the evaluation and explanation.
