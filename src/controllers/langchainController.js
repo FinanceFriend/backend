@@ -50,13 +50,33 @@ const calculateAge = async (birthDate) => {
 
 const getLessonMessageLoremIpsum = async (req, res) => {
     try {
-        const lesson_index = req.query.lesson_index;
-        const mini_lesson_index = req.query.mini_lesson_index;
-        const result = lesson_index+""+mini_lesson_index+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed scelerisque leo. Vestibulum tincidunt blandit enim, in mollis ipsum vestibulum eu. Vestibulum a rutrum massa. Mauris in suscipit enim. Pellentesque vel pellentesque enim, vitae accumsan felis. Proin eu justo non metus vulputate venenatis non et ipsum. Donec ut imperdiet erat, et ultricies tortor. Curabitur accumsan congue diam, sed dignissim erat auctor quis. Suspendisse mollis lectus sit amet purus hendrerit faucibus. Integer ac metus nisl. Phasellus ante dolor, mattis eu magna ac, scelerisque lacinia erat. Vestibulum et vehicula purus, quis sollicitudin magna."
 
-        res.json({ result: result });
+        const currentBlock = req.body.currentBlock;
+        const currentLesson = req.body.currentLesson;
+        const currentMinilesson = req.body.currentMinilesson;
+        const user = req.body.user;
+        const land = req.body.land;
+
+        let result = currentBlock+" "+currentLesson+" "+currentMinilesson+" "+user+" "+land+" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed scelerisque leo. Vestibulum tincidunt blandit enim, in mollis ipsum vestibulum eu. Vestibulum a rutrum massa. Mauris in suscipit enim. Pellentesque vel pellentesque enim, vitae accumsan felis. Proin eu justo non metus vulputate venenatis non et ipsum. Donec ut imperdiet erat, et ultricies tortor. Curabitur accumsan congue diam, sed dignissim erat auctor quis. Suspendisse mollis lectus sit amet purus hendrerit faucibus. Integer ac metus nisl. Phasellus ante dolor, mattis eu magna ac, scelerisque lacinia erat. Vestibulum et vehicula purus, quis sollicitudin magna."
+
+
+
+
+        
+        if(currentBlock==2){
+            result = "\n```json\n[\n\t{\n\t\t\"question\": \"Mathematics is an important part of everyday financial situations.\",\n\t\t\"type\": \"True/False\",\n\t\t\"correct_answer\": \"True\"\n\t},\n\t{\n\t\t\"question\": \"What is the importance of learning financial arithmetic?\",\n\t\t\"type\": \"Fill-in-the-Blank\",\n\t\t\"correct_answer\": \"Understanding\"\n\t},\n\t{\n\t\t\"question\": \"Which of the following is not a role of mathematics in finance?\",\n\t\t\"type\": \"Multiple Choice\",\n\t\t\"correct_answer\": \"Making predictions about the future\",\n\t\t\"options\": \"A. Calculating interest rates B. Making predictions about the future C. Analyzing financial data D. Managing investments\"\n\t},\n\t{\n\t\t\"question\": \"CAL is a friendly and knowledgeable calculator living in Numberland.\",\n\t\t\"type\": \"True/False\",\n\t\t\"correct_answer\": \"True\"\n\t},\n\t{\n\t\t\"question\": \"CAL is teaching children about finance and financial mathematics.\",\n\t\t\"type\": \"Multiple Choice\",\n\t\t\"correct_answer\": \"A. Finance and financial mathematics\",\n\t\t\"options\": \"A. Finance and financial mathematics B. Math and science C. Art and music D. History and geography\"\n\t}\n]\n```"
+        }
+
+        res.status(200).json({
+            success: true,
+            message: result
+        });
     } catch (error) {
-        res.status(500).json({ error: error });
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            error: error
+        });
     }
 };
 
@@ -115,7 +135,7 @@ const getLessonMessageAlt = async (req, res) => {
 
 
        // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
-       script = parseInt(currentBlock) == 3 ? quizPath :  lessonPath
+       script = parseInt(currentBlock) == 2 ? quizPath :  lessonPath
        const result = await executePython(script, [
             user.username,
             land.name,
