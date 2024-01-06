@@ -20,8 +20,8 @@ user_age = int(sys.argv[8])
 user_language = str(sys.argv[9])
 
 
-#file_path = '../docs/' + location_name + '.json'
-file_path = 'src/langchain/docs/' + location_name + '.json'
+file_path = '../docs/' + location_name + '.json'
+#file_path = 'src/langchain/docs/' + location_name + '.json'
 
 with open(file_path, 'r') as file:
     lessons = json.load(file)
@@ -49,9 +49,9 @@ output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
 format_instructions = output_parser.get_format_instructions()
 
 quiz_prompt_template = """
-    Generate a 5-question quiz from the provided lecture content. Format each question as a JSON object with 'type', 'question', 'correct_answer', and 'options' (if applicable). Include two True/False questions, two multiple-choice questions with four options each, and one fill-in-the-blank question with a "BLANK" placeholder for the missing word or phrase.
+    Generate a 5-question quiz from the provided lecture content. Format each question as a JSON object with 'type', 'question', 'correct_answer', and 'options' (if applicable). Include two True/False questions, two multiple-choice questions with four options each, and one open-ended question.
 
-    Ensure that the True/False statements and fill-in-the-blank questions are factual based on the lecture content. For multiple-choice questions, only one option should be correct. IF OPTIONS ARE PRESENT, THEY SHOULD BE WRITTEN AS A LIST OF STRINGS. 
+    Ensure that the True/False statements and open-ended questions are factual based on the lecture content. For multiple-choice questions, only one option should be correct. IF OPTIONS ARE PRESENT, THEY SHOULD BE WRITTEN AS A LIST OF STRINGS. 
 
     Tailor the questions to suit {user_age}-year-olds and write them in {user_language}. 
 
@@ -82,6 +82,6 @@ final_prompt = prompt.format(
 )
 
 output = llm(final_prompt)
-print(output)
+print(json.dumps(output))
 
 sys.stdout.flush()

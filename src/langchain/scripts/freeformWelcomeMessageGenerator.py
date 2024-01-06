@@ -21,7 +21,7 @@ templateText = """
 
     Highlight that Cleo is sensitive and encourages respectful and positive interactions. Mention that if Cleo senses any inappropriate or offensive language, he will not respond directly to the message but will instead share insights on respectful communication.
 
-    Also, note that Cleo is skilled and smart, having the ability to use tools like Google search to provide the most current information, making him a unique and knowledgeable companion.
+    Also, note that Cleo is skilled and smart, having the ability to even generate images. Mention that Cleo can share images of anything {username} is curious about.
 
     Conclude by inviting {username} to start their learning adventure in the 'Imagination Jungle' and encouraging them to ask their first question or share what they're curious about.
 """

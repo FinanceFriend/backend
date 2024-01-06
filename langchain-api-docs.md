@@ -96,7 +96,7 @@
 
 - **Endpoint**: `/api/langchain/freeformChat`
 - **Method**: `POST`
-- **Description**: This endpoint facilitates a freeform chat experience in the "Imagination Jungle" module. It allows users to engage in an interactive conversation with Cleo the Chameleon on a wide range of topics, beyond just finance. Cleo, being sensitive to the tone of the conversation, will provide educational and respectful responses, and may use external sources like Google search for up-to-date information. However, if inappropriate or offensive content is detected, Cleo will share a message emphasizing positive communication instead of responding to the specific content.
+- **Description**: This endpoint enables a freeform chat experience in the "Imagination Jungle" module, where users interact with Cleo the Chameleon. It supports both text-based conversations and image generation based on user input. For text chats, Cleo offers educational and respectful responses. Inappropriate or offensive content triggers a response emphasizing positive communication. If the user opts for image generation, the endpoint returns an image URL based on the provided message.
 - **Request Body**:
   
   The request body should be a JSON object with the following structure:
@@ -112,18 +112,20 @@
       "name": "Imagination Jungle",
       "friendName": "Cleo",
       "friendType": "Chameleon"
-    }
+    },
+    "type": "text" // or "image" to generate an image response
   }
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
-  - `message`: String - The response from Cleo the Chameleon, either addressing the user's query or providing guidance on positive communication.
+  - `message`: Depending on the `type` parameter in the request, this can be either:
+    - String - The response from Cleo the Chameleon for text-based chats.
+    - String - A URL to the generated image for image requests.
 
 - **Error Handling**:
   - Returns `500 Internal Server Error` for server-side issues.
 
 ## Implementation Details:
-This endpoint corresponds to the `getFreeformMessage` function in the backend, which processes the user's message and invokes the `executePython` function. The Python script uses OpenAI's language model to generate Cleo's response based on the `templateText` input template. The script considers the user's age, language, and the content of the message to tailor the response. It also handles the detection of inappropriate or offensive content to maintain a respectful chat environment.
-
+This endpoint corresponds to the `getFreeformMessage` function in the backend. It processes the user's message, and depending on the requested type (text or image), invokes the appropriate Python script. For text responses, the `executePython` function uses OpenAI's language model to generate Cleo's response based on the `templateText` input template, considering the user's age, language, and chat history. For image responses, it executes a different script to generate an image URL based on the message. The endpoint also handles detection of inappropriate or offensive content to ensure a respectful chat environment.
 
 
 ## 5. Get User Chat

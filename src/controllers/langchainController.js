@@ -12,6 +12,7 @@ const answerUserPath = path.join(__dirname, '..', 'langchain', 'scripts', 'userA
 const freeformPath = path.join(__dirname, '..', 'langchain', 'scripts', 'freeformMessageGenerator.py');
 const freeformWelcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'freeformWelcomeMessageGenerator.py');
 const imageGeneratorPath = path.join(__dirname, '..', 'langchain', 'scripts', 'imageGenerator.py');
+const questionEvaluationPath = path.join(__dirname, '..', 'langchain', 'scripts', 'questionEval.py');
 
 // Function to execute Python scripts
 const executePython = async (script, args) => {
@@ -246,6 +247,33 @@ const getFreeformMessage = async (req, res) => {
     };
 }
 
+const getQuestionEvaluation = async (req, res) => {
+    try {
+        const user = req.body.user;
+        const question = req.body.question;
+        const userAnswer = req.body.userAnswer;
+        const correctAnswerExample = req.body.correctAnswerExample;
+
+        const result = await executePython(questionEvaluationPath, [
+            question,
+            userAnswer,
+            user.preferredLanguage,
+            correctAnswerExample
+        ]);
+
+        res.status(200).json({
+            success: true,
+            message: result
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+}
+
 const getLessonsndMiniLessonsName = async (req, res) => {
 
     try {
@@ -287,5 +315,5 @@ module.exports = {
     getAnswerToUserMessage,
     getLessonsndMiniLessonsName,
     getFreeformMessage,
-    getGeneratedImage
+    getQuestionEvaluation
 };
