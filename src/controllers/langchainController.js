@@ -206,27 +206,33 @@ const getAnswerToUserMessage = async (req, res) => {
 }
 
 // get freeform message - should be generated every time the user sends a message in Imaginary Jungle via chat prompt
+// depending on the button that the user has clicked, it generates a text prompt or an image
 const getFreeformMessage = async (req, res) => {
     try {
         const user = req.body.user;
         const land = req.body.land;
         const message = req.body.message;
+        const type = req.body.type;
 
         const userAge = await calculateAge(new Date(user.dateOfBirth));
         const historyContext = await chatController.getHistoryMessages(user.username, land.id);
 
-        await chatController.saveMessage(user.username, 'User', land.id, message);
-
-        const result = await executePython(freeformPath, [
-            user.username,
-            userAge,
-            user.preferredLanguage,
-            message,
-            historyContext
-        ]);
-
-        await chatController.saveMessage(user.username, 'AI', land.id, result);
-
+        if (type == "image"){
+            const result = await executePython(imageGeneratorPath, [
+                message
+            ]);
+        } else {
+            await chatController.saveMessage(user.username, 'User', land.id, message);
+            const result = await executePython(freeformPath, [
+                user.username,
+                userAge,
+                user.preferredLanguage,
+                message,
+                historyContext
+            ]);
+            await chatController.saveMessage(user.username, 'AI', land.id, result);
+        }
+        
         res.status(200).json({
             success: true,
             message: result
@@ -239,28 +245,6 @@ const getFreeformMessage = async (req, res) => {
     
     };
 }
-
-const getGeneratedImage = async (req, res) => {
-    try {
-        const message = req.body.message;
-
-        const result = await executePython(imageGeneratorPath, [
-            message
-        ]);
-
-        res.status(200).json({
-            success: true,
-            message: result
-        });
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
-    }
-}
-
 
 const getLessonsndMiniLessonsName = async (req, res) => {
 

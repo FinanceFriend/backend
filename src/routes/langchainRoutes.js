@@ -8,6 +8,5 @@ router.post('/welcome', langchainController.getWelcomeMessage);
 router.post('/lessonMessage', langchainController.getLessonMessageAlt);
 router.post('/freeformUserMessage', langchainController.getFreeformMessage);
 router.get('/lessonNames', langchainController.getLessonsndMiniLessonsName);
-router.get('/generateImage', langchainController.getGeneratedImage);
 
 module.exports = router;
