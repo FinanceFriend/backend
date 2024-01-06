@@ -11,6 +11,7 @@ const welcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'welcomeM
 const answerUserPath = path.join(__dirname, '..', 'langchain', 'scripts', 'userAnswerGenerator.py');
 const freeformPath = path.join(__dirname, '..', 'langchain', 'scripts', 'freeformMessageGenerator.py');
 const freeformWelcomePath = path.join(__dirname, '..', 'langchain', 'scripts', 'freeformWelcomeMessageGenerator.py');
+const imageGeneratorPath = path.join(__dirname, '..', 'langchain', 'scripts', 'imageGenerator.py');
 
 // Function to execute Python scripts
 const executePython = async (script, args) => {
@@ -212,6 +213,7 @@ const getFreeformMessage = async (req, res) => {
         const message = req.body.message;
 
         const userAge = await calculateAge(new Date(user.dateOfBirth));
+        const historyContext = await chatController.getHistoryMessages(user.username, land.id);
 
         await chatController.saveMessage(user.username, 'User', land.id, message);
 
@@ -219,7 +221,8 @@ const getFreeformMessage = async (req, res) => {
             user.username,
             userAge,
             user.preferredLanguage,
-            message
+            message,
+            historyContext
         ]);
 
         await chatController.saveMessage(user.username, 'AI', land.id, result);
@@ -235,6 +238,27 @@ const getFreeformMessage = async (req, res) => {
         });
     
     };
+}
+
+const getGeneratedImage = async (req, res) => {
+    try {
+        const message = req.body.message;
+
+        const result = await executePython(imageGeneratorPath, [
+            message
+        ]);
+
+        res.status(200).json({
+            success: true,
+            message: result
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
 }
 
 
@@ -278,5 +302,6 @@ module.exports = {
     getLessonMessageAlt,
     getAnswerToUserMessage,
     getLessonsndMiniLessonsName,
-    getFreeformMessage
+    getFreeformMessage,
+    getGeneratedImage
 };
