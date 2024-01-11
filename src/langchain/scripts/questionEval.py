@@ -14,7 +14,7 @@ userAnswer = str(sys.argv[2])
 userLanguage = str(sys.argv[3])
 correctAnswerExample = str(sys.argv[4])
 
-llm = OpenAI(temperature=0, model_name='text-davinci-003', max_tokens=1024)
+llm = OpenAI(temperature=0, model_name='gpt-3.5-turbo-instruct', max_tokens=1024)
 
 # Define response schemas for the quiz question components
 response_schemas = [
