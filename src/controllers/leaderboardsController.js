@@ -2,74 +2,6 @@ require("mongoose");
 const Stats = require("../models/stats");
 const User = require("../models/user");
 
-const getGeneralLeaderboard = async (req, res) => {
-  try {
-    const usersWithStats = await User.aggregate([
-      {
-        $lookup: {
-          from: Stats.collection.name,
-          localField: "username",
-          foreignField: "username",
-          as: "stats",
-        },
-      },
-      {
-        $unwind: "$stats",
-      },
-      {
-        $project: {
-          username: 1,
-          countryOfOrigin: 1,
-          age: {
-            $floor: {
-              $divide: [
-                { $subtract: [new Date(), "$dateOfBirth"] },
-                365 * 24 * 60 * 60 * 1000,
-              ],
-            },
-          },
-          totalPoints: { $sum: "$stats.points" },
-        },
-      },
-      {
-        $sort: { totalPoints: -1 },
-      },
-      {
-        $limit: 100,
-      },
-    ]);
-
-    let lastPoints = null;
-    let lastRank = 0;
-    let rank = 0;
-    const leaderboard = usersWithStats.map((user) => {
-      if (user.totalPoints !== lastPoints) {
-        lastPoints = user.totalPoints;
-        rank = ++lastRank;
-      } else {
-        lastRank = rank;
-      }
-
-      return {
-        username: user.username,
-        countryOfOrigin: user.countryOfOrigin,
-        age: user.age,
-        totalPoints: user.totalPoints,
-        rank: rank,
-      };
-    });
-
-    res.status(200).json({ success: true, leaderboard });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      success: false,
-      message: "Error retrieving leaderboard",
-      error: err.message,
-    });
-  }
-};
-
 const getGeneralLeaderboardByUser = async (req, res) => {
   try {
     const { username } = req.params;
@@ -138,79 +70,6 @@ const getGeneralLeaderboardByUser = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error retrieving user leaderboard data",
-      error: err.message,
-    });
-  }
-};
-
-const getCountryLeaderboard = async (req, res) => {
-  try {
-    const { country } = req.params;
-
-    const usersWithStats = await User.aggregate([
-      {
-        $match: { countryOfOrigin: country },
-      },
-      {
-        $lookup: {
-          from: Stats.collection.name,
-          localField: "username",
-          foreignField: "username",
-          as: "stats",
-        },
-      },
-      {
-        $unwind: "$stats",
-      },
-      {
-        $project: {
-          username: 1,
-          countryOfOrigin: 1,
-          age: {
-            $floor: {
-              $divide: [
-                { $subtract: [new Date(), "$dateOfBirth"] },
-                365 * 24 * 60 * 60 * 1000,
-              ],
-            },
-          },
-          totalPoints: { $sum: "$stats.points" },
-        },
-      },
-      {
-        $sort: { totalPoints: -1 },
-      },
-      {
-        $limit: 100,
-      },
-    ]);
-
-    let lastPoints = null;
-    let lastRank = 0;
-    let rank = 0;
-    const leaderboard = usersWithStats.map((user) => {
-      if (user.totalPoints !== lastPoints) {
-        lastPoints = user.totalPoints;
-        rank = ++lastRank;
-      } else {
-        lastRank = rank;
-      }
-
-      return {
-        username: user.username,
-        countryOfOrigin: user.countryOfOrigin,
-        age: user.age,
-        totalPoints: user.totalPoints,
-        rank: rank,
-      };
-    });
-
-    res.status(200).json({ success: true, leaderboard });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      success: false,
-      message: "Error retrieving country-specific leaderboard",
       error: err.message,
     });
   }
@@ -292,79 +151,6 @@ const getCountryLeaderboardByUser = async (req, res) => {
   }
 };
 
-const getAgeLeaderboard = async (req, res) => {
-  try {
-    const age = parseInt(req.params.age);
-
-    const usersWithStats = await User.aggregate([
-      {
-        $lookup: {
-          from: Stats.collection.name,
-          localField: "username",
-          foreignField: "username",
-          as: "stats",
-        },
-      },
-      {
-        $unwind: "$stats",
-      },
-      {
-        $project: {
-          username: 1,
-          countryOfOrigin: 1,
-          age: {
-            $floor: {
-              $divide: [
-                { $subtract: [new Date(), "$dateOfBirth"] },
-                365 * 24 * 60 * 60 * 1000,
-              ],
-            },
-          },
-          totalPoints: { $sum: "$stats.points" },
-        },
-      },
-      {
-        $match: { age },
-      },
-      {
-        $sort: { totalPoints: -1 },
-      },
-      {
-        $limit: 100,
-      },
-    ]);
-
-    let lastPoints = null;
-    let lastRank = 0;
-    let rank = 0;
-    const leaderboard = usersWithStats.map((user) => {
-      if (user.totalPoints !== lastPoints) {
-        lastPoints = user.totalPoints;
-        rank = ++lastRank;
-      } else {
-        lastRank = rank;
-      }
-
-      return {
-        username: user.username,
-        countryOfOrigin: user.countryOfOrigin,
-        age: user.age,
-        totalPoints: user.totalPoints,
-        rank: rank,
-      };
-    });
-
-    res.status(200).json({ success: true, leaderboard });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      success: false,
-      message: "Error retrieving age-specific leaderboard",
-      error: err.message,
-    });
-  }
-};
-
 const getAgeLeaderboardByUser = async (req, res) => {
   try {
     const { age, username } = req.params;
@@ -441,11 +227,103 @@ const getAgeLeaderboardByUser = async (req, res) => {
   }
 };
 
+const getLeaderboard = async (req, res) => {
+  try {
+    const { age, country } = req.query;
+
+    const usersWithStats = await getUsersWithStats(age, country);
+
+    let lastPoints = null;
+    let lastRank = 0;
+    let rank = 0;
+    const leaderboard = usersWithStats.map((user) => {
+      if (user.totalPoints !== lastPoints) {
+        lastPoints = user.totalPoints;
+        rank = ++lastRank;
+      } else {
+        rank = lastRank;
+      }
+
+      return {
+        username: user.username,
+        countryOfOrigin: user.countryOfOrigin,
+        age: user.userAge, 
+        totalPoints: user.totalPoints,
+        rank: rank,
+      };
+    });
+
+    res.status(200).json({ success: true, leaderboard });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error retrieving leaderboard",
+      error: err.message,
+    });
+  }
+};
+
+async function getUsersWithStats(age, country) {
+  let matchStage = {};
+
+  if (age) {
+      matchStage.userAge = parseInt(age);
+  }
+
+  if (country) {
+      matchStage.countryOfOrigin = country;
+  }
+
+  try {
+      const usersWithStats = await User.aggregate([
+          {
+              $lookup: {
+                  from: Stats.collection.name,
+                  localField: "username",
+                  foreignField: "username",
+                  as: "stats",
+              },
+          },
+          {
+              $unwind: "$stats",
+          },
+          {
+              $project: {
+                  username: 1,
+                  countryOfOrigin: 1,
+                  userAge: {
+                      $floor: {
+                          $divide: [
+                              { $subtract: [new Date(), "$dateOfBirth"] },
+                              365 * 24 * 60 * 60 * 1000,
+                          ],
+                      },
+                  },
+                  totalPoints: { $sum: "$stats.points" },
+              },
+          },
+          {
+              $match: matchStage,
+          },
+          {
+              $sort: { totalPoints: -1 },
+          },
+          {
+              $limit: 100,
+          },
+      ]);
+
+      return usersWithStats;
+  } catch (err) {
+      console.error(err);
+      throw new Error("Error retrieving users with stats");
+  }
+}
+
 module.exports = {
-  getGeneralLeaderboard,
+  getLeaderboard,
   getGeneralLeaderboardByUser,
-  getCountryLeaderboard,
   getCountryLeaderboardByUser,
-  getAgeLeaderboard,
-  getAgeLeaderboardByUser
+  getAgeLeaderboardByUser,
 };
