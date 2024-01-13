@@ -123,6 +123,7 @@
     - `totalCompletion`: Number - The average of all completion percentages.
     - `totalPoints`: Number - The sum of all points.
     - `correctAnswersPercentage`: Number - The percentage of correct answers.
+    - `progress`: Array of Objects - Each object contains `blockId` and `minilessonId` representing the user's progress.
 - **Error Handling**:
   - Returns `404 Not Found` if the stats for the given username are not found.
   - Returns `500 Internal Server Error` for any server-side errors.
