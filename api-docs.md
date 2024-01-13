@@ -183,8 +183,27 @@
 - **Error Handling**:
   - On server-side errors, returns `500 Internal Server Error` with an error message.
 
+## 11. Get Leaderboard By User
 
-## 11. Evaluate User Answer to a Question
+- **Endpoint**: `/api/leaderboard/:username`
+- **Method**: `GET`
+- **Description**: Retrieves the ranking information of a specific user across different leaderboards (general, age-based, and country-based). This method finds the user's rank in each of these categories. If the user is not found, a 404 error is returned.
+- **Path Parameters**:
+  - `username`: String - The username of the user for whom to retrieve leaderboard data.
+- **Response**: 
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `userData`: Object - Contains the ranking information of the user in different leaderboards. It includes:
+    - `username`: String - The user's username.
+    - `age`: Number - The user's age, calculated from their date of birth.
+    - `country`: String - The user's country of origin.
+    - `generalRank`: Number - The user's rank in the general leaderboard.
+    - `ageRank`: Number - The user's rank in the age-specific leaderboard.
+    - `countryRank`: Number - The user's rank in the country-specific leaderboard.
+- **Error Handling**:
+  - If the user is not found, returns `404 Not Found` with an appropriate error message.
+  - On server-side errors, returns `500 Internal Server Error` with an error message.
+
+## 12. Evaluate User Answer to a Question
 
 - **Endpoint**: `/evaluateQuestion`
 - **Method**: `POST`
