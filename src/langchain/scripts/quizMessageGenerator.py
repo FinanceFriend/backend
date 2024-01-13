@@ -20,8 +20,8 @@ user_age = int(sys.argv[8])
 user_language = str(sys.argv[9])
 
 
-file_path = '../docs/' + location_name + '.json'
-#file_path = 'src/langchain/docs/' + location_name + '.json'
+#file_path = '../docs/' + location_name + '.json'
+file_path = 'src/langchain/docs/' + location_name + '.json'
 
 with open(file_path, 'r') as file:
     lessons = json.load(file)
@@ -32,7 +32,7 @@ lesson = lessons[current_lesson_ind]
 mini_lesson_name = lesson['mini_lessons'][current_minilesson_ind]['name']
 mini_lesson_goal = lesson['mini_lessons'][current_minilesson_ind]['content']
 
-llm = OpenAI(temperature=0, model_name='text-davinci-003', max_tokens=1024)
+llm = OpenAI(temperature=0, model_name='gpt-3.5-turbo-instruct', max_tokens=1024)
 
 # Define response schemas for the quiz question components
 response_schemas = [
