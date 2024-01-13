@@ -164,97 +164,46 @@
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
-## 10. Single User General Leaderboard
+## 10. General Leaderboard
 
-- **Endpoint**: `/api/leaderboard/general/:username`
+- **Endpoint**: `/api/leaderboard/general`
 - **Method**: `GET`
-- **Description**: Retrieves leaderboard data for a specific user, including their rank among all users, total points, country of origin, and age.
-- **URL Parameters**:
-  - `username`: String (required) - The username of the user whose leaderboard data is being requested.
-- **Response**:
+- **Description**: This method provides a leaderboard of the first 100 users, sorted by their total points. It supports optional filtering based on the user's age and country of origin. Each user's entry includes their username, country, age, total points, and rank.
+- **Query Parameters**:
+  - `age` (optional): Integer - Specifies the age to filter the leaderboard.
+  - `country` (optional): String - Specifies the country to filter the leaderboard.
+- **Response**: 
   - `success`: Boolean - Indicates if the operation was successful.
-  - `userData`: Object - Contains the leaderboard data for the specified user.
-    - `username`: String - The username of the user.
-    - `countryOfOrigin`: String - The country of origin of the user.
-    - `age`: Number - The age of the user, calculated from their date of birth.
+  - `leaderboard`: Array of Objects - List of user rankings, each containing:
+    - `username`: String - The user's username.
+    - `countryOfOrigin`: String - The user's country of origin.
+    - `age`: Number - The user's age, calculated from their date of birth.
     - `totalPoints`: Number - The total points accumulated by the user.
-    - `rank`: Number - The user's rank among all users, with dense ranking applied (users with the same number of points share the same rank).
+    - `rank`: Number - The user's rank in the leaderboard. Users with the same number of points share the same rank.
 - **Error Handling**:
-  - Returns `404 Not Found` if the specified user is not found.
-  - Returns `500 Internal Server Error` for any server-side errors.
+  - On server-side errors, returns `500 Internal Server Error` with an error message.
 
-## 11. Country-Specific Leaderboard
+## 11. Get Leaderboard By User
 
-- **Endpoint**: `/api/leaderboard/country/:country`
+- **Endpoint**: `/api/leaderboard/:username`
 - **Method**: `GET`
-- **Description**: Retrieves a leaderboard of first 100 users from a specific country, sorted by total points. Each entry includes the user's username, country, age, total points, and their rank.
-- **Response**:
+- **Description**: Retrieves the ranking information of a specific user across different leaderboards (general, age-based, and country-based). This method finds the user's rank in each of these categories. If the user is not found, a 404 error is returned.
+- **Path Parameters**:
+  - `username`: String - The username of the user for whom to retrieve leaderboard data.
+- **Response**: 
   - `success`: Boolean - Indicates if the operation was successful.
-  - `leaderboard`: Array of Objects - A list of user rankings.
-    - `username`: String - The username of the user.
-    - `countryOfOrigin`: String - The country of origin of the user.
-    - `age`: Number - The age of the user, calculated from their date of birth.
-    - `totalPoints`: Number - The total points accumulated by the user.
-    - `rank`: Number - The rank of the user in the leaderboard. Users with the same number of points share the same rank.
+  - `userData`: Object - Contains the ranking information of the user in different leaderboards. It includes:
+    - `username`: String - The user's username.
+    - `age`: Number - The user's age, calculated from their date of birth.
+    - `country`: String - The user's country of origin.
+    - `generalRank`: Number - The user's rank in the general leaderboard.
+    - `ageRank`: Number - The user's rank in the age-specific leaderboard.
+    - `countryRank`: Number - The user's rank in the country-specific leaderboard.
 - **Error Handling**:
-  - Returns `500 Internal Server Error` for any server-side errors.
+  - If the user is not found, returns `404 Not Found` with an appropriate error message.
+  - On server-side errors, returns `500 Internal Server Error` with an error message.
 
-## 12. Single User Country-Specific Leaderboard
-
-- **Endpoint**: `/api/leaderboard/country/:country/:username`
-- **Method**: `GET`
-- **Description**: Retrieves leaderboard data for a specific user from a specified country, including their rank among all users from that country, total points, country of origin, and age.
-- **URL Parameters**:
-  - `username`: String (required) - The username of the user whose country-specific leaderboard data is being requested.
-- **Response**:
-  - `success`: Boolean - Indicates if the operation was successful.
-  - `userData`: Object - Contains the leaderboard data for the specified user.
-    - `username`: String - The username of the user.
-    - `countryOfOrigin`: String - The country of origin of the user.
-    - `age`: Number - The age of the user, calculated from their date of birth.
-    - `totalPoints`: Number - The total points accumulated by the user.
-    - `rank`: Number - The user's rank among all users from a specified country, with dense ranking applied (users with the same number of points share the same rank).
-- **Error Handling**:
-  - Returns `404 Not Found` if the specified user is not found.
-  - Returns `500 Internal Server Error` for any server-side errors.
-
-## 13. Age-Specific Leaderboard
-
-- **Endpoint**: `/api/leaderboard/age/:age`
-- **Method**: `GET`
-- **Description**: Retrieves a leaderboard of first 100 users with a specific age, sorted by total points. Each entry includes the user's username, country, age, total points, and their rank.
-- **Response**:
-  - `success`: Boolean - Indicates if the operation was successful.
-  - `leaderboard`: Array of Objects - A list of user rankings.
-    - `username`: String - The username of the user.
-    - `countryOfOrigin`: String - The country of origin of the user.
-    - `age`: Number - The age of the user, calculated from their date of birth.
-    - `totalPoints`: Number - The total points accumulated by the user.
-    - `rank`: Number - The rank of the user in the leaderboard. Users with the same number of points share the same rank.
-- **Error Handling**:
-  - Returns `500 Internal Server Error` for any server-side errors.
-
-## 14. Single User Age-Specific Leaderboard
-
-- **Endpoint**: `/api/leaderboard/age/:age/:username`
-- **Method**: `GET`
-- **Description**: Retrieves leaderboard data for a specific user with a specific age, including their rank among all users with that age, total points, country of origin, and age.
-- **URL Parameters**:
-  - `username`: String (required) - The username of the user whose age-specific leaderboard data is being requested.
-- **Response**:
-  - `success`: Boolean - Indicates if the operation was successful.
-  - `userData`: Object - Contains the leaderboard data for the specified user.
-    - `username`: String - The username of the user.
-    - `countryOfOrigin`: String - The country of origin of the user.
-    - `age`: Number - The age of the user, calculated from their date of birth.
-    - `totalPoints`: Number - The total points accumulated by the user.
-    - `rank`: Number - The user's rank among all users from a specified country, with dense ranking applied (users with the same number of points share the same rank).
-- **Error Handling**:
-  - Returns `404 Not Found` if the specified user is not found.
-  - Returns `500 Internal Server Error` for any server-side errors.
-
-
-## Evaluate User Answer to a Question
+## 12. Evaluate User Answer to a Question
 
 - **Endpoint**: `/evaluateQuestion`
 - **Method**: `POST`
