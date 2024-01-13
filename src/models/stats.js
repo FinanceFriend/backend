@@ -35,6 +35,15 @@ const statsSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  progress: {
+    type: [
+      {
+        blockId: { type: Number, required: true },
+        minilessonId: { type: Number, required: true },
+      },
+    ],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Stats", statsSchema);

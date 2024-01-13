@@ -135,10 +135,13 @@
 - **URL Parameters**:
   - `username`: String (required) - The username of the user whose stats are to be updated.
 - **Request Body** (Any or all of the following):
-  - `completionPercentages`: Array of Numbers (optional) - An array of new completion percentages.
   - `points`: Array of Numbers (optional) - An array of new points.
   - `correctAnswers`: Number (optional) - The updated count of correct answers.
   - `incorrectAnswers`: Number (optional) - The updated count of incorrect answers.
+  - `progress`: Object (optional) - An object containing the progress update. The object should have the following structure:
+    - `locationId`: Number (required for progress update) - The index in the progress array to update.
+    - `blockId`: Number (required for progress update) - The new block ID to set.
+    - `minilessonId`: Number (required for progress update) - The new minilesson ID to set.
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
   - `message`: String - A message describing the outcome.
@@ -148,25 +151,10 @@
   - Returns `404 Not Found` if no stats are found for the given username.
   - Returns `500 Internal Server Error` for any server-side errors.
 
+
 ## 9. General Leaderboard
 
-- **Endpoint**: `/api/leaderboard/general`
-- **Method**: `GET`
-- **Description**: Retrieves a leaderboard of first 100 users sorted by total points. Each entry includes the user's username, country, age, total points, and their rank.
-- **Response**:
-  - `success`: Boolean - Indicates if the operation was successful.
-  - `leaderboard`: Array of Objects - A list of user rankings.
-    - `username`: String - The username of the user.
-    - `countryOfOrigin`: String - The country of origin of the user.
-    - `age`: Number - The age of the user, calculated from their date of birth.
-    - `totalPoints`: Number - The total points accumulated by the user.
-    - `rank`: Number - The rank of the user in the leaderboard. Users with the same number of points share the same rank.
-- **Error Handling**:
-  - Returns `500 Internal Server Error` for any server-side errors.
-
-## 10. General Leaderboard
-
-- **Endpoint**: `/api/leaderboard/general`
+- **Endpoint**: `/api/leaderboard`
 - **Method**: `GET`
 - **Description**: This method provides a leaderboard of the first 100 users, sorted by their total points. It supports optional filtering based on the user's age and country of origin. Each user's entry includes their username, country, age, total points, and rank.
 - **Query Parameters**:
@@ -183,7 +171,7 @@
 - **Error Handling**:
   - On server-side errors, returns `500 Internal Server Error` with an error message.
 
-## 11. Get Leaderboard By User
+## 10. Get Leaderboard By User
 
 - **Endpoint**: `/api/leaderboard/:username`
 - **Method**: `GET`
@@ -203,7 +191,7 @@
   - If the user is not found, returns `404 Not Found` with an appropriate error message.
   - On server-side errors, returns `500 Internal Server Error` with an error message.
 
-## 12. Evaluate User Answer to a Question
+## 11. Evaluate User Answer to a Question
 
 - **Endpoint**: `/evaluateQuestion`
 - **Method**: `POST`

@@ -3,12 +3,18 @@ const Stats = require("../models/stats");
 
 const initializeStats = async (username) => {
   try {
+    const initialProgress = new Array(6).fill({
+      lastBlockId: 0,
+      lastMinilessonId: 0,
+    });
+
     const newStats = new Stats({
       username,
       completionPercentages: new Array(6).fill(0),
       points: new Array(6).fill(0),
       correctAnswers: 0,
       incorrectAnswers: 0,
+      progress: initialProgress,
     });
 
     await newStats.save();
@@ -56,6 +62,19 @@ const updateStats = async (req, res) => {
   try {
     const { username } = req.params;
     const updateData = req.body;
+
+    const updateDataProgress = updateData.progress;
+
+    if (updateDataProgress != null) {
+      console.log("Updating progress for", username);
+      const stats = await Stats.findOne({ username });
+      let progress = stats.progress;
+      progress[updateDataProgress.locationId] = {
+        blockId: updateDataProgress.blockId,
+        minilessonId: updateDataProgress.minilessonId,
+      };
+      updateData.progress = progress;
+    }
 
     const updatedStats = await Stats.findOneAndUpdate(
       { username: username },
@@ -109,6 +128,7 @@ function createStatsResponse(stats) {
     totalCompletion: totalCompletion,
     totalPoints: totalPoints,
     correctAnswersPercentage: correctAnswersPercentage,
+    progress: stats.progress,
   };
 }
 
