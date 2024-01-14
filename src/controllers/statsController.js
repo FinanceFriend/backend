@@ -1,4 +1,6 @@
 require("mongoose");
+const path = require("path");
+const { readFileSync } = require("fs");
 const Stats = require("../models/stats");
 
 const initializeStats = async (username) => {
@@ -66,7 +68,6 @@ const updateStats = async (req, res) => {
     const updateDataProgress = updateData.progress;
 
     if (updateDataProgress != null) {
-      console.log("Updating progress for", username);
       const stats = await Stats.findOne({ username });
       let progress = stats.progress;
       progress[updateDataProgress.locationId] = {
@@ -74,6 +75,9 @@ const updateStats = async (req, res) => {
         minilessonId: updateDataProgress.minilessonId,
       };
       updateData.progress = progress;
+      updateData.completionPercentages = stats.completionPercentages;
+      updateData.completionPercentages[updateDataProgress.locationId] =
+        updateCompletionPercentage(updateDataProgress);
     }
 
     const updatedStats = await Stats.findOneAndUpdate(
@@ -130,6 +134,63 @@ function createStatsResponse(stats) {
     correctAnswersPercentage: correctAnswersPercentage,
     progress: stats.progress,
   };
+}
+
+function updateCompletionPercentage(updateDataProgress) {
+  const dataPath = path.join(
+    __dirname,
+    "..",
+    "langchain",
+    "docs",
+    "locations.json"
+  );
+
+  const data = readFileSync(dataPath);
+  const jsonObject = JSON.parse(data);
+
+  const locationName = jsonObject.find(
+    (obj) => obj.id === updateDataProgress.locationId
+  ).name;
+
+  const locationDataPath = path.join(
+    __dirname,
+    "..",
+    "langchain",
+    "docs",
+    locationName + ".json"
+  );
+
+  const locationData = readFileSync(locationDataPath);
+  const locationJsonObject = JSON.parse(locationData);
+
+  return calculateProgress(
+    locationJsonObject,
+    updateDataProgress.blockId,
+    updateDataProgress.minilessonId
+  );
+}
+
+function calculateProgress(blocks, lastBlockId, lastMinilessonId) {
+  let totalMinilessons = 0;
+  let completedMinilessons = 0;
+
+  blocks.forEach((block, index) => {
+    totalMinilessons += block.mini_lessons.length;
+
+    if (index < lastBlockId) {
+      completedMinilessons += block.mini_lessons.length;
+    } else if (index === lastBlockId) {
+      completedMinilessons += lastMinilessonId + 1;
+    }
+  });
+
+  if (completedMinilessons === 1)
+    completedMinilessons = 0;
+
+  if (completedMinilessons > totalMinilessons)
+    completedMinilessons = totalMinilessons;
+
+  return (completedMinilessons / totalMinilessons) * 100;
 }
 
 module.exports = {

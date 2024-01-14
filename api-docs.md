@@ -139,7 +139,7 @@
   - `points`: Array of Numbers (optional) - An array of new points.
   - `correctAnswers`: Number (optional) - The updated count of correct answers.
   - `incorrectAnswers`: Number (optional) - The updated count of incorrect answers.
-  - `progress`: Object (optional) - An object containing the progress update. The object should have the following structure:
+  - `progress`: Object (optional) - An object containing the progress update. When this field is updated, the completion percentages are automatically recalculated and updated. The object should have the following structure:
     - `locationId`: Number (required for progress update) - The index in the progress array to update.
     - `blockId`: Number (required for progress update) - The new block ID to set.
     - `minilessonId`: Number (required for progress update) - The new minilesson ID to set.
