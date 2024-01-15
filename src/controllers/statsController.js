@@ -4,8 +4,9 @@ const { readFileSync } = require("fs");
 const Stats = require("../models/stats");
 
 const initialProgress = new Array(5).fill({
-  blockId: 0,
+  lessonId: 0,
   minilessonId: 0,
+  blockId: 0,
 });
 
 const initializeStats = async (username) => {
@@ -72,13 +73,14 @@ const updateStats = async (req, res) => {
       let progress = userOldStats.progress;
       if (progress.length == 0) progress = initialProgress;
       progress[updateDataProgress.locationId] = {
-        blockId: updateDataProgress.blockId,
+        lessonId: updateDataProgress.lessonId,
         minilessonId: updateDataProgress.minilessonId,
+        blockId: updateDataProgress.blockId,
       };
       updateData.progress = progress;
       updateData.completionPercentages = userOldStats.completionPercentages;
       updateData.completionPercentages[updateDataProgress.locationId] =
-        updateCompletionPercentage(updateDataProgress);
+      updateCompletionPercentage(updateDataProgress);
     }
 
     if (updateData.correctAnswers) {
@@ -179,31 +181,32 @@ function updateCompletionPercentage(updateDataProgress) {
 
   return calculateProgress(
     locationJsonObject,
-    updateDataProgress.blockId,
-    updateDataProgress.minilessonId
+    updateDataProgress.lessonId,
+    updateDataProgress.minilessonId,
+    updateDataProgress.blockId
   );
 }
 
-function calculateProgress(blocks, lastBlockId, lastMinilessonId) {
-  let totalMinilessons = 0;
-  let completedMinilessons = 0;
+function calculateProgress(lessons, lastLessonId, lastMinilessonId, lastBlockId) {
+  let totalBlocks = 0;
+  let completedBlocks = 0;
 
-  blocks.forEach((block, index) => {
-    totalMinilessons += block.mini_lessons.length;
+  lessons.forEach((lesson, index) => {
+    totalBlocks += lesson.mini_lessons.length * 3;
 
-    if (index < lastBlockId) {
-      completedMinilessons += block.mini_lessons.length;
-    } else if (index === lastBlockId) {
-      completedMinilessons += lastMinilessonId + 1;
+    if (index < lastLessonId) {
+      completedBlocks += lesson.mini_lessons.length * 3;
+    } else if (index === lastLessonId) {
+      completedBlocks += lastMinilessonId * 3 + lastBlockId + 1;
     }
   });
 
-  if (completedMinilessons === 1) completedMinilessons = 0;
+  if (completedBlocks === 1) completedBlocks = 0;
 
-  if (completedMinilessons > totalMinilessons)
-    completedMinilessons = totalMinilessons;
+  if (completedBlocks > totalBlocks)
+    completedBlocks = totalBlocks;
 
-  return (completedMinilessons / totalMinilessons) * 100;
+  return (completedBlocks / totalBlocks) * 100;
 }
 
 module.exports = {

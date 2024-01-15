@@ -190,7 +190,7 @@ const getLessonMessageAlt = async (req, res) => {
 
     const userAge = dateCalc.getAge(user.dateOfBirth);
 
-    await updateProgressStatsInternally(user.username, land.id, currentBlock, currentMinilesson);
+    await updateProgressStatsInternally(user.username, land.id, currentBlock, currentMinilesson, currentLesson);
 
     if (currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0)
       await chatController.deleteChatByLocationId(user.username, land.id);
@@ -376,7 +376,7 @@ const getLessonsndMiniLessonsName = async (req, res) => {
   }
 };
 
-async function updateProgressStatsInternally(username, locationId, blockId, minilessonId) {
+async function updateProgressStatsInternally(username, locationId, blockId, minilessonId, lessonId) {
   // Mock request object
   const req = {
     params: {
@@ -387,6 +387,7 @@ async function updateProgressStatsInternally(username, locationId, blockId, mini
         locationId: locationId,
         blockId: blockId,
         minilessonId: minilessonId,
+        lessonId: lessonId
       }
     },
   };
@@ -405,6 +406,8 @@ async function updateProgressStatsInternally(username, locationId, blockId, mini
 
   await updateStats(req, res);
 }
+
+//function findNextBlockLessonAndMinilesson(locationId, )
 
 module.exports = {
   getLessonMessageLoremIpsum,

@@ -38,8 +38,9 @@ const statsSchema = new mongoose.Schema({
   progress: {
     type: [
       {
-        blockId: { type: Number, required: true },
+        lessonId: { type: Number, required: true },
         minilessonId: { type: Number, required: true },
+        blockId: { type: Number, required: true },
       },
     ],
     required: true
