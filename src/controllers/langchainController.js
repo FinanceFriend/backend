@@ -2,6 +2,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const chatController = require('./chatController');
+const dateCalc = require('../utilities/dateCalc');
 const { readFileSync } = require('fs');
 
 // Define file paths for Python scripts
@@ -42,20 +43,6 @@ const executePython = async (script, args) => {
 
     return result;
 }
-
-const calculateAge = async (birthDate) => {
-    
-    const today = new Date();
-    let userAge = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-        userAge--;
-    }
-    
-    return userAge;
-}
-
-
 
 // get test message
 const getLessonMessageLoremIpsum = async (req, res) => {
@@ -98,7 +85,7 @@ const getWelcomeMessage = async (req, res) => {
         const user = req.body.user;
         const land = req.body.land;
 
-        const userAge = await calculateAge(new Date(user.dateOfBirth));
+        const userAge = dateCalc.getAge(user.dateOfBirth);
 
         // Imagination Jungle is the only land where the welcome message is different because it does not have modules, lessons and minilessons
         const script = land == "Imagination Jungle" ? freeformWelcomePath : welcomePath
@@ -142,10 +129,9 @@ const getLessonMessageAlt = async (req, res) => {
         const user = req.body.user;
         const land = req.body.land;
 
-        const userAge = await calculateAge(new Date(user.dateOfBirth));
+        const userAge = dateCalc.getAge(user.dateOfBirth);
 
         if(currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0) await chatController.deleteChatByLocationId(user.username, land.id);
-
 
        // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
         script = parseInt(currentBlock) == 2 ? quizPath :  lessonPath
@@ -187,7 +173,7 @@ const getAnswerToUserMessage = async (req, res) => {
         const land = req.body.land;
         const message = req.body.message;
 
-        const userAge = await calculateAge(new Date(user.dateOfBirth));
+        const userAge = dateCalc.getAge(user.dateOfBirth);
 
         const historyContext = await chatController.getHistoryMessages(user.username, land.id);
 
@@ -231,7 +217,7 @@ const getFreeformMessage = async (req, res) => {
         const message = req.body.message;
         const type = req.body.type;
 
-        const userAge = await calculateAge(new Date(user.dateOfBirth));
+        const userAge = dateCalc.getAge(user.dateOfBirth);
         const historyContext = await chatController.getHistoryMessages(user.username, land.id);
 
         if (type == "image"){
