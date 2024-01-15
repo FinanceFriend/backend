@@ -171,7 +171,7 @@ This endpoint corresponds to the `getFreeformMessage` function in the backend. I
 
 ## 7. Evaluate User Answer to a Question
 
-- **Endpoint**: `/evaluateQuestion`
+- **Endpoint**: `/api/langchain/evaluateQuestion`
 - **Method**: `POST`
 - **Description**: This endpoint evaluates a user's answer to a given question. It determines the relevance and correctness of the answer compared to a provided example of a correct answer. The evaluation and explanation are generated using the OpenAI language model, tailored to the specified language.
 - **Request Body**:
