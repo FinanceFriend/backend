@@ -66,18 +66,31 @@ const updateStats = async (req, res) => {
     const updateData = req.body;
 
     const updateDataProgress = updateData.progress;
+    const userOldStats = await Stats.findOne({ username });
 
     if (updateDataProgress != null) {
-      const stats = await Stats.findOne({ username });
-      let progress = stats.progress;
+      let progress = userOldStats.progress;
       progress[updateDataProgress.locationId] = {
         blockId: updateDataProgress.blockId,
         minilessonId: updateDataProgress.minilessonId,
       };
       updateData.progress = progress;
-      updateData.completionPercentages = stats.completionPercentages;
+      updateData.completionPercentages = userOldStats.completionPercentages;
       updateData.completionPercentages[updateDataProgress.locationId] =
         updateCompletionPercentage(updateDataProgress);
+    }
+
+    if (updateData.correctAnswers) {
+      updateData.correctAnswers += userOldStats.correctAnswers;
+    }
+
+    if (updateData.incorrectAnswers) {
+      updateData.incorrectAnswers += userOldStats.incorrectAnswers;
+    }
+
+    if (updateData.locationId >= 0 && updateData.newPoints > 0) {
+      updateData.points = userOldStats.points;
+      updateData.points[updateData.locationId] += updateData.newPoints;
     }
 
     const updatedStats = await Stats.findOneAndUpdate(

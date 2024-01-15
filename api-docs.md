@@ -136,9 +136,10 @@
 - **URL Parameters**:
   - `username`: String (required) - The username of the user whose stats are to be updated.
 - **Request Body** (Any or all of the following):
-  - `points`: Array of Numbers (optional) - An array of new points.
-  - `correctAnswers`: Number (optional) - The updated count of correct answers.
-  - `incorrectAnswers`: Number (optional) - The updated count of incorrect answers.
+  - `newPoints`: Number (optional) - The new points to be added to the user's total on the index of `locationId`.
+  - `locationId`: Number (optional) - Identifier of location where `newPoints` are to be increased.
+  - `correctAnswers`: Number (optional) - The amount to increase total correctAnswers of a user.
+  - `incorrectAnswers`: Number (optional) - The amount to increase total incorrectAnswers of a user.
   - `progress`: Object (optional) - An object containing the progress update. When this field is updated, the completion percentages are automatically recalculated and updated. The object should have the following structure:
     - `locationId`: Number (required for progress update) - The index in the progress array to update.
     - `blockId`: Number (required for progress update) - The new block ID to set.
