@@ -81,8 +81,22 @@
   The request body is a JSON object with the following structure:
   ```json
   {
-    "username": "string",
-    "location_id": 0,
+    "currentLesson": 0,
+    "currentMinilesson": 0,
+    "land": {
+        "id": 0,
+        "name": "string",
+        "friendName": "string",
+        "friendType": "string",
+        "moduleName": "string"
+        
+    },
+    "user": {
+        "username": "string",
+        "dateOfBirth": "string",
+        "preferredLanguage": "string"
+        
+    },
     "message": "string"
   }
   ```
