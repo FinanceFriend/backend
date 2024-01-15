@@ -67,6 +67,7 @@
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
   - `message`: String - The lesson message.
+  - `nextIds`: Object - Next `lessonId`, `minilessonId` and `blockId` that await for user's completion. All fields are null if location is completely done.
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 

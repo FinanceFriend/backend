@@ -190,7 +190,13 @@ const getLessonMessageAlt = async (req, res) => {
 
     const userAge = dateCalc.getAge(user.dateOfBirth);
 
-    await updateProgressStatsInternally(user.username, land.id, currentBlock, currentMinilesson, currentLesson);
+    await updateProgressStatsInternally(
+      user.username,
+      land.id,
+      currentBlock,
+      currentMinilesson,
+      currentLesson
+    );
 
     if (currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0)
       await chatController.deleteChatByLocationId(user.username, land.id);
@@ -212,9 +218,12 @@ const getLessonMessageAlt = async (req, res) => {
     if (currentBlock < 2)
       await chatController.saveMessage(user.username, "AI", land.id, result);
 
+    const nextIds = findNextBlockLessonAndMinilesson(land.id, currentLesson, currentMinilesson, currentBlock);
+
     res.status(200).json({
       success: true,
       message: result,
+      nextIds
     });
   } catch (error) {
     console.log(error);
@@ -376,7 +385,13 @@ const getLessonsndMiniLessonsName = async (req, res) => {
   }
 };
 
-async function updateProgressStatsInternally(username, locationId, blockId, minilessonId, lessonId) {
+async function updateProgressStatsInternally(
+  username,
+  locationId,
+  blockId,
+  minilessonId,
+  lessonId
+) {
   // Mock request object
   const req = {
     params: {
@@ -387,8 +402,8 @@ async function updateProgressStatsInternally(username, locationId, blockId, mini
         locationId: locationId,
         blockId: blockId,
         minilessonId: minilessonId,
-        lessonId: lessonId
-      }
+        lessonId: lessonId,
+      },
     },
   };
 
@@ -396,7 +411,7 @@ async function updateProgressStatsInternally(username, locationId, blockId, mini
   const res = {
     status: function (statusCode) {
       console.log("Status:", statusCode);
-      return this; 
+      return this;
     },
     json: function (data) {
       console.log("Data:", data);
@@ -407,7 +422,74 @@ async function updateProgressStatsInternally(username, locationId, blockId, mini
   await updateStats(req, res);
 }
 
-//function findNextBlockLessonAndMinilesson(locationId, )
+function findNextBlockLessonAndMinilesson(
+  locationId,
+  lessonId,
+  minilessonId,
+  blockId
+) {
+  const dataPath = path.join(
+    __dirname,
+    "..",
+    "langchain",
+    "docs",
+    "locations.json"
+  );
+
+  const data = readFileSync(dataPath);
+  const jsonObject = JSON.parse(data);
+
+  const locationName = jsonObject.find((obj) => obj.id === locationId).name;
+
+  const locationDataPath = path.join(
+    __dirname,
+    "..",
+    "langchain",
+    "docs",
+    locationName + ".json"
+  );
+
+  const locationData = readFileSync(locationDataPath);
+  const locationJsonObject = JSON.parse(locationData);
+
+  let newLessonId = 0;
+  let newMinilessonId = 0;
+  let newBlockId = (blockId + 1) % 3;
+
+  if (newBlockId === 0) {
+    if (lessonId >= locationJsonObject.length - 1) {
+      return {
+        lessonId: null,
+        minilessonId: null,
+        blockId: null,
+      };
+    }
+
+    return {
+      lessonId,
+      minilessonId,
+      blockId: 0,
+    };
+  }
+
+  locationJsonObject.forEach((lesson, index) => {
+    if (index == lessonId) {
+      if (minilessonId >= lesson.mini_lessons.length - 1) {
+        newLessonId = lessonId + 1;
+        newMinilessonId = 0;
+      } else {
+        newLessonId = minilessonId + 1;
+        newMinilessonId = minilessonId;
+      }
+    }
+  });
+
+  return {
+    lessonId: newLessonId,
+    minilessonId: newMinilessonId,
+    blockId: newBlockId,
+  };
+}
 
 module.exports = {
   getLessonMessageLoremIpsum,
