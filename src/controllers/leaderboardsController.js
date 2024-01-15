@@ -53,7 +53,7 @@ const getLeaderboardByUser = async (req, res) => {
     }
 
     const userAge = getAge(user.dateOfBirth);
-    
+
     const generalUserStats = await getUsersWithStats(
       undefined,
       undefined,
@@ -70,13 +70,22 @@ const getLeaderboardByUser = async (req, res) => {
     const ageRank = findUserRank(ageUserStats, username);
     const countryRank = findUserRank(countryUserStats, username);
 
+    let totalPoints = 0;
+
+    ageUserStats.forEach((user) => {
+      if (user.username === username) {
+        totalPoints = user.totalPoints;
+      }
+    });
+
     const userData = {
       username,
       age: userAge,
       country: user.countryOfOrigin,
+      totalPoints,
       generalRank,
       ageRank,
-      countryRank
+      countryRank,
     };
 
     res.status(200).json({ success: true, userData });
