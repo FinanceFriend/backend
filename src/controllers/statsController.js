@@ -3,17 +3,17 @@ const path = require("path");
 const { readFileSync } = require("fs");
 const Stats = require("../models/stats");
 
+const initialProgress = new Array(5).fill({
+  blockId: 0,
+  minilessonId: 0,
+});
+
 const initializeStats = async (username) => {
   try {
-    const initialProgress = new Array(6).fill({
-      lastBlockId: 0,
-      lastMinilessonId: 0,
-    });
-
     const newStats = new Stats({
       username,
-      completionPercentages: new Array(6).fill(0),
-      points: new Array(6).fill(0),
+      completionPercentages: new Array(5).fill(0),
+      points: new Array(5).fill(0),
       correctAnswers: 0,
       incorrectAnswers: 0,
       progress: initialProgress,
@@ -70,6 +70,7 @@ const updateStats = async (req, res) => {
 
     if (updateDataProgress != null) {
       let progress = userOldStats.progress;
+      if (progress.length == 0) progress = initialProgress;
       progress[updateDataProgress.locationId] = {
         blockId: updateDataProgress.blockId,
         minilessonId: updateDataProgress.minilessonId,
@@ -197,8 +198,7 @@ function calculateProgress(blocks, lastBlockId, lastMinilessonId) {
     }
   });
 
-  if (completedMinilessons === 1)
-    completedMinilessons = 0;
+  if (completedMinilessons === 1) completedMinilessons = 0;
 
   if (completedMinilessons > totalMinilessons)
     completedMinilessons = totalMinilessons;

@@ -11,6 +11,7 @@
   - `password`: String (required) - The user's password.
   - `dateOfBirth`: Date (required) - The user's date of birth.
   - `countryOfOrigin`: String (required) - The user's country of origin.
+  - `preferredLanguage`: String (required) - The user's preferred language.
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
   - `message`: String - A message describing the outcome.

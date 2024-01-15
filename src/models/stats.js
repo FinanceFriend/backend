@@ -42,7 +42,7 @@ const statsSchema = new mongoose.Schema({
         minilessonId: { type: Number, required: true },
       },
     ],
-    required: true,
+    required: true
   },
 });
 

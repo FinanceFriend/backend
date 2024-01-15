@@ -38,9 +38,9 @@
 
 ## 2. Get Lesson Message
 
-- **Endpoint**: `/api/langchain/lessonMessageAlt`
+- **Endpoint**: `/api/langchain/lessonMessage`
 - **Method**: `POST`
-- **Description**: Generates a message for the current mini-lesson or a quiz based on the user's progress. For lesson messages, it includes a theoretical explanation and a playful scenario. For quiz messages, it generates a 5-question quiz based on the mini-lesson content, formatted as JSON objects with question details. This approach is aimed at enhancing the learning experience in a fun, interactive way, using the OpenAI language model.
+- **Description**: Generates a message for the current mini-lesson or a quiz based on the user's progress. For lesson messages, it includes a theoretical explanation and a playful scenario. For quiz messages, it generates a 5-question quiz based on the mini-lesson content, formatted as JSON objects with question details. This approach is aimed at enhancing the learning experience in a fun, interactive way, using the OpenAI language model. This call automatically updates user progress.
 - **Request Body**:
 
   The request body is a JSON object with the following structure:
