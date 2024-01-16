@@ -342,9 +342,14 @@ const getQuestionEvaluation = async (req, res) => {
       correctAnswerExample,
     ]);
 
+    const cleanedResult = result.replace(/\\r\\n/g, '');  // Remove escaped \r\n
+
+    // Convert the cleaned string to a JavaScript object
+    const parsedResult = JSON.parse(cleanedResult);
+
     res.status(200).json({
       success: true,
-      message: result,
+      message: parsedResult,
     });
   } catch (error) {
     res.status(500).json({
