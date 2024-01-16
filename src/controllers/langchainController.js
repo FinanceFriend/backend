@@ -219,12 +219,17 @@ const getLessonMessageAlt = async (req, res) => {
     if (currentBlock < 2)
       await chatController.saveMessage(user.username, "AI", land.id, result);
 
-    const nextIds = findNextBlockLessonAndMinilesson(land.name, currentLesson, currentMinilesson, currentBlock);
+    const nextIds = findNextBlockLessonAndMinilesson(
+      land.name,
+      currentLesson,
+      currentMinilesson,
+      currentBlock
+    );
 
     res.status(200).json({
       success: true,
       message: result,
-      nextIds
+      nextIds,
     });
   } catch (error) {
     console.log(error);
@@ -301,16 +306,15 @@ const getFreeformMessage = async (req, res) => {
 
     let result;
     if (type == "image") {
-        result = await executePython(imageGeneratorPath, [message]);
+      result = await executePython(imageGeneratorPath, [message]);
     } else {
-        result = await executePython(freeformPath, [
-            user.username,
-            userAge,
-            user.preferredLanguage,
-            message,
-            historyContext,
+      result = await executePython(freeformPath, [
+        user.username,
+        userAge,
+        user.preferredLanguage,
+        message,
+        historyContext,
       ]);
-      
     }
 
     await chatController.saveMessage(user.username, "AI", landId, result);
@@ -320,7 +324,7 @@ const getFreeformMessage = async (req, res) => {
       message: result,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       success: false,
       error: error.message,
@@ -415,7 +419,7 @@ async function updateProgressStatsInternally(
         blockId: blockId,
         minilessonId: minilessonId,
         lessonId: lessonId,
-        locationName: locationName
+        locationName: locationName,
       },
     },
   };
@@ -452,37 +456,26 @@ function findNextBlockLessonAndMinilesson(
   const locationData = readFileSync(locationDataPath);
   const locationJsonObject = JSON.parse(locationData);
 
-  let newLessonId = 0;
-  let newMinilessonId = 0;
+  let newLessonId = lessonId;
+  let newMinilessonId = minilessonId;
   let newBlockId = (blockId + 1) % 3;
 
   if (newBlockId === 0) {
-    if (lessonId >= locationJsonObject.length - 1) {
-      return {
-        lessonId: null,
-        minilessonId: null,
-        blockId: null,
-      };
+    if (
+      lessonId >= locationJsonObject.length - 1 &&
+      minilessonId >= locationJsonObject[lessonId].mini_lessons.length - 1
+    ) {
+      return { lessonId: null, minilessonId: null, blockId: null };
     }
 
-    return {
-      lessonId,
-      minilessonId,
-      blockId: 0,
-    };
+    let currentLesson = locationJsonObject[lessonId];
+    if (minilessonId >= currentLesson.mini_lessons.length - 1) {
+      newLessonId = lessonId + 1;
+      newMinilessonId = 0;
+    } else {
+      newMinilessonId = minilessonId + 1;
+    }
   }
-
-  locationJsonObject.forEach((lesson, index) => {
-    if (index == lessonId) {
-      if (minilessonId >= lesson.mini_lessons.length - 1) {
-        newLessonId = lessonId + 1;
-        newMinilessonId = 0;
-      } else {
-        newLessonId = minilessonId + 1;
-        newMinilessonId = minilessonId;
-      }
-    }
-  });
 
   return {
     lessonId: newLessonId,
