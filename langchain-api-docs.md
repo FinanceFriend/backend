@@ -109,7 +109,7 @@
 
 ## 4. Get Freeform Chat Message
 
-- **Endpoint**: `/api/langchain/freeformChat`
+- **Endpoint**: `/api/langchain/freeformUserMessage`
 - **Method**: `POST`
 - **Description**: This endpoint enables a freeform chat experience in the "Imagination Jungle" module, where users interact with Cleo the Chameleon. It supports both text-based conversations and image generation based on user input. For text chats, Cleo offers educational and respectful responses. Inappropriate or offensive content triggers a response emphasizing positive communication. If the user opts for image generation, the endpoint returns an image URL based on the provided message.
 - **Request Body**:
@@ -120,14 +120,10 @@
     "user": {
       "username": "string",
       "dateOfBirth": "string",
-      "preferredLanguage": "string",
-      "message": "string"
+      "preferredLanguage": "string"
     },
-    "land": {
-      "name": "Imagination Jungle",
-      "friendName": "Cleo",
-      "friendType": "Chameleon"
-    },
+    "landId": 5,
+    "message": "string",
     "type": "text" // or "image" to generate an image response
   }
 - **Response**:
@@ -153,7 +149,7 @@ This endpoint corresponds to the `getFreeformMessage` function in the backend. I
   - `location_id`: Integer (required)
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
-  - `message`: String - A message we want.
+  - `messages`: List of chat messages in which each message contains sender (User or AI) and content.
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
@@ -166,7 +162,7 @@ This endpoint corresponds to the `getFreeformMessage` function in the backend. I
   - `locationName`: String (required)
 - **Response**:
   - `success`: Boolean - Indicates if the operation was successful.
-  - `message`: String - A message we want.
+  - `message`: List of lessons in which each lesson containts its name and array of mini-lessons names.
 - **Error Handling**:
   - Returns `500 Internal Server Error` for any server-side errors.
 
