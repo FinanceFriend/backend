@@ -192,6 +192,7 @@ const getLessonMessageAlt = async (req, res) => {
 
     await updateProgressStatsInternally(
       user.username,
+      land.name,
       land.id,
       currentBlock,
       currentMinilesson,
@@ -218,7 +219,7 @@ const getLessonMessageAlt = async (req, res) => {
     if (currentBlock < 2)
       await chatController.saveMessage(user.username, "AI", land.id, result);
 
-    const nextIds = findNextBlockLessonAndMinilesson(land.id, currentLesson, currentMinilesson, currentBlock);
+    const nextIds = findNextBlockLessonAndMinilesson(land.name, currentLesson, currentMinilesson, currentBlock);
 
     res.status(200).json({
       success: true,
@@ -392,6 +393,7 @@ const getLessonsndMiniLessonsName = async (req, res) => {
 
 async function updateProgressStatsInternally(
   username,
+  locationName,
   locationId,
   blockId,
   minilessonId,
@@ -408,6 +410,7 @@ async function updateProgressStatsInternally(
         blockId: blockId,
         minilessonId: minilessonId,
         lessonId: lessonId,
+        locationName: locationName
       },
     },
   };
@@ -428,24 +431,11 @@ async function updateProgressStatsInternally(
 }
 
 function findNextBlockLessonAndMinilesson(
-  locationId,
+  locationName,
   lessonId,
   minilessonId,
   blockId
 ) {
-  const dataPath = path.join(
-    __dirname,
-    "..",
-    "langchain",
-    "docs",
-    "locations.json"
-  );
-
-  const data = readFileSync(dataPath);
-  const jsonObject = JSON.parse(data);
-
-  const locationName = jsonObject.find((obj) => obj.id === locationId).name;
-
   const locationDataPath = path.join(
     __dirname,
     "..",

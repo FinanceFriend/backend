@@ -142,6 +142,7 @@
   - `correctAnswers`: Number (optional) - The amount to increase total correctAnswers of a user.
   - `incorrectAnswers`: Number (optional) - The amount to increase total incorrectAnswers of a user.
   - `progress`: Object (optional) - An object containing the progress update. When this field is updated, the completion percentages are automatically recalculated and updated. The object should have the following structure:
+    - `locationName`: String (required for progress update) - The name of the location.
     - `locationId`: Number (required for progress update) - The index in the progress array to update.
     - `lessonId`: Number (required for progress update) - The new lesson ID to set.
     - `minilessonId`: Number (required for progress update) - The new minilesson ID to set.

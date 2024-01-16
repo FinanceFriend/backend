@@ -80,7 +80,7 @@ const updateStats = async (req, res) => {
       updateData.progress = progress;
       updateData.completionPercentages = userOldStats.completionPercentages;
       updateData.completionPercentages[updateDataProgress.locationId] =
-      updateCompletionPercentage(updateDataProgress);
+      updateCompletionPercentage(updateDataProgress, updateDataProgress.locationName);
     }
 
     if (updateData.correctAnswers) {
@@ -152,22 +152,7 @@ function createStatsResponse(stats) {
   };
 }
 
-function updateCompletionPercentage(updateDataProgress) {
-  const dataPath = path.join(
-    __dirname,
-    "..",
-    "langchain",
-    "docs",
-    "locations.json"
-  );
-
-  const data = readFileSync(dataPath);
-  const jsonObject = JSON.parse(data);
-
-  const locationName = jsonObject.find(
-    (obj) => obj.id === updateDataProgress.locationId
-  ).name;
-
+function updateCompletionPercentage(updateDataProgress, locationName) {
   const locationDataPath = path.join(
     __dirname,
     "..",
