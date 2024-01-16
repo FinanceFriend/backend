@@ -286,35 +286,40 @@ const getAnswerToUserMessage = async (req, res) => {
 const getFreeformMessage = async (req, res) => {
   try {
     const user = req.body.user;
-    const land = req.body.land;
+    const landId = req.body.landId;
     const message = req.body.message;
     const type = req.body.type;
 
     const userAge = dateCalc.getAge(user.dateOfBirth);
     const historyContext = await chatController.getHistoryMessages(
       user.username,
-      land.id
+      landId
     );
 
+    await chatController.saveMessage(user.username, "User", landId, message);
+
+    let result;
     if (type == "image") {
-      const result = await executePython(imageGeneratorPath, [message]);
+        result = await executePython(imageGeneratorPath, [message]);
     } else {
-      await chatController.saveMessage(user.username, "User", land.id, message);
-      const result = await executePython(freeformPath, [
-        user.username,
-        userAge,
-        user.preferredLanguage,
-        message,
-        historyContext,
+        result = await executePython(freeformPath, [
+            user.username,
+            userAge,
+            user.preferredLanguage,
+            message,
+            historyContext,
       ]);
-      await chatController.saveMessage(user.username, "AI", land.id, result);
+      
     }
+
+    await chatController.saveMessage(user.username, "AI", landId, result);
 
     res.status(200).json({
       success: true,
       message: result,
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       success: false,
       error: error.message,
