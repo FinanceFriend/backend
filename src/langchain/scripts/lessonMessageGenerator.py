@@ -1,7 +1,7 @@
 import os
+from langchain.llms.openai import OpenAI
 #from dotenv import load_dotenv
 import openai
-from langchain.llms.openai import OpenAI
 from langchain.prompts import PromptTemplate
 import sys, json
 
