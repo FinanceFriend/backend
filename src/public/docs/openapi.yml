@@ -1,0 +1,1113 @@
+openapi: 3.1.0
+
+info:
+  title: FinanceFriend
+  version: 1.0.0
+  description: API documentation for user registration, authentication, user profile management and langchain functionality.
+
+paths:
+  /api/register:
+    post:
+      tags:
+        - User
+      summary: Create a new user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    examples:
+                      - User created successfully
+                  user:
+                    $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Username/Email already exists
+        '500':
+          description: Internal Server Error
+
+  /api/login:
+    post:
+      tags:
+        - User
+      summary: User authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    examples:
+                      - Login successful
+                  user:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                      email:
+                        type: string
+                    
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Both fields are required
+                      - User not found
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Invalid credentials
+        '500':
+          description: Internal Server Error
+
+  /api/user/{username}:
+    get:
+      tags:
+        - User
+      summary: Fetch user profile by username
+      parameters:
+        - $ref: '#/components/parameters/UsernameParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - User not found
+        '500':
+          description: Internal Server Error
+    
+    put:
+      tags:
+        - User
+      summary: Update user information
+      parameters:
+        - $ref: '#/components/parameters/UsernameParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    examples:
+                      - User updated successfully
+                  user:
+                    $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Email already exists
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - User not found
+        '500':
+          description: Internal Server Error
+
+    delete:
+      tags:
+        - User
+      summary: Delete user account
+      parameters:
+        - $ref: '#/components/parameters/UsernameParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    examples:
+                      - User deleted successfully
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - User not found
+        '500':
+          description: Internal Server Error
+
+  /api/stats/{username}:
+    get:
+      tags:
+        - User
+      summary: Fetch user statistics
+      parameters:
+        - $ref: '#/components/parameters/UsernameParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatsResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Username already exists
+        '500':
+          description: Internal Server Error
+
+    put:
+      tags:
+        - User
+      summary: Update user statistics
+      parameters:
+        - $ref: '#/components/parameters/UsernameParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserStatsRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Username already exists
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - Username already exists
+        '500':
+          description: Internal Server Error
+
+  /api/users:
+    get:
+      tags:
+        - User
+      summary: Retrieve a list of all users
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - User is not authorized
+        '500':
+          description: Internal Server Error
+
+  /api/leaderboard:
+    get:
+      tags:
+        - User
+      summary: Get general leaderboard
+      parameters:
+        - $ref: '#/components/parameters/AgeQueryParam'
+        - $ref: '#/components/parameters/CountryQueryParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardResponse'
+        '500':
+          description: Internal Server Error
+
+  /api/leaderboard/{username}:
+    get:
+      tags:
+        - User
+      summary: Get user-specific leaderboard information
+      parameters:
+        - $ref: '#/components/parameters/UsernameParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardUserResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - false
+                  message:
+                    type: string
+                    examples:
+                      - User not found
+        '500':
+          description: Internal Server Error
+
+  /api/langchain/welcome:
+    post:
+      tags:
+        - Langchain
+      summary: Get personalized welcome message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WelcomeMessageRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    description: The customized welcome message
+        '500':
+          description: Internal Server Error
+
+  /api/langchain/lessonMessage:
+    post:
+      tags:
+        - Langchain
+      summary: Get lesson message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonMessageRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    description: The lesson message
+                  nextIds:
+                    items:
+                      lessonId:
+                        type: Integer
+                        examples:
+                          - 0
+                      minilessonId:
+                        type: Integer
+                        examples:
+                          - 0
+                      blockId:
+                        type: Integer
+                        examples:
+                          - 0
+        '500':
+          description: Internal Server Error
+
+  /api/langchain/userMessage:
+    post:
+      tags:
+        - Langchain
+      summary: Save and respond to user message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMessageRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    description: AI answer
+        '500':
+          description: Internal Server Error
+
+  /api/langchain/freeformUserMessage:
+    post:
+      tags:
+        - Langchain
+      summary: Freeform chat experience with Cleo the Chameleon
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FreeformUserMessageRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: string
+                    description: Depending on the type parameter in the request, this can be either response from Cleo the Chameleon for text-based chats or a URL to the generated image for image requests.
+        '500':
+          description: Internal Server Error
+
+  /api/chat:
+    get:
+      tags:
+        - Langchain
+      summary: Retrieve user chat for a location
+      parameters:
+        - $ref: '#/components/parameters/UsernameQueryParam'
+        - $ref: '#/components/parameters/LocationIdQueryParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  messages:
+                    type: array
+                    format: list
+                    description: List of chat messages in which each message contains sender (User or AI) and content.
+        '500':
+          description: Internal Server Error
+
+  /api/langchain/lessonNames:
+    get:
+      tags:
+        - Langchain
+      summary: Retrieve lessons and mini-lessons names for a location
+      parameters:
+        - $ref: '#/components/parameters/LocationNameQueryParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: array
+                    format: list
+                    items:
+                      type: object
+                      properties:
+                        lessonName:
+                          type: string
+                        miniLessonsNames:
+                          type: array
+                          items:
+                            type: string
+        '500':
+          description: Internal Server Error
+
+  /api/langchain/evaluateQuestion:
+    post:
+      tags:
+        - Langchain
+      summary: Evaluate user answer to a question
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluateQuestionRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    examples:
+                      - true
+                  message:
+                    type: object
+                    properties:
+                      evaluation:
+                        type: string
+                        description:  Indicates the correctness of the user's answer ('correct' or 'incorrect').
+                      explanation:
+                        type: string
+                        description: Provides a rationale for the evaluation of the user's answer.
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        dateOfBirth:
+          type: string
+        countryOfOrigin:
+          type: string
+        preferredLanguage:
+          type: string
+      required:
+        - username
+        - email
+        - password
+        - dateOfBirth
+        - countryOfOrigin
+        - preferredLanguage
+
+    LoginRequest:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+      required:
+        - login
+        - password
+
+    UserResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        dateOfBirth:
+          type: string
+        countryOfOrigin:
+          type: string
+        preferredLanguage:
+          type: string
+
+    UserProfileResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+            email:
+              type: string
+            dateOfBirth:
+              type: string
+            countryOfOrigin:
+              type: string
+            preferredLanguage:
+              type: string
+
+    UserListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        users:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+              email:
+                type: string
+              dateOfBirth:
+                type: string
+              countryOfOrigin:
+                type: string
+              preferredLanguage:
+                type: string
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        newUsername:
+          type: string
+        email:
+          type: string
+        dateOfBirth:
+          type: string
+        countryOfOrigin:
+          type: string
+
+    UserStatsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        statsResponse:
+          type: object
+          properties:
+            username:
+              type: string
+            completionPercentages:
+              type: array
+            points:
+              type: array
+            correctAnswers:
+              type: integer
+            incorrectAnswers:
+              type: integer
+            totalCompletion:
+              type: integer
+            totalPoints:
+              type: integer
+            correctAnswersPercentage:
+              type: integer
+            progress:
+              type: array
+              items:
+                type: object
+                properties:
+                  lessonId:
+                    type: integer
+                  minilessonId:
+                    type: integer
+                  blockId:
+                    type: integer
+                  _id:
+                    type: string
+
+    UpdateUserStatsRequest:
+      type: object
+      properties:
+        newPoints:
+          type: number
+          description: The new points to be added to the user's total.
+        locationId:
+          type: number
+          description: Identifier of the location where newPoints are to be increased.
+        correctAnswers:
+          type: number
+          description: The amount to increase the total correctAnswers of a user.
+        incorrectAnswers:
+          type: number
+          description: The amount to increase the total incorrectAnswers of a user.
+        progress:
+          type: object
+          properties:
+            locationName:
+              type: string
+              description: The name of the location for progress update.
+            locationId:
+              type: number
+              description: The index in the progress array to update.
+            lessonId:
+              type: number
+              description: The new lesson ID to set.
+            minilessonId:
+              type: number
+              description: The new minilesson ID to set.
+            blockId:
+              type: number
+              description: The new block ID to set.
+    
+    LeaderboardResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indicates if the operation was successful.
+        leaderboard:
+          type: array
+          description: List of user rankings.
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+                description: The user's username.
+              countryOfOrigin:
+                type: string
+                description: The user's country of origin.
+              age:
+                type: number
+                description: The user's age.
+              totalPoints:
+                type: number
+                description: The total points accumulated by the user.
+              rank:
+                type: number
+                description: The user's rank in the leaderboard. Users with the same number of points share the same rank.
+    
+    LeaderboardUserResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indicates if the operation was successful.
+        userData:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The user's username.
+            age:
+              type: number
+              description: The user's age.
+            country:
+              type: string
+              description: The user's country of origin.
+            totalPoints:
+              type: number
+              description: The total points accumulated by the user.
+            generalRank:
+              type: number
+              description: The user's rank in the general leaderboard.
+            ageRank:
+              type: number
+              description: The user's rank in the age-specific leaderboard.
+            countryRank:
+              type: number
+              description: The user's rank in the country-specific leaderboard
+
+    WelcomeMessageRequest:
+      type: object
+      properties:
+        currentBlock:
+          type: integer
+          description: The current block in the module.
+        currentLesson:
+          type: integer
+          description: The current lesson in the module.
+        currentMinilesson:
+          type: integer
+          description: The current minilesson in the module.
+        land:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the land.
+            name:
+              type: string
+              description: The name of the land.
+            friendName:
+              type: string
+              description: The name of the friend in the land.
+            friendType:
+              type: string
+              description: The type of friend in the land.
+            moduleName:
+              type: string
+              description: The name of the module in the land.
+            moduleDecriptionKids:
+              type: string
+              description: The module description for kids in the land.
+            moduleDescriptionParents:
+              type: string
+              description: The module description for parents in the land.
+          description: Details about the land.
+        progress:
+          type: integer
+          description: The progress in the module.
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The username of the user.
+            dateOfBirth:
+              type: string
+              description: The date of birth of the user.
+            preferredLanguage:
+              type: string
+              description: The preferred language of the user.
+          description: Details about the user.
+
+    LessonMessageRequest:
+      type: object
+      properties:
+        currentBlock:
+          type: integer
+          description: The current block in the module.
+        currentLesson:
+          type: integer
+          description: The current lesson in the module.
+        currentMinilesson:
+          type: integer
+          description: The current minilesson in the module.
+        land:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the land.
+            name:
+              type: string
+              description: The name of the land.
+            friendName:
+              type: string
+              description: The name of the friend in the land.
+            friendType:
+              type: string
+              description: The type of friend in the land.
+            moduleName:
+              type: string
+              description: The name of the module in the land.
+          description: Details about the land.
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The username of the user.
+            dateOfBirth:
+              type: string
+              description: The date of birth of the user.
+            preferredLanguage:
+              type: string
+              description: The preferred language of the user.
+          description: Details about the user.
+
+    UserMessageRequest:
+      type: object
+      properties:
+        currentLesson:
+          type: integer
+          description: The current lesson in the module.
+        currentMinilesson:
+          type: integer
+          description: The current minilesson in the module.
+        land:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the land.
+            name:
+              type: string
+              description: The name of the land.
+            friendName:
+              type: string
+              description: The name of the friend in the land.
+            friendType:
+              type: string
+              description: The type of friend in the land.
+            moduleName:
+              type: string
+              description: The name of the module in the land.
+          description: Details about the land.
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The username of the user.
+            dateOfBirth:
+              type: string
+              description: The date of birth of the user.
+            preferredLanguage:
+              type: string
+              description: The preferred language of the user.
+          description: Details about the user.
+        message:
+          type: string
+          description: The message sent by the user.
+
+    FreeformUserMessageRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        landId:
+          type: integer
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+            - text
+            - image
+      required:
+        - user
+        - landId
+        - message
+        - type
+
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        dateOfBirth:
+          type: string
+        preferredLanguage:
+          type: string
+    
+    EvaluateQuestionRequest:
+      type: object
+      properties:
+        user:
+          items:
+            username:
+              type: string
+            preferredLanguage:
+              type:string
+        question:
+          type: string
+        userAnswer:
+          type: string
+        correctAnswerExample:
+          type: string
+    
+  parameters:
+    UsernameParam:
+      name: username
+      in: path
+      description: The username of the user
+      required: true
+      schema:
+        type: string
+      example: john_doe
+
+    AgeQueryParam:
+      name: age
+      in: query
+      description: Optional parameter to filter results by age.
+      required: false
+      schema:
+        type: integer
+        format: int32
+
+    CountryQueryParam:
+      name: country
+      in: query
+      description: Optional parameter to filter results by country.
+      required: false
+      schema:
+        type: string
+
+    UsernameQueryParam:
+      name: username
+      in: query
+      description: The username of the user.
+      required: true
+      schema:
+        type: string
+    
+    LocationIdQueryParam:
+      name: location_id
+      in: query
+      description: The ID of the location.
+      required: true
+      schema:
+        type: integer
+
+    LocationNameQueryParam:
+      name: locationName
+      in: query
+      description: The name of the location.
+      required: true
+      schema:
+        type: string

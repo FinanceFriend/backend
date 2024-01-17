@@ -79,6 +79,6 @@ final_prompt = prompt.format(
 )
 
 output = llm(final_prompt)
-print(output)
+print(json.dumps(output))
 
 sys.stdout.flush()
