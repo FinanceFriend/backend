@@ -30,5 +30,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 //OPENAPI specification
-const swaggerDocument = YAML.load(fs.readFileSync('./src/public/docs/openapi.yml', 'utf8'));
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+// const swaggerDocument = YAML.load(fs.readFileSync('./src/public/docs/openapi.yml', 'utf8'));
+// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
