@@ -1,11 +1,11 @@
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import openai
 from langchain.llms.openai import OpenAI
 from langchain.prompts import PromptTemplate
 import sys, json
 
-load_dotenv("../../../.env")
+#load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 llm = OpenAI(temperature=0.2, model_name = 'gpt-3.5-turbo-instruct', max_tokens=1024)
