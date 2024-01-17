@@ -7,6 +7,9 @@ const statsRoutes = require('./routes/statsRoutes');
 const leaderboardsRoutes = require('./routes/leaderboardsRoutes');
 const setupMiddleware = require('./config/middleware');
 const cors = require('cors');
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('js-yaml');
+const fs = require('fs')
 require('dotenv').config();
 
 connectDB();
@@ -25,3 +28,7 @@ app.use('/api', leaderboardsRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+//OPENAPI specification
+const swaggerDocument = YAML.load(fs.readFileSync('./src/public/docs/openapi.yml', 'utf8'));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
