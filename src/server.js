@@ -9,6 +9,7 @@ const setupMiddleware = require('./config/middleware');
 const cors = require('cors');
 const fs = require('fs')
 const path = require('path');
+const marked = require('marked');
 require('dotenv').config();
 
 connectDB();
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
             res.status(500).send('Error reading the Markdown file.');
             return;
         }
-        const htmlContent = marked(data);
+        const htmlContent = marked.parse(data);
         res.send(htmlContent);
     });
 });
