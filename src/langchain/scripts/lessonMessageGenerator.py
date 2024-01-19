@@ -25,13 +25,14 @@ block.append(f"""
     We are just starting to talk about this part of the lesson, so first thing you should explain to user is: 
     
     Introduction and Explanation
+    - WRITE IN {user_language}
     - Playfully explain the mini-lesson's content from theoretical standpoint, ensuring it's understandable and engaging.
     - Incorporate elements of {location_name} and interactions with {friend_name} the {friend_type} or related characters for an immersive experience but don't introduce them.
 """)
 block.append(f"""
 
     Let's say that student is already familiar with the concept of the current minilesson. Continue your conversation with the following: 
-
+    - WRITE IN {user_language}
     - Create an imaginative scenario in {location_name} where the mini-lesson content is applied. This scenario is entirely crafted by you, involving your own character and location. It is not a question, so don't ask the student anything. IT IS A STORY.
     - The scenario should be playful and relevant, encouraging interactive learning and problem-solving.
 """)
@@ -55,22 +56,22 @@ current_block = block[current_block_ind]
 
 templateText = """
 
-    You are responding to a {user_age}-year-old and WRITE IN {user_language}.
-
-    You are teaching children about finance and {module_name}.
+    You are responding to a {user_age}-year-old and WRITE IN {user_language}. You are teaching children about finance and {module_name}.
 
     Current mini-lesson is: {mini_lesson_name} and it is a part of {lesson_name}. Learning outcomes of this mini-lesson are: {mini_lesson_goal}
     
     {current_block}
 
-    Note: Directly provide an explanation of the mini-lesson content without introductory greetings or welcoming phrases. The response should be straightforward and focused on the subject matter.
-
+    Always use currency as EURO.
+    Please ensure that the response does not include any greetings or welcoming phrases. Always directly provide an explanation of the mini-lesson content. The response should be straightforward and focused on the subject of the mini-lesson.
 """
+
+
 
 prompt = PromptTemplate(
     input_variables=["lesson_name", "mini_lesson_name", "mini_lesson_goal", "module_name", "current_block", "user_age", "user_language"],
     template= templateText
-)
+) + "Avoid including any greetings or welcoming phrases in the response."
 
 final_prompt = prompt.format(
     lesson_name=lesson_name,
@@ -79,7 +80,7 @@ final_prompt = prompt.format(
     module_name=module_name,
     current_block=current_block,
     user_age=user_age,
-    user_language=user_language
+    user_language=user_language.upper()
 )
 
 output = llm(final_prompt)
