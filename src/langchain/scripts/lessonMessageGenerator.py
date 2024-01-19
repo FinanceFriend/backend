@@ -62,7 +62,7 @@ templateText = """
     
     {current_block}
 
-    Always use currency as EURO.
+    Always denote currency exclusively in Euros.
     Please ensure that the response does not include any greetings or welcoming phrases. Always directly provide an explanation of the mini-lesson content. The response should be straightforward and focused on the subject of the mini-lesson.
 """
 
