@@ -35,8 +35,6 @@ quiz_prompt_template = """
     {userAnswer}
     Be strict. 
 
-    {format_instructions}
-
     Example of a correct answer: {correctAnswerExample}
 
     Questions and answers are written in {userLanguage}. Use {userLanguage} in evaluation JSON values. Keep the key names as they are. Do not print anything else.
@@ -46,23 +44,20 @@ quiz_prompt_template = """
     Present the final output as a JSON object.
 """
 
-format_instructions = output_parser.get_format_instructions()
 
 prompt = PromptTemplate(
     input_variables=["question", "userAnswer", "userLanguage", "correctAnswerExample"],
-    template=quiz_prompt_template,
-    partial_variables={"format_instructions": format_instructions}
+    template=quiz_prompt_template
 )
 
-chain = prompt | llm | output_parser
+final_prompt = prompt.format(
+    question=question,
+    userAnswer=userAnswer,
+    userLanguage=userLanguage,
+    correctAnswerExample=correctAnswerExample
+)
 
-result = chain.invoke({
-    "question": question,
-    "userAnswer": userAnswer,
-    "userLanguage": userLanguage,
-    "correctAnswerExample": correctAnswerExample
-})
-
-print(json.dumps(result))
+output = llm(final_prompt)
+print(json.dumps(output))
 
 sys.stdout.flush()
