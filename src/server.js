@@ -7,9 +7,9 @@ const statsRoutes = require('./routes/statsRoutes');
 const leaderboardsRoutes = require('./routes/leaderboardsRoutes');
 const setupMiddleware = require('./config/middleware');
 const cors = require('cors');
-const swaggerUI = require('swagger-ui-express');
-const YAML = require('js-yaml');
 const fs = require('fs')
+const path = require('path');
+const marked = require('marked');
 require('dotenv').config();
 
 connectDB();
@@ -26,9 +26,17 @@ app.use('/api/chat', chatRoutes);
 app.use('/api', statsRoutes);
 app.use('/api', leaderboardsRoutes);
 
+const filePath = path.join(__dirname, '..', 'api-docs.md');
+app.get('/', (req, res) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('Error reading the Markdown file.');
+            return;
+        }
+        const htmlContent = marked.parse(data);
+        res.send(htmlContent);
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-//OPENAPI specification
-// const swaggerDocument = YAML.load(fs.readFileSync('./src/public/docs/openapi.yml', 'utf8'));
-// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
