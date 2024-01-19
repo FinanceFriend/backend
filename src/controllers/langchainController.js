@@ -149,7 +149,7 @@ const getWelcomeMessage = async (req, res) => {
     const script =
       land == "Imagination Jungle" ? freeformWelcomePath : welcomePath;
 
-    const result = await executePython(script, [
+    let result = await executePython(script, [
       //"../scripts/welcomeMessageGenerator.py"
       user.username,
       land.name,
@@ -165,6 +165,8 @@ const getWelcomeMessage = async (req, res) => {
       userAge,
       user.preferredLanguage,
     ]);
+
+    result = JSON.parse(result);
 
     res.status(200).json({
       success: true,
@@ -204,7 +206,7 @@ const getLessonMessageAlt = async (req, res) => {
 
     // script = parseInt(currentBlock) == 3 ? "../scripts/quizMessageGenerator.py" :  "../scripts/lessonMessageGenerator.py"
     script = parseInt(currentBlock) == 2 ? quizPath : lessonPath;
-    const result = await executePython(script, [
+    let result = await executePython(script, [
       land.name,
       land.friendName,
       land.friendType,
@@ -215,6 +217,8 @@ const getLessonMessageAlt = async (req, res) => {
       userAge,
       user.preferredLanguage,
     ]);
+
+    result = JSON.parse(result);
 
     if (currentBlock < 2)
       await chatController.saveMessage(user.username, "AI", land.id, result);
@@ -230,7 +234,7 @@ const getLessonMessageAlt = async (req, res) => {
       success: true,
       message: result,
       nextIds,
-    });
+  });  
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -258,7 +262,7 @@ const getAnswerToUserMessage = async (req, res) => {
 
     await chatController.saveMessage(user.username, "User", land.id, message);
 
-    const result = await executePython(answerUserPath, [
+    let result = await executePython(answerUserPath, [
       user.username,
       land.name,
       land.friendName,
@@ -272,11 +276,13 @@ const getAnswerToUserMessage = async (req, res) => {
       historyContext,
     ]);
 
+    result = JSON.parse(result);
+
     await chatController.saveMessage(user.username, "AI", land.id, result);
 
     res.status(200).json({
       success: true,
-      message: result,
+      message: result
     });
   } catch (error) {
     console.error(error);
