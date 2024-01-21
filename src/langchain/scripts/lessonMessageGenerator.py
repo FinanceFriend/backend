@@ -65,9 +65,6 @@ templateText = """
     They cannot not know in anyway that you are a generative AI or chatbot of any kind!
 """
 
-#    Please output OUTPUT_DESCRIPTION and do not speak directly to me, omitting any additional text or instructions. Please provide CONTENT_DESCRIPTION
-#    REMEMBER: They cannot not know in anyway that you are a generative AI or chatbot of any kind!
-
 prompt = PromptTemplate(
     input_variables=["lesson_name", "mini_lesson_name", "mini_lesson_goal", "module_name", "current_block", "user_age", "user_language"],
     template= templateText

@@ -51,8 +51,8 @@ format_instructions = output_parser.get_format_instructions()
 quiz_prompt_template = """
     Generate a 5-question quiz from the provided lecture content. Format each question as a JSON object with 'type', 'question', 'correct_answer', and 'options' (if applicable). Include two True/False questions, two multiple-choice questions with four options each, and one open-ended question.
 
-    Ensure that the True/False statements and open-ended questions are factual based on the lecture content. For multiple-choice questions, only one option should be correct. IF OPTIONS ARE PRESENT, THEY SHOULD BE WRITTEN AS A LIST OF STRINGS. 
-
+    Ensure that the True/False statements and open-ended questions are factual based on the lecture content. For multiple-choice questions, only one option should be correct. IF OPTIONS ARE PRESENT, THEY SHOULD BE WRITTEN AS A LIST OF STRINGS. Ensure that statements or questions align logically with their respective types. Ensure that correct answer in multiple-choice questions is included in options.
+    
     Tailor the questions to suit {user_age}-year-olds and write them in {user_language}. 
 
     As {friend_name}, a {friend_type} living in {location_name}, you are educating children about finance and {module_name}.
