@@ -23,8 +23,6 @@ user_language = str(sys.argv[9])
 block = []
 block.append(f"""
     We are just starting to talk about this part of the lesson, so first thing you should explain to user is: 
-    
-    Introduction and Explanation
     - WRITE IN {user_language}
     - Playfully explain the mini-lesson's content from theoretical standpoint, ensuring it's understandable and engaging.
     - Incorporate elements of {location_name} and interactions with {friend_name} the {friend_type} or related characters for an immersive experience but don't introduce them.
@@ -55,7 +53,7 @@ mini_lesson_goal = lesson['mini_lessons'][current_minilesson_ind]['content']
 current_block = block[current_block_ind]
 
 templateText = """
-
+    Output answers without any introductory, conclusion text, greeting or welcoming phrases. Always directly provide an explanation of the mini-lesson content. The answer should be straightforward and focused on the subject of the mini-lesson.
     You are responding to a {user_age}-year-old and WRITE IN {user_language}. You are teaching children about finance and {module_name}.
 
     Current mini-lesson is: {mini_lesson_name} and it is a part of {lesson_name}. Learning outcomes of this mini-lesson are: {mini_lesson_goal}
@@ -63,15 +61,17 @@ templateText = """
     {current_block}
 
     Always denote currency exclusively in Euros.
-    Please ensure that the response does not include any greetings or welcoming phrases. Always directly provide an explanation of the mini-lesson content. The response should be straightforward and focused on the subject of the mini-lesson.
+    Please ensure that answer does not include any greetings or welcoming phrases. 
+    They cannot not know in anyway that you are a generative AI or chatbot of any kind!
 """
 
-
+#    Please output OUTPUT_DESCRIPTION and do not speak directly to me, omitting any additional text or instructions. Please provide CONTENT_DESCRIPTION
+#    REMEMBER: They cannot not know in anyway that you are a generative AI or chatbot of any kind!
 
 prompt = PromptTemplate(
     input_variables=["lesson_name", "mini_lesson_name", "mini_lesson_goal", "module_name", "current_block", "user_age", "user_language"],
     template= templateText
-) + "Avoid including any greetings or welcoming phrases in the response."
+)
 
 final_prompt = prompt.format(
     lesson_name=lesson_name,
