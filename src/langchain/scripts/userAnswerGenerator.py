@@ -8,7 +8,7 @@ import sys, json
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(temperature=0.3, model_name = 'gpt-3.5-turbo-instruct', max_tokens=1024)
+llm = OpenAI(temperature=0.3, model_name = 'gpt-4', max_tokens=1024)
 
 username = str(sys.argv[1])
 location_name = str(sys.argv[2])
