@@ -125,11 +125,18 @@ This is a Next.js project bootstrapped with `create-next-app`.
 
 #### Getting Started
 
-1. **Install Necessary npm Dependencies**:
+1. **Set Up Environment Variables**: 
+- Rename the .env.example file to .env in the root of your project.
+- dd your backend API URI and other necessary environment variables. Example:
+  ```
+  NEXT_PUBLIC_API_URL=your_api_uri
+  ```
+
+2. **Install Necessary npm Dependencies**:
 ```npm install --force```
 
 
-2. **Run the Development Server**:
+3. **Run the Development Server**:
 ```npm run dev```
 or 
 ```yarn dev```
