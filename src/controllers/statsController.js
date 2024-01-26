@@ -20,7 +20,8 @@ const initializeStats = async (username) => {
       progress: initialProgress,
     });
 
-    await newStats.save();
+    const updatedStats = await newStats.save();
+    return updatedStats;
   } catch (err) {
     console.error("Error initializing stats:", err);
     throw err;
@@ -80,7 +81,10 @@ const updateStats = async (req, res) => {
       updateData.progress = progress;
       updateData.completionPercentages = userOldStats.completionPercentages;
       updateData.completionPercentages[updateDataProgress.locationId] =
-      updateCompletionPercentage(updateDataProgress, updateDataProgress.locationName);
+        updateCompletionPercentage(
+          updateDataProgress,
+          updateDataProgress.locationName
+        );
     }
 
     if (updateData.correctAnswers) {
@@ -121,6 +125,34 @@ const updateStats = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error updating stats",
+      error: err.message,
+    });
+  }
+};
+
+const resetStats = async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const oldStats = await Stats.findOneAndDelete({ username });
+    if (!oldStats) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Stats not found" });
+    }
+
+    const resetedStats = await initializeStats(username);
+
+    res.status(200).json({
+      success: true,
+      message: "Stats reseted successfully",
+      data: resetedStats,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error reseting stats",
       error: err.message,
     });
   }
@@ -172,7 +204,12 @@ function updateCompletionPercentage(updateDataProgress, locationName) {
   );
 }
 
-function calculateProgress(lessons, lastLessonId, lastMinilessonId, lastBlockId) {
+function calculateProgress(
+  lessons,
+  lastLessonId,
+  lastMinilessonId,
+  lastBlockId
+) {
   let totalBlocks = 0;
   let completedBlocks = 0;
 
@@ -188,8 +225,7 @@ function calculateProgress(lessons, lastLessonId, lastMinilessonId, lastBlockId)
 
   if (completedBlocks === 1) completedBlocks = 0;
 
-  if (completedBlocks > totalBlocks)
-    completedBlocks = totalBlocks;
+  if (completedBlocks > totalBlocks) completedBlocks = totalBlocks;
 
   return (completedBlocks / totalBlocks) * 100;
 }
@@ -199,4 +235,5 @@ module.exports = {
   deleteStats,
   getStats,
   updateStats,
+  resetStats,
 };

@@ -157,8 +157,22 @@
   - Returns `404 Not Found` if no stats are found for the given username.
   - Returns `500 Internal Server Error` for any server-side errors.
 
+## 9. Reset User Stats
 
-## 9. General Leaderboard
+- **Endpoint**: `/api/stats/reset/:username`
+- **Method**: `PUT`
+- **Description**: Resets the statistics associated with a specific user.
+- **URL Parameters**:
+  - `username`: String (required) - The username of the user whose stats are to be reset.
+- **Response**:
+  - `success`: Boolean - Indicates if the operation was successful.
+  - `message`: String - A message describing the outcome of the operation.
+  - `data`: Object - Contains the reset stats for the user.
+- **Error Handling**:
+  - Returns `404 Not Found` if no stats are found for the given username.
+  - Returns `500 Internal Server Error` if an error occurs during the operation, along with an error message detailing the issue.
+
+## 10. General Leaderboard
 
 - **Endpoint**: `/api/leaderboard`
 - **Method**: `GET`
@@ -177,7 +191,7 @@
 - **Error Handling**:
   - On server-side errors, returns `500 Internal Server Error` with an error message.
 
-## 10. Get Leaderboard By User
+## 11. Get Leaderboard By User
 
 - **Endpoint**: `/api/leaderboard/:username`
 - **Method**: `GET`
