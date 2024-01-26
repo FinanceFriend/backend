@@ -73,7 +73,7 @@ response = chain.run(
     user_age=user_age,
     user_language=user_language,
     userMessage=userMessage,
-    history=history
+    history=historyContext
 )
 print(json.dumps(response))
 
