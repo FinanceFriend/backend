@@ -1,5 +1,7 @@
 const { validateEmail } = require("../utilities/regex");
 const User = require("../models/user");
+const Stats = require("../models/stats");
+const Chat = require("../models/chat");
 const bcrypt = require("bcryptjs");
 const statsController = require('./statsController');
 const chatController = require('./chatController');
@@ -195,6 +197,18 @@ const updateUser = async (req, res) => {
     user.password = password ? await bcrypt.hash(password, 10) : user.password;
 
     const updatedUser = await user.save();
+
+    if (newUsername) {
+      await Stats.findOneAndUpdate(
+        { username: username }, 
+        { $set: { username: newUsername } },
+      );
+
+      await Chat.updateMany(
+        { username: username }, 
+        { $set: { username: newUsername } },
+      );
+    }
 
     const userForResponse = {
       username: updatedUser.username,
