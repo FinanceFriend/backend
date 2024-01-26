@@ -1,14 +1,15 @@
 import os
 from dotenv import load_dotenv
 import openai
-from langchain.llms.openai import OpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 import sys, json
+from langchain.chains import LLMChain
 
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(temperature=0.7, model_name = 'gpt-4', max_tokens=1024)
+llm = ChatOpenAI(temperature=0.7, model_name='gpt-4')
 
 
 username = str(sys.argv[1])
@@ -26,8 +27,8 @@ user_age = int(sys.argv[12])
 user_language = str(sys.argv[13])
 
 
-#file_path = '../docs/' + location_name + '_converted.json'
-file_path = 'src/langchain/docs/' + location_name + '.json'
+file_path = '../docs/' + location_name + '.json'
+#file_path = 'src/langchain/docs/' + location_name + '.json'
 
 
 with open(file_path, 'r') as file:
@@ -64,8 +65,8 @@ prompt = PromptTemplate(
     template= templateText
 )
 
-
-final_prompt = prompt.format(
+chain = LLMChain(llm=llm, prompt=prompt)
+response = chain.run(
     username=username,
     location_name=location_name, 
     friend_name=friend_name,
@@ -75,7 +76,7 @@ final_prompt = prompt.format(
     module_description_parents=module_description_parents,
     user_age=user_age,
     user_language=user_language
-) if progress == 0 else prompt.format(
+) if progress == 0 else chain.run(
     username=username,
     location_name=location_name, 
     friend_name=friend_name,
@@ -88,8 +89,6 @@ final_prompt = prompt.format(
     user_age=user_age,
     user_language=user_language
 )
-
-output = llm(final_prompt)
-print(json.dumps(output))
+print(json.dumps(response))
 
 sys.stdout.flush()

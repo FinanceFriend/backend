@@ -1,14 +1,16 @@
 import os
+import os
 from dotenv import load_dotenv
 import openai
-from langchain.llms.openai import OpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 import sys, json
+from langchain.chains import LLMChain
 
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(temperature=0.7, model_name='gpt-4', max_tokens=1024)
+llm = ChatOpenAI(temperature=0.7, model_name='gpt-4')
 
 username = str(sys.argv[1])
 user_age = int(sys.argv[12])
@@ -31,13 +33,12 @@ prompt = PromptTemplate(
     template=templateText
 )
 
-final_prompt = prompt.format(
+chain = LLMChain(llm=llm, prompt=prompt)
+response = chain.run(
     username=username,
     user_age=user_age,
     user_language=user_language
 )
-
-output = llm(final_prompt)
-print(json.dumps(output))
+print(json.dumps(response))
 
 sys.stdout.flush()

@@ -4,14 +4,15 @@
 import os
 from dotenv import load_dotenv
 import openai
-from langchain.llms.openai import OpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 import sys, json
+from langchain.chains import LLMChain
 
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(temperature=0.7, model_name='gpt-4', max_tokens=1024)
+llm = ChatOpenAI(temperature=0.7, model_name='gpt-4')
 
 username = str(sys.argv[1])
 location_name = "Imagination Jungle"
@@ -47,10 +48,10 @@ prompt = PromptTemplate(
     input_variables=["username", "location_name", "friend_name", "friend_type", "user_age", "user_language", "userMessage", "history"],
     template=templateText
 )
-
-final_prompt = prompt.format(
+chain = LLMChain(llm=llm, prompt=prompt)
+response = chain.run(
     username=username,
-    location_name=location_name, 
+    location_name=location_name,
     friend_name=friend_name,
     friend_type=friend_type,
     user_age=user_age,
@@ -58,8 +59,6 @@ final_prompt = prompt.format(
     userMessage=userMessage,
     history=history
 )
-
-output = llm(final_prompt)
-print(json.dumps(output))
+print(json.dumps(response))
 
 sys.stdout.flush()
