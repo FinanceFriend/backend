@@ -147,7 +147,7 @@ const getAllUsers = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { username } = req.params;
-    const { newUsername, email, dateOfBirth, countryOfOrigin } = req.body;
+    const { newUsername, email, dateOfBirth, countryOfOrigin, password } = req.body;
 
     let user = await User.findOne({ username });
 
@@ -192,13 +192,22 @@ const updateUser = async (req, res) => {
     user.email = email || user.email;
     user.dateOfBirth = dateOfBirth ? new Date(dateOfBirth) : user.dateOfBirth;
     user.countryOfOrigin = countryOfOrigin || user.countryOfOrigin;
+    user.password = password ? await bcrypt.hash(password, 10) : user.password;
 
-    await user.save();
+    const updatedUser = await user.save();
+
+    const userForResponse = {
+      username: updatedUser.username,
+      email: updatedUser.email,
+      dateOfBirth: updatedUser.dateOfBirth,
+      countryOfOrigin: updatedUser.countryOfOrigin,
+      preferredLanguage: updatedUser.preferredLanguage
+    };
 
     res.json({
       success: true,
       message: "User updated successfully",
-      user: user,
+      user: userForResponse,
     });
   } catch (err) {
     console.error(err);

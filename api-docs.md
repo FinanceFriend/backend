@@ -78,6 +78,7 @@
 - **Request Body** (Any or all of the following):
   - `newUsername`: String (optional) - The new username for the user.
   - `email`: String (optional) - The new email address for the user.
+  - `password`: String (optional) - The new password for the user.
   - `dateOfBirth`: Date (optional) - The new date of birth for the user.
   - `countryOfOrigin`: String (optional) - The new country of origin for the user.
 - **Response**:
