@@ -19,7 +19,7 @@ friend_type = str(sys.argv[4])
 module_name = str(sys.argv[5])
 module_description_kids = str(sys.argv[6])
 module_description_parents = str(sys.argv[7])
-progress = int(sys.argv[8])
+progress = float(sys.argv[8])
 current_lesson_ind = int(sys.argv[9])
 current_minilesson_ind = int(sys.argv[10])
 current_block_ind = int(sys.argv[11])
@@ -27,8 +27,8 @@ user_age = int(sys.argv[12])
 user_language = str(sys.argv[13])
 
 
-file_path = '../docs/' + location_name + '.json'
-#file_path = 'src/langchain/docs/' + location_name + '.json'
+#file_path = '../docs/' + location_name + '.json'
+file_path = 'src/langchain/docs/' + location_name + '.json'
 
 
 with open(file_path, 'r') as file:
