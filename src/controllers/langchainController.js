@@ -192,15 +192,6 @@ const getLessonMessageAlt = async (req, res) => {
 
     const userAge = dateCalc.getAge(user.dateOfBirth);
 
-    await updateProgressStatsInternally(
-      user.username,
-      land.name,
-      land.id,
-      currentBlock,
-      currentMinilesson,
-      currentLesson
-    );
-
     if (currentLesson > 0 && currentMinilesson === 0 && currentBlock === 0)
       await chatController.deleteChatByLocationId(user.username, land.id);
 
@@ -228,6 +219,15 @@ const getLessonMessageAlt = async (req, res) => {
       currentLesson,
       currentMinilesson,
       currentBlock
+    );
+
+    await updateProgressStatsInternally(
+      user.username,
+      land.name,
+      land.id,
+      nextIds.blockId,
+      nextIds.minilessonId,
+      nextIds.lessonId
     );
 
     res.status(200).json({
