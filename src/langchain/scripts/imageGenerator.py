@@ -7,7 +7,7 @@ import sys
 
 load_dotenv("../../../.env")
 
-llm = OpenAI(temperature=0.9)
+llm = OpenAI(temperature=0.4)
 
 query = str(sys.argv[1])
 

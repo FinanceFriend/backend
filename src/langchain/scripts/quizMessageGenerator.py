@@ -1,10 +1,13 @@
 import os
 from dotenv import load_dotenv
 import openai
-from langchain.llms.openai import OpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import PromptTemplate
 import sys, json
+from langchain.chains import LLMChain
+
+llm = ChatOpenAI(temperature=0, model_name='gpt-4')
 
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -31,8 +34,6 @@ lesson = lessons[current_lesson_ind]
 
 mini_lesson_name = lesson['mini_lessons'][current_minilesson_ind]['name']
 mini_lesson_goal = lesson['mini_lessons'][current_minilesson_ind]['content']
-
-llm = OpenAI(temperature=0, model_name='gpt-4', max_tokens=1024)
 
 # Define response schemas for the quiz question components
 response_schemas = [
@@ -70,19 +71,17 @@ prompt = PromptTemplate(
     input_variables=["location_name", "friend_name", "friend_type", "module_name", "mini_lesson_goal", "user_age", "user_language", "format_instructions"],
     template=quiz_prompt_template
 )
-
-final_prompt = prompt.format(
+chain = LLMChain(llm=llm, prompt=prompt)
+response = chain.run(
+    location_name=location_name,
     friend_name=friend_name,
     friend_type=friend_type,
-    location_name=location_name,
     module_name=module_name,
+    mini_lesson_goal=mini_lesson_goal,
     user_age=user_age,
     user_language=user_language,
-    mini_lesson_goal=mini_lesson_goal,
     format_instructions=format_instructions
 )
-
-output = llm(final_prompt)
-print(json.dumps(output))
+print(json.dumps(response))
 
 sys.stdout.flush()
