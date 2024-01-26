@@ -27,8 +27,8 @@ user_age = int(sys.argv[12])
 user_language = str(sys.argv[13])
 
 
-file_path = '../docs/' + location_name + '.json'
-#file_path = 'src/langchain/docs/' + location_name + '.json'
+#file_path = '../docs/' + location_name + '.json'
+file_path = 'src/langchain/docs/' + location_name + '.json'
 
 
 with open(file_path, 'r') as file:
