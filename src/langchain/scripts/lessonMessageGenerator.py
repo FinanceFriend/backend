@@ -9,7 +9,7 @@ from langchain.chains import LLMChain
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = ChatOpenAI(temperature=0.2, model_name='gpt-4')
+llm = ChatOpenAI(temperature=0.2, model_name='gpt-3.5-turbo')
 
 location_name = str(sys.argv[1])
 friend_name = str(sys.argv[2])
@@ -27,6 +27,7 @@ block.append(f"""
     - WRITE IN {user_language}
     - Playfully explain the mini-lesson's content from theoretical standpoint, ensuring it's understandable and engaging.
     - Incorporate elements of {location_name} and interactions with {friend_name} the {friend_type} or related characters for an immersive experience but don't introduce them.
+    - 
 """)
 block.append(f"""
 
@@ -34,6 +35,7 @@ block.append(f"""
     - WRITE IN {user_language}
     - Create an imaginative scenario in {location_name} where the mini-lesson content is applied. This scenario is entirely crafted by you, involving your own character and location. It is not a question, so don't ask the student anything. IT IS A STORY.
     - The scenario should be playful and relevant, encouraging interactive learning and problem-solving.
+    - Announce that if the student is curious about anything in the scenario, they can ask you about it. If he has no further question, tell him to click on the "Next" button to start with a quiz and test his knowledge.
 """)
 
 

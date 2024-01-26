@@ -9,7 +9,7 @@ from langchain.chains import LLMChain
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = ChatOpenAI(temperature=0.7, model_name='gpt-4')
+llm = ChatOpenAI(temperature=0.7, model_name='gpt-3.5-turbo')
 
 
 username = str(sys.argv[1])
@@ -27,8 +27,8 @@ user_age = int(sys.argv[12])
 user_language = str(sys.argv[13])
 
 
-#file_path = '../docs/' + location_name + '.json'
-file_path = 'src/langchain/docs/' + location_name + '.json'
+file_path = '../docs/' + location_name + '.json'
+#file_path = 'src/langchain/docs/' + location_name + '.json'
 
 
 with open(file_path, 'r') as file:
@@ -56,7 +56,7 @@ templateText = """
 
     Highlight how much they've already learned about {module_description_kids} and how this knowledge is helping them become a little financial genius. Encourage them to keep up the great work, reminding them of the fun and interactive activities that await in the next lessons.
 
-    End the message by reassuring {username} that you, {friend_name}, the {friend_type}, are there to guide and support them through every new challenge and discovery in the wonderful world of {module_name}.
+    End the message by reassuring {username} that you, {friend_name}, the {friend_type}, are there to guide and support them through every new challenge and discovery in the wonderful world of {module_name}. Keep the message short.
 """
 
 

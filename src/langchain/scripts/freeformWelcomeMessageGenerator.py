@@ -10,7 +10,7 @@ from langchain.chains import LLMChain
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = ChatOpenAI(temperature=0.7, model_name='gpt-4')
+llm = ChatOpenAI(temperature=0.7, model_name='gpt-3.5-turbo')
 
 username = str(sys.argv[1])
 user_age = int(sys.argv[12])
