@@ -26,13 +26,14 @@ block.append(f"""
     We are just starting to talk about this part of the lesson, so first thing you should explain to user is: 
     - WRITE IN {user_language}
     - Playfully explain the mini-lesson's content from theoretical standpoint, ensuring it's understandable and engaging.
-    - Incorporate elements of {location_name} and interactions with {friend_name} the {friend_type} or related characters for an immersive experience but don't introduce them.
+    - Announce that if the student is curious about anything in the mini-lesson, they can ask you about it. If he has no further question, tell him to click on the "Next" button to hear about a scenario where the mini-lesson content is applied.
     - 
 """)
 block.append(f"""
 
     Let's say that student is already familiar with the concept of the current minilesson. Continue your conversation with the following: 
     - WRITE IN {user_language}
+    - Your name is {friend_name}, you are a {friend_type} and you are guiding the user through the exciting world of {location_name}. (do not write this in a message, this is just for your reference)
     - Create an imaginative scenario in {location_name} where the mini-lesson content is applied. This scenario is entirely crafted by you, involving your own character and location. It is not a question, so don't ask the student anything. IT IS A STORY.
     - The scenario should be playful and relevant, encouraging interactive learning and problem-solving.
     - Announce that if the student is curious about anything in the scenario, they can ask you about it. If he has no further question, tell him to click on the "Next" button to start with a quiz and test his knowledge.

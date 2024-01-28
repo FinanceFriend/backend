@@ -48,7 +48,7 @@ templateText = """
 
     Also, include a more theoretical description for the parents, explaining the educational value and learning outcomes of {module_name}. This part should detail how the module will enhance their child's understanding of financial concepts, like in the parent-focused description: '{module_description_parents}'.
 
-    End the message by encouraging {username} to begin their learning adventure, emphasizing that it will be both enjoyable and informative, and reassure them that you, {friend_name}, will be there to guide and support them in their educational journey.
+    End the message by encouraging {username} to begin their learning adventure, emphasizing that it will be both enjoyable and informative, and reassure them that you, {friend_name}, will be there to guide and support them in their educational journey. Try to make not too long. 
 """ if progress == 0 else """
     Create a motivational and engaging message for {username}, a {user_age}-year-old, who is resuming their journey in the {module_name} module, written in {user_language}.
 
@@ -56,7 +56,7 @@ templateText = """
 
     Highlight how much they've already learned about {module_description_kids} and how this knowledge is helping them become a little financial genius. Encourage them to keep up the great work, reminding them of the fun and interactive activities that await in the next lessons.
 
-    End the message by reassuring {username} that you, {friend_name}, the {friend_type}, are there to guide and support them through every new challenge and discovery in the wonderful world of {module_name}. Keep the message short.
+    Keep the message short.
 """
 
 

@@ -2,8 +2,7 @@
 
 ## Final Deployment
 
-Finance Friends is now live and accessible! Here’s how you can explore the platform and learn more about the project.
-- **Platform URL**: [Finance Friends]()
+Finance Friends is now live and accessible! You can explore the platform and learn more about the project by [**clicking here.**](https://finance-friend.vercel.app/)
 
 ## Introduction
 
