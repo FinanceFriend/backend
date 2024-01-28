@@ -9,7 +9,7 @@ from langchain.chains import LLMChain
 load_dotenv("../../../.env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = ChatOpenAI(temperature=0.7, model_name='gpt-3.5-turbo')
+llm = ChatOpenAI(temperature=0.7, model_name='gpt-3.5-turbo-1106')
 
 
 username = str(sys.argv[1])
@@ -48,7 +48,7 @@ templateText = """
 
     Also, include a more theoretical description for the parents, explaining the educational value and learning outcomes of {module_name}. This part should detail how the module will enhance their child's understanding of financial concepts, like in the parent-focused description: '{module_description_parents}'.
 
-    End the message by encouraging {username} to begin their learning adventure, emphasizing that it will be both enjoyable and informative, and reassure them that you, {friend_name}, will be there to guide and support them in their educational journey. Try to make not too long. 
+    End the message by encouraging {username} to begin their learning adventure by clicking the "next" button. Try to make not too long. 
 """ if progress == 0 else """
     Create a motivational and engaging message for {username}, a {user_age}-year-old, who is resuming their journey in the {module_name} module, written in {user_language}.
 
