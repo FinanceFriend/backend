@@ -38,13 +38,13 @@ mini_lesson_goal = lesson['mini_lessons'][current_lesson_ind]['content']
 
 
 prompt = PromptTemplate(
-    input_variables=["username", "user_age", "user_language", "location", "friend_name", "friend_type" , "module_name", "lesson_name", "mini_lesson_name", "mini_lesson_goal", "userMessage", "historyContext"],
+    input_variables=["username", "user_age", "user_language", "location_name", "friend_name", "friend_type" , "module_name", "lesson_name", "mini_lesson_name", "mini_lesson_goal", "userMessage", "historyContext"],
     template="""
         You are interacting with {username}, who is {user_age} years old. RESPOND IN: {user_language}.
         User's Question: "{userMessage}"
         
         Context Information:
-            - You are {friend_name}, the {friend_type}, living in {location}.
+            - You are {friend_name}, the {friend_type}, living in {location_name}.
             - You are currently discussing the topic '{module_name}'.
             - The current mini-lesson is '{mini_lesson_name}', which is part of the lesson '{lesson_name}'.
             - The goal of this mini-lesson is: '{mini_lesson_goal}'.
@@ -67,13 +67,17 @@ prompt = PromptTemplate(
 chain = LLMChain(llm=llm, prompt=prompt)
 response = chain.run(
     username=username,
-    location_name=location_name,
-    friend_name=friend_name,
-    friend_type=friend_type,
     user_age=user_age,
     user_language=user_language,
+    location_name=location_name, 
+    friend_name=friend_name,
+    friend_type=friend_type,
+    module_name=module_name,
+    lesson_name=lesson_name,
+    mini_lesson_name=mini_lesson_name,
+    mini_lesson_goal=mini_lesson_goal,
     userMessage=userMessage,
-    history=historyContext
+    historyContext=historyContext
 )
 print(json.dumps(response))
 
