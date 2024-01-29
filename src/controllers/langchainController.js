@@ -321,6 +321,7 @@ const getFreeformMessage = async (req, res) => {
         message,
         historyContext,
       ]);
+      result = JSON.parse(result);
     }
 
     await chatController.saveMessage(user.username, "AI", landId, result);
